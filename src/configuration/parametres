@@ -1,1 +1,6 @@
-vitesse=5 
+distance_deplacement=30
+temps_deplacement=10
+distance_detection=20
+angle=90
+langue=francais
+type_requete=texte
