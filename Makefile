@@ -5,4 +5,4 @@ main.o : src/main.c
 	gcc -c src/main.c -o src/main.o
 
 clean:
-	rm -f src/main.out src/*.o 
+	rm -f main.out src/*.o 
