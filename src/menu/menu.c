@@ -12,7 +12,7 @@ void demarrer_menu() {
         "3 : Quitter"
     };
     int nb_options = 3;
-
+    int mdp_valide;
     do {
 
         afficher_menu("Menu Principal - Choix du Mode", options, nb_options);
@@ -22,17 +22,32 @@ void demarrer_menu() {
         switch (choix) {
             case 1:
                 printf("\n=====> Entree en Mode Utilisateur...\n");
+                ajout_log("==> Entree en mode Utilisateur");
+
                 menu_mode_utilisateur();
                 break;
             case 2:
-                printf("\n=====> Entree en Mode Administrateur...\n");
-                menu_mode_administrateur();
-                break;
+                mdp_valide = verif_mdp();
+                if (mdp_valide){
+
+                    printf("\n=====> Entree en Mode Administrateur...\n");
+                    ajout_log("Mot de passe Valide ");
+                    ajout_log("==> Entree en Mode Administrateur");
+                    menu_mode_administrateur();
+                    break;
+                }
+                else {
+                    printf("Mauvais mot de passe\n");
+                    ajout_log("Mauvais mot de passe rentré");
+                    break;
+                }
             case 3:
                 printf("\nArret du programme..\n");
+                ajout_log("Quitter le programme");
                 return; 
             default:
                 printf("\nChoix invalide. Réessayez.\n");
+                ajout_log("Choix invalide (menu principal)");
                 break;
         }
     } while (choix != 3);
@@ -55,28 +70,33 @@ void menu_mode_utilisateur() {
     int nb_options = 4;
 
     do {
-        afficher_menu("Mode Utilisateur", options, nb_options);
+        afficher_menu("   Mode Utilisateur", options, nb_options);
         
         choix = obtenir_choix_utilisateur(nb_options);
 
         switch (choix) {
             case 1:
-                printf("\n[UTILISATEUR] Activation du Mode Textuel\n");
-                // Appeler ici la fonction de gestion des commandes texte (e.g., communication/gerer_texte.c)
+                printf("\n[UTILISATEUR] Mode Textuel\n");
+                ajout_log("[UTILISATEUR] Choix du mode Textuel");
+                // appel fonction de gestion des commandes texte
                 break;
             case 2:
                 printf("\n[UTILISATEUR] Activation du Mode Vocal\n");
-                // Appeler ici la fonction de gestion des commandes vocales
+                ajout_log("[UTILISATEUR] Choix du mode Vocal");
+                // appel fonction de gestion des commandes vocales
                 break;
             case 3:
                 printf("\n[UTILISATEUR] Changement de langue (Defaut: Francais)\n");
-                // Appeler ici le sous-menu de choix de langue
+                ajout_log("[UTILISATEUR] Choix de la langue");
+                // appel sous-menu de choix de langue
                 break;
             case 4:
                 printf("\nRetour au Menu Principal.\n");
+                ajout_log("[UTILISATEUR] Retour au menu principal");
                 return; 
             default:
                 printf("\nChoix invalide.\n");
+                ajout_log("[UTILISATEUR] Choix invalide");
                 break;
         }
     } while (choix != 4);
@@ -98,24 +118,29 @@ void menu_mode_administrateur() {
     int nb_options = 3;
 
     do {
-        afficher_menu("Mode Administrateur", options, nb_options);
+        afficher_menu("   Mode Administrateur", options, nb_options);
         
         choix = obtenir_choix_utilisateur(nb_options);
 
         switch (choix) {
             case 1:
                 printf("\n[ADMIN] Lancement de l'editeur de configuration\n");
-                // Appeler ici la fonction de gestion de la configuration (e.g., gestionnaire_config_menu())
+                ajout_log("[ADMIN] Lancement de l'editeur de configuration");
+
+                // Appeler ici la fonction de gestion de la configuration
                 break;
             case 2:
-                printf("\n[ADMIN] Affichage des logs\n");
-                // Appeler ici la fonction pour lire et afficher le fichier de logs
+                printf("\n[ADMIN] ------------ Affichage des logs -------------\n\n");
+                ajout_log("[ADMIN] Affichage des logs");
+                affiche_logs();
                 break;
             case 3:
                 printf("\nRetour au Menu Principal\n");
+                ajout_log("Retour au menu principal");
                 return; 
             default:
                 printf("\nChoix invalide\n");
+                ajout_log("[ADMIN] Choix invalide");
                 break;
         }
     } while (choix != 3);
@@ -167,4 +192,17 @@ int obtenir_choix_utilisateur(int choix_maximum) {
         return 0;
     }
     return choix;
+}
+
+
+int verif_mdp(){
+
+    const int mdp = 123;
+    int valeur;
+    printf("Entrer le mot de passe : \n");
+    scanf("%d", &valeur);
+
+    if (valeur == mdp) return 1;
+    else return 0;
+
 }

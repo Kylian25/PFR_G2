@@ -6,4 +6,6 @@ void ajout_log(const char *message);
 
 void reset_logs();
 
+void affiche_logs();
+
 #endif

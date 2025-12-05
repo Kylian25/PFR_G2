@@ -6,7 +6,7 @@
 
 int main(void){
 
-  reset_logs(); // résinitialise le fichier logs
+  reset_logs(); // résinitialise le fichier de logs
 
   printf("Debut du programme..\n");
   ajout_log("Lancement du programme \n");

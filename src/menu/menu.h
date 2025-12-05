@@ -12,4 +12,6 @@ void menu_mode_administrateur(void);
 void afficher_menu(const char *titre, const char *options[], int nombre_options);
 int obtenir_choix_utilisateur(int choix_maximum);
 
+int verif_mdp();
+
 #endif // fin de ifndef 

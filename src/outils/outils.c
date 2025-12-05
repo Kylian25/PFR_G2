@@ -20,3 +20,9 @@ void reset_logs(){
     system(" > configuration/logs");
 
 }
+
+void affiche_logs(){
+
+    system("cat configuration/logs");
+
+}
