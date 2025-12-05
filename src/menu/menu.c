@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include "menu.h"
+#include "../outils/outils.h"
 
 // debut du menu
 void demarrer_menu() {
@@ -147,6 +148,7 @@ int obtenir_choix_utilisateur(int choix_maximum) {
 
     int choix;
     int resultat_lecture;
+
     // lit l'entier
     resultat_lecture = scanf("%d", &choix);
 
@@ -156,7 +158,7 @@ int obtenir_choix_utilisateur(int choix_maximum) {
         while (c != '\n' && c != EOF); // c =! du retour a la ligne et de la fin du fichier(EOF)
         return 0; // Invalide
     }
-    // On s'assure que le caractere de nouvelle ligne restant est consomme
+    
     int caractere;
     caractere = getchar();
     while (caractere != '\n' && caractere != EOF);
