@@ -4,4 +4,6 @@
 // Fonction pour écrire dans le fichier de log
 void ajout_log(const char *message);
 
+void reset_logs();
+
 #endif
