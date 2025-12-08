@@ -15,5 +15,4 @@ typedef struct {
 extern CONFIG_ROBOT config;  // pour l'utiliser dans les autres .c 
 
 
-
 #endif

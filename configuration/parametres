@@ -1,7 +1,7 @@
 langue=francais
 type_requete=texte
-distance_deplacement=30
-temps_deplacement=10
-distance_detection=20
-angle=90
+distance_deplacement=1
+temps_deplacement=1
+distance_detection=1
+angle=1
 
