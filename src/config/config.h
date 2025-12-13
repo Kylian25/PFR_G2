@@ -27,7 +27,7 @@ extern CONFIG_ROBOT config;
 void init_config();
 void afficher_fichier_config();
 void sauvegarder_config();
-void charger_config();
 void modifier_config();
+void choix_langue();
 
 #endif

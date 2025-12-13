@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
+#include <string.h>
+
 #include "menu.h"
 #include "../outils/outils.h"
 #include "../config/config.h"
@@ -79,17 +81,21 @@ void menu_mode_utilisateur() {
             case 1:
                 printf("\n[UTILISATEUR] Mode Textuel\n");
                 ajout_log("[UTILISATEUR] Choix du mode Textuel");
+                strcpy(config.type_requete, "texte");
+                sauvegarder_config();
                 // appel fonction de gestion des commandes texte
                 break;
             case 2:
                 printf("\n[UTILISATEUR] Activation du Mode Vocal\n");
                 ajout_log("[UTILISATEUR] Choix du mode Vocal");
+                strcpy(config.type_requete, "vocale");
+                sauvegarder_config();
                 // appel fonction de gestion des commandes vocales
                 break;
             case 3:
                 printf("\n[UTILISATEUR] Changement de langue (Defaut: Francais)\n");
                 ajout_log("[UTILISATEUR] Choix de la langue");
-                // appel sous-menu de choix de langue
+                choix_langue();
                 break;
             case 4:
                 printf("\nRetour au Menu Principal.\n");
@@ -129,6 +135,7 @@ void menu_modifier_config(){
             case 1:
                 printf("\n[ADMIN] Affichage des parametres\n");
                 ajout_log("[ADMIN] Affichage des parametres");
+                
                 afficher_fichier_config();
                 break;
 
