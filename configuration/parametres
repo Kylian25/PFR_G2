@@ -1,7 +1,6 @@
-langue=francais
+langue=FR
 type_requete=texte
-distance_deplacement=1
-temps_deplacement=1
-distance_detection=1
-angle=1
-
+dist_dep=1
+tps_dep=1
+dist_det=1
+angle=100

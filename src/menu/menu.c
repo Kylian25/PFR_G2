@@ -2,6 +2,7 @@
 #include <stdlib.h> 
 #include "menu.h"
 #include "../outils/outils.h"
+#include "../config/config.h"
 
 // debut du menu
 void demarrer_menu() {
@@ -104,6 +105,54 @@ void menu_mode_utilisateur() {
 
 // #####################################################################
 
+// Menu modif config 
+
+void menu_modifier_config(){
+
+    int nb_choix = 3;
+    int choix;
+
+    const char * options[] ={
+        "1 : Afficher parametres",
+        "2 : Modifier parametres",
+        "3 : Revenir au menu amdinistrateur"
+    };
+
+    do{
+
+        afficher_menu("Mode administrateur - modification configuration", options, nb_choix);
+
+        choix = obtenir_choix_utilisateur(nb_choix);
+
+        switch (choix){
+
+            case 1:
+                printf("\n[ADMIN] Affichage des parametres\n");
+                ajout_log("[ADMIN] Affichage des parametres");
+                afficher_fichier_config();
+                break;
+
+            case 2:
+                printf("[ADMIN] Modification des parametres");
+                ajout_log("[ADMIN] Modification des parametres");
+                modifier_config();
+                break;
+            case 3:
+                printf("\nRetour au Menu administrateur\n");
+                ajout_log("Retour au menu administrateur");
+                return; 
+            default:
+                printf("\nChoix invalide\n");
+                ajout_log("[ADMIN] Choix invalide");
+                break;
+        }
+
+    }while (choix!=3);
+
+}
+
+
+
 //  Menu du mode Administrateur : modification de la configuration et logs.
 void menu_mode_administrateur() {
 
@@ -126,8 +175,8 @@ void menu_mode_administrateur() {
             case 1:
                 printf("\n[ADMIN] Lancement de l'editeur de configuration\n");
                 ajout_log("[ADMIN] Lancement de l'editeur de configuration");
-
-                // Appeler ici la fonction de gestion de la configuration
+                menu_modifier_config();
+                
                 break;
             case 2:
                 printf("\n[ADMIN] ------------ Affichage des logs -------------\n\n");
@@ -147,14 +196,16 @@ void menu_mode_administrateur() {
 }
 
 
+
+
 // ---- autres fonctions ---
 
 // affiche un menu avec un titre et des options.
 void afficher_menu(const char *titre, const char *options[], int nb_options) {
 
-    printf("\n#############################################\n");
-    printf("        %s\n", titre);
-    printf("#############################################\n");
+    printf("\n##############################################################\n");
+    printf("                   %s\n", titre);
+    printf("###############################################################\n");
 
     for (int i = 0; i < nb_options; i++) {
         printf("%s\n", options[i]);
