@@ -1,5 +1,22 @@
-17:29:50 : Lancement du programme 
+16:24:58 : Lancement du programme 
 
-17:29:52 : Quitter le programme
-17:29:52 : Programme arrêté 
+16:25:42 : ==> Entree en mode Utilisateur
+16:26:57 : [UTILISATEUR] Choix de la langue
+16:27:09 : Langue choisie : Francais
+16:27:53 : [UTILISATEUR] Choix de la langue
+16:27:55 : Langue choisie : Anglais
+16:28:06 : [UTILISATEUR] Choix du mode Textuel
+16:28:14 : [UTILISATEUR] Choix du mode Vocal
+16:28:17 : [UTILISATEUR] Retour au menu principal
+16:28:46 : Mot de passe Valide 
+16:28:46 : ==> Entree en Mode Administrateur
+16:29:06 : [ADMIN] Affichage des logs
+16:32:29 : [ADMIN] Lancement de l'editeur de configuration
+16:34:56 : [ADMIN] Affichage des parametres
+16:37:39 : [ADMIN] Modification des parametres
+16:39:13 : angle de rotation par defaut modifiée
+16:47:36 : Retour au menu administrateur
+16:47:37 : Retour au menu principal
+16:47:38 : Quitter le programme
+16:47:38 : Programme arrêté 
 
