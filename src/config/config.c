@@ -70,7 +70,7 @@ void modifier_config(){
         switch (choix){
 
             case 1:
-                printf("Entrez la valeur :\n");
+                printf("Entrez la valeur :");
                 valeur = obtenir_entier_utilisateur(max);
                 if (valeur > 0 && valeur <= 2){
                     config.dist_dep = valeur;
@@ -78,9 +78,11 @@ void modifier_config(){
                 }
                 else printf("valeur incorrecte");
                 ajout_log("distance de déplacement par defaut modifiée");
+
+                system("clear");
                 break;
             case 2:
-                printf("Entrez la valeur :\n");
+                printf("Entrez la valeur :");
                 valeur = obtenir_entier_utilisateur(360);
                 if (valeur > 0 && valeur < 30){
                     config.tps_dep = valeur;
@@ -88,9 +90,10 @@ void modifier_config(){
                 }
                 else printf("valeur incorrecte");
                 ajout_log("temps de déplacement par defaut modifiée");
+                system("clear");
                 break;
             case 3: 
-                printf("Entrez la valeur :\n");
+                printf("Entrez la valeur :");
                 valeur = obtenir_entier_utilisateur(360);
                 if (valeur > 5 && valeur < 50){
                     config.dist_det = valeur;
@@ -98,9 +101,10 @@ void modifier_config(){
                 }
                 else printf("valeur incorrecte");
                 ajout_log("distance de détection par defaut modifiée");
+                system("clear");
                 break;
             case 4:
-                printf("Entrez la valeur :\n");
+                printf("Entrez la valeur :");
                 valeur = obtenir_entier_utilisateur(360);
                 if (valeur > 20 && valeur < 360){
                     config.angle = valeur;
@@ -108,12 +112,17 @@ void modifier_config(){
                 }
                 else printf("valeur incorrecte");
                 ajout_log("angle de rotation par defaut modifiée");
+                system("clear");
                 break;
             case 5:
+                system("clear");
+
                 printf("\nRetour au menu précédent\n");
                 ajout_log("Retour au menu précédent");
                 return; 
             default:
+                system("clear");
+
                 printf("\nChoix invalide\n");
                 ajout_log("[ADMIN] Choix invalide");
                 break;

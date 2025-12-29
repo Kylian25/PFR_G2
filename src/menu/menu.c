@@ -58,7 +58,7 @@ void demarrer_menu() {
                 return; 
             default:
                 system("clear"); // reset le terminal 
-                
+
                 printf("\nChoix invalide. Réessayez.\n");
                 ajout_log("Choix invalide (menu principal)");
                 break;
@@ -155,6 +155,8 @@ void menu_modifier_config(){
         switch (choix){
 
             case 1:
+                system("clear");
+                
                 printf("\n[ADMIN] Affichage des parametres\n");
                 ajout_log("[ADMIN] Affichage des parametres");
                 
@@ -162,6 +164,8 @@ void menu_modifier_config(){
                 break;
 
             case 2:
+                system("clear");
+
                 printf("[ADMIN] Modification des parametres");
                 ajout_log("[ADMIN] Modification des parametres");
                 modifier_config();

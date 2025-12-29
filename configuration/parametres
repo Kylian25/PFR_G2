@@ -1,6 +1,6 @@
-langue=EN
+langue=FR
 type_requete=texte
 dist_dep=1
-tps_dep=1
+tps_dep=20
 dist_det=1
 angle=100

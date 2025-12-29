@@ -1,9 +1,9 @@
-11:47:12 : Lancement du programme 
+11:58:29 : Lancement du programme 
 
-11:47:15 : Choix invalide (menu principal)
-11:47:19 : ==> Entree en mode Utilisateur
-11:47:28 : [UTILISATEUR] Choix invalide
-11:47:48 : [UTILISATEUR] Retour au menu principal
-11:47:50 : Quitter le programme
-11:47:50 : Programme arrêté 
-
+11:58:32 : Mot de passe Valide 
+11:58:32 : ==> Entree en Mode Administrateur
+11:58:37 : [ADMIN] Lancement de l'editeur de configuration
+11:58:39 : [ADMIN] Affichage des parametres
+11:58:44 : [ADMIN] Modification des parametres
+11:59:25 : temps de déplacement par defaut modifiée
+11:59:35 : [ADMIN] Modification des parametres
