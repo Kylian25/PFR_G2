@@ -1,5 +1,5 @@
-main.out : src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o
-	gcc -o main.out src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o
+main : src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o
+	gcc -o main src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o
 
 main.o : src/main.c src/menu/menu.h
 	gcc -c src/main.c -o src/main.o

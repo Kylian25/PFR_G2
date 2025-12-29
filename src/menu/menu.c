@@ -9,13 +9,15 @@
 // debut du menu
 void demarrer_menu() {
     int choix;
-    const char *options[] = {   // tableau de pointeurs qui pointent vers une chaine de caracteres (constantes)
+    const char * options[] = {   // tableau de pointeurs qui pointent vers une chaine de caracteres (constantes)
         "1 : Mode Utilisateur",
         "2 : Mode Administrateur",
         "3 : Quitter"
     };
     int nb_options = 3;
     int mdp_valide;
+
+    system("clear");
     do {
 
         afficher_menu("Menu Principal - Choix du Mode", options, nb_options);
@@ -36,6 +38,7 @@ void demarrer_menu() {
                     printf("\n=====> Entree en Mode Administrateur...\n");
                     ajout_log("Mot de passe Valide ");
                     ajout_log("==> Entree en Mode Administrateur");
+                    system("chmod ug+rw configuration/parametres"); // modifie les droits du fichier parametres pour modification
                     menu_mode_administrateur();
                     break;
                 }
@@ -63,6 +66,7 @@ void menu_mode_utilisateur() {
 
     int choix;
 
+    system("chmod ug-w configuration/parametres");  // supprimer les droits de modif des parametres
     const char *options[] = {
         "1 : Mode Requete Textuelle",
         "2 : Mode Requete Vocale",
@@ -82,14 +86,14 @@ void menu_mode_utilisateur() {
                 printf("\n[UTILISATEUR] Mode Textuel\n");
                 ajout_log("[UTILISATEUR] Choix du mode Textuel");
                 strcpy(config.type_requete, "texte");
-                sauvegarder_config();
+                //sauvegarder_config();
                 // appel fonction de gestion des commandes texte
                 break;
             case 2:
                 printf("\n[UTILISATEUR] Activation du Mode Vocal\n");
                 ajout_log("[UTILISATEUR] Choix du mode Vocal");
                 strcpy(config.type_requete, "vocale");
-                sauvegarder_config();
+                //sauvegarder_config();
                 // appel fonction de gestion des commandes vocales
                 break;
             case 3:
@@ -100,6 +104,7 @@ void menu_mode_utilisateur() {
             case 4:
                 printf("\nRetour au Menu Principal.\n");
                 ajout_log("[UTILISATEUR] Retour au menu principal");
+                system("clear");
                 return; 
             default:
                 printf("\nChoix invalide.\n");

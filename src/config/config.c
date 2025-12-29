@@ -63,6 +63,7 @@ void modifier_config(){
     int max = 360;
     int choix;
     int valeur;
+    
     printf("\nEntrez votre choix : ");
     choix = obtenir_choix_utilisateur(nb_choix);
     
