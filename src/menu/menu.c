@@ -53,6 +53,7 @@ void demarrer_menu() {
                 }
             case 3:
                 system("clear");
+                system("chmod ug+w configuration/parametres");
                 printf("\nArret du programme..\n");
                 ajout_log("Quitter le programme");
                 return; 
@@ -156,7 +157,7 @@ void menu_modifier_config(){
 
             case 1:
                 system("clear");
-                
+
                 printf("\n[ADMIN] Affichage des parametres\n");
                 ajout_log("[ADMIN] Affichage des parametres");
                 

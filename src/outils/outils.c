@@ -29,6 +29,10 @@ void reset_logs(){
 
 void affiche_logs(){
 
-    system("cat configuration/logs");
+    char commande[200];
+
+    sprintf(commande, "cat %s", f_log.chemin_log);
+
+    system(commande);
 
 }

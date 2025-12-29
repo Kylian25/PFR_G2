@@ -1,0 +1,7 @@
+15:43:30 : Lancement du programme 
+
+15:43:31 : ==> Entree en mode Utilisateur
+15:43:32 : [UTILISATEUR] Retour au menu principal
+15:43:33 : Quitter le programme
+15:43:33 : Programme arrêté 
+

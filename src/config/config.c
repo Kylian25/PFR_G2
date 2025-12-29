@@ -10,14 +10,14 @@
 CONFIG_ROBOT config = {0};
 LOG f_log = {0};
 
-void init_config(){
+void init_config(CONFIG_ROBOT * config){
 
-    strcpy(config.langue,DEF_LANGUE);
-    strcpy(config.type_requete,DEF_TYPE_REQUETE);
-    config.dist_dep=DEF_DIST_DEP;
-    config.tps_dep=DEF_TPS_DEP;
-    config.dist_det=DEF_DIST_DET;
-    config.angle=DEF_ANGLE;
+    strcpy(config->langue,DEF_LANGUE);
+    strcpy(config->type_requete,DEF_TYPE_REQUETE);
+    config->dist_dep=DEF_DIST_DEP;
+    config->tps_dep=DEF_TPS_DEP;
+    config->dist_det=DEF_DIST_DET;
+    config->angle=DEF_ANGLE;
 
 }
 

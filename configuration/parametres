@@ -2,5 +2,5 @@ langue=FR
 type_requete=vocale
 dist_dep=1
 tps_dep=1
-dist_det=1
+dist_det=10
 angle=100
