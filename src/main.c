@@ -12,6 +12,8 @@ int main(void){
 
   init_config();
 
+  init_log(&f_log);
+
   reset_logs(); // résinitialise le fichier de logs
 
   // FIN INITIALISATION 

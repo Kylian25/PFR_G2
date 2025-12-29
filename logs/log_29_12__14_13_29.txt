@@ -1,0 +1,9 @@
+14:13:29 : Lancement du programme 
+
+14:13:31 : ==> Entree en mode Utilisateur
+14:13:42 : [UTILISATEUR] Choix du mode Textuel
+14:13:45 : [UTILISATEUR] Choix du mode Vocal
+14:14:01 : [UTILISATEUR] Retour au menu principal
+14:14:02 : Quitter le programme
+14:14:02 : Programme arrêté 
+

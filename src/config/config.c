@@ -8,6 +8,7 @@
 
 
 CONFIG_ROBOT config = {0};
+LOG f_log = {0};
 
 void init_config(){
 
@@ -18,6 +19,32 @@ void init_config(){
     config.dist_det=DEF_DIST_DET;
     config.angle=DEF_ANGLE;
 
+}
+
+void init_log(LOG *l){
+
+    char date[50];
+    FILE *f;
+
+    f = popen("date +%d_%m__%H_%M_%S","r");
+
+    if (f!=NULL){
+
+        if (fgets(date, sizeof(date), f) != NULL) {
+            date[strcspn(date, "\n")] = '\0'; // supprime le retour à la ligne \n ajoute par la commande
+        }
+        pclose(f);
+    }
+    
+
+    strcpy(l->date_cour,date); // enregistrement de la date
+    sprintf(l->chemin_log, "logs/log_%s.txt",date);  // création du chemin vers le fichier de log
+
+    // créer le fichier de log 
+    FILE *fl = fopen(l->chemin_log, "w");
+        if (fl != NULL) {
+            fclose(fl); // Le fichier est maintenant créé et vide
+        }
 }
 
 

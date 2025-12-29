@@ -22,12 +22,23 @@ typedef struct {
 
 }CONFIG_ROBOT;
 
+typedef struct{
+
+    char date_cour[50];
+    char chemin_log[150];
+
+}LOG;
+
 extern CONFIG_ROBOT config;
+extern LOG f_log;
 
 void init_config();
+void init_log();
 void afficher_fichier_config();
 void sauvegarder_config();
 void modifier_config();
 void choix_langue();
+
+
 
 #endif
