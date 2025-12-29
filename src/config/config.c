@@ -47,6 +47,100 @@ void init_log(LOG *l){
         }
 }
 
+void recup_config(CONFIG_ROBOT * config){
+
+    char cle[30];
+    char valeur[30];
+    FILE *f;
+    f = fopen("configuration/parametres", "r");
+
+    while (fscanf(f, "%29s %29s" , cle , valeur) == 2){  // == 2 -> si les deux chaines ont bien été lues
+        
+        // langue
+        if (strcmp(cle,"langue") == 0){ // si les deux chaines sont identiques renvoie 0
+
+            if (strcmp(valeur,"FR") == 0) {
+                strcpy(config->langue, "FR");
+            }
+            else if (strcmp(valeur, "EN") ==0){
+                strcpy(config->langue, "EN");
+            }
+            else {
+                strcpy(config->langue, DEF_LANGUE);
+            }
+        }
+        // type requete
+        else if (strcmp(cle,"type_requete") == 0){ 
+
+            if (strcmp(valeur,"voc") == 0) {
+                strcpy(config->type_requete, "voc");
+            }
+            else if (strcmp(valeur, "txt") ==0){
+                strcpy(config->type_requete, "txt");
+            }
+            else {
+                strcpy(config->type_requete, DEF_TYPE_REQUETE);
+            }
+        }
+        // distance deplacement
+        else if (strcmp(cle, "dist_dep") == 0){
+
+            char * fin;
+            long val;
+            val = strtol(valeur,&fin, 10 );
+            if (*fin == '\0' && val > MIN_DIST_DEP && val < MAX_DIST_DEP){
+                config->dist_dep=(int)val;
+            }
+            else{
+                config->dist_dep=DEF_DIST_DEP;
+            }
+        }
+        // temps déplacement
+        else if (strcmp(cle, "tps_dep") ==0){
+
+            char * fin;
+            long val;
+            val = strtol(valeur,&fin, 10 );
+            if (*fin == '\0' && val > MIN_TPS_DEP && val < MAX_TPS_DEP){
+                config->tps_dep=(int)val;
+            }
+            else{
+                config->tps_dep=DEF_TPS_DEP;
+            }
+        }
+        // distance detection
+         else if (strcmp(cle, "dist_det") ==0){
+
+            char * fin;
+            long val;
+            val = strtol(valeur,&fin, 10 );
+            if (*fin == '\0' && val > MIN_DIST_DET && val < MAX_DIST_DET){
+                config->dist_det=(int)val;
+            }
+            else{
+                config->dist_det=DEF_DIST_DET;
+            }
+        }
+        // angle 
+         else if (strcmp(cle, "angle") ==0){
+
+            char * fin;
+            long val;
+            val = strtol(valeur,&fin, 10 );
+            if (*fin == '\0' && val > MIN_ANGLE && val < MAX_ANGLE){
+                config->angle=(int)val;
+            }
+            else{
+                config->angle=DEF_ANGLE;
+            }
+        }
+        else{
+            ajout_log("erreur dans le chargement des parametres");
+        }
+    }
+    sauvegarder_config();
+}
+
 
 void afficher_fichier_config(){
 
@@ -66,12 +160,12 @@ void sauvegarder_config(){
     fichier = fopen(chemin_fichier_config, "w");   // efface le contenu du fichier 
 
     // ecriture 
-    fprintf(fichier, "langue=%s\n", config.langue);
-    fprintf(fichier, "type_requete=%s\n", config.type_requete);
-    fprintf(fichier, "dist_dep=%d\n", config.dist_dep);
-    fprintf(fichier, "tps_dep=%d\n", config.tps_dep);
-    fprintf(fichier, "dist_det=%d\n",config.dist_det );
-    fprintf(fichier, "angle=%d\n",config.angle);
+    fprintf(fichier, "langue %s\n", config.langue);
+    fprintf(fichier, "type_requete %s\n", config.type_requete);
+    fprintf(fichier, "dist_dep %d\n", config.dist_dep);
+    fprintf(fichier, "tps_dep %d\n", config.tps_dep);
+    fprintf(fichier, "dist_det %d\n",config.dist_det );
+    fprintf(fichier, "angle %d\n",config.angle);
 
     fclose(fichier);
 
@@ -87,7 +181,6 @@ void modifier_config(){
     printf("5 : Revenir au menu précédent\n");
 
     const int nb_choix = 5;
-    int max = 360;
     int choix;
     int valeur;
     
@@ -98,8 +191,8 @@ void modifier_config(){
 
             case 1:
                 printf("Entrez la valeur :");
-                valeur = obtenir_entier_utilisateur(max);
-                if (valeur > 0 && valeur <= 2){
+                valeur = obtenir_entier_utilisateur(MAX_DIST_DEP);
+                if (valeur > MIN_DIST_DEP && valeur <= MAX_DIST_DEP){
                     config.dist_dep = valeur;
                     sauvegarder_config();
                 }
@@ -110,8 +203,8 @@ void modifier_config(){
                 break;
             case 2:
                 printf("Entrez la valeur :");
-                valeur = obtenir_entier_utilisateur(360);
-                if (valeur > 0 && valeur < 30){
+                valeur = obtenir_entier_utilisateur(MAX_TPS_DEP);
+                if (valeur > MIN_TPS_DEP && valeur < MAX_TPS_DEP){
                     config.tps_dep = valeur;
                     sauvegarder_config();
                 }
@@ -121,8 +214,8 @@ void modifier_config(){
                 break;
             case 3: 
                 printf("Entrez la valeur :");
-                valeur = obtenir_entier_utilisateur(360);
-                if (valeur > 5 && valeur < 50){
+                valeur = obtenir_entier_utilisateur(MAX_DIST_DET);
+                if (valeur > MIN_DIST_DET && valeur < MAX_DIST_DET){
                     config.dist_det = valeur;
                     sauvegarder_config();
                 }
@@ -132,8 +225,8 @@ void modifier_config(){
                 break;
             case 4:
                 printf("Entrez la valeur :");
-                valeur = obtenir_entier_utilisateur(360);
-                if (valeur > 20 && valeur < 360){
+                valeur = obtenir_entier_utilisateur(MAX_ANGLE);
+                if (valeur > MIN_ANGLE && valeur < MAX_ANGLE){
                     config.angle = valeur;
                     sauvegarder_config();
                 }

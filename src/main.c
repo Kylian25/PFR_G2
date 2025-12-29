@@ -11,7 +11,7 @@ int main(void){
 
   // INITIALISATION 
 
-  init_config(&config);
+  recup_config(&config);
 
   init_log(&f_log);
 

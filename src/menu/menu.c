@@ -166,7 +166,7 @@ void menu_modifier_config(){
 
             case 2:
                 system("clear");
-
+                afficher_fichier_config();
                 printf("[ADMIN] Modification des parametres");
                 ajout_log("[ADMIN] Modification des parametres");
                 modifier_config();

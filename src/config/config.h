@@ -5,11 +5,22 @@
 // valeurs par defaut 
 
 #define DEF_LANGUE "FR"
-#define DEF_TYPE_REQUETE "texte"
+#define DEF_TYPE_REQUETE "txt"
 #define DEF_DIST_DEP 1
 #define DEF_TPS_DEP 1
 #define DEF_DIST_DET 1
 #define DEF_ANGLE 100
+
+// valeurs max/min
+
+#define MAX_DIST_DEP 200
+#define MIN_DIST_DEP 1
+#define MAX_TPS_DEP 20
+#define MIN_TPS_DEP 1
+#define MAX_DIST_DET 100
+#define MIN_DIST_DET 1
+#define MAX_ANGLE 360
+#define MIN_ANGLE 30
 
 typedef struct {
 
@@ -32,8 +43,9 @@ typedef struct{
 extern CONFIG_ROBOT config;
 extern LOG f_log;
 
-void init_config();
+void init_config(CONFIG_ROBOT * config);
 void init_log();
+void recup_config(CONFIG_ROBOT * config);
 void afficher_fichier_config();
 void sauvegarder_config();
 void modifier_config();
