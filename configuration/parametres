@@ -1,6 +1,6 @@
 langue=EN
-type_requete=vocale
+type_requete=texte
 dist_dep=1
 tps_dep=1
 dist_det=1
-angle=115
+angle=100

@@ -14,5 +14,5 @@ config.o : src/config/config.c src/config/config.h
 	gcc -c src/config/config.c -o src/config/config.o
 
 clean:
-	rm -f main.out
+	rm -f main
 	find src -name "*.o" -type f -delete   

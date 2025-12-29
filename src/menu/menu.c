@@ -8,6 +8,8 @@
 
 // debut du menu
 void demarrer_menu() {
+
+    system("clear"); // reset le terminal
     int choix;
     const char * options[] = {   // tableau de pointeurs qui pointent vers une chaine de caracteres (constantes)
         "1 : Mode Utilisateur",
@@ -22,10 +24,11 @@ void demarrer_menu() {
 
         afficher_menu("Menu Principal - Choix du Mode", options, nb_options);
 
-        choix = obtenir_choix_utilisateur(nb_options);
+        choix = obtenir_entier_utilisateur(nb_options);
 
         switch (choix) {
             case 1:
+                system("clear");
                 printf("\n=====> Entree en Mode Utilisateur...\n");
                 ajout_log("==> Entree en mode Utilisateur");
 
@@ -35,6 +38,7 @@ void demarrer_menu() {
                 mdp_valide = verif_mdp();
                 if (mdp_valide){
 
+                    system("clear");
                     printf("\n=====> Entree en Mode Administrateur...\n");
                     ajout_log("Mot de passe Valide ");
                     ajout_log("==> Entree en Mode Administrateur");
@@ -48,10 +52,13 @@ void demarrer_menu() {
                     break;
                 }
             case 3:
+                system("clear");
                 printf("\nArret du programme..\n");
                 ajout_log("Quitter le programme");
                 return; 
             default:
+                system("clear"); // reset le terminal 
+                
                 printf("\nChoix invalide. Réessayez.\n");
                 ajout_log("Choix invalide (menu principal)");
                 break;
@@ -70,7 +77,7 @@ void menu_mode_utilisateur() {
     const char *options[] = {
         "1 : Mode Requete Textuelle",
         "2 : Mode Requete Vocale",
-        "3 : Choisir la Langue",
+        "3 : Choisir la Langue (defaut: Francais)",
         "4 : Retour au Menu Principal"
     };
 
@@ -79,10 +86,12 @@ void menu_mode_utilisateur() {
     do {
         afficher_menu("   Mode Utilisateur", options, nb_options);
         
-        choix = obtenir_choix_utilisateur(nb_options);
+        choix = obtenir_entier_utilisateur(nb_options);
 
         switch (choix) {
             case 1:
+                system("clear"); // reset le terminal
+
                 printf("\n[UTILISATEUR] Mode Textuel\n");
                 ajout_log("[UTILISATEUR] Choix du mode Textuel");
                 strcpy(config.type_requete, "texte");
@@ -90,23 +99,31 @@ void menu_mode_utilisateur() {
                 // appel fonction de gestion des commandes texte
                 break;
             case 2:
-                printf("\n[UTILISATEUR] Activation du Mode Vocal\n");
+                system("clear"); // reset le terminal 
+
+                printf("\n[UTILISATEUR] Mode Vocal\n");
                 ajout_log("[UTILISATEUR] Choix du mode Vocal");
                 strcpy(config.type_requete, "vocale");
                 //sauvegarder_config();
                 // appel fonction de gestion des commandes vocales
                 break;
             case 3:
-                printf("\n[UTILISATEUR] Changement de langue (Defaut: Francais)\n");
+                system("clear"); // reset le terminal 
+
+                printf("\n[UTILISATEUR] Changement de langue\n");
                 ajout_log("[UTILISATEUR] Choix de la langue");
                 choix_langue();
                 break;
             case 4:
+                system("clear"); // reset le terminal 
+
                 printf("\nRetour au Menu Principal.\n");
                 ajout_log("[UTILISATEUR] Retour au menu principal");
                 system("clear");
                 return; 
             default:
+                system("clear"); // reset le terminal 
+
                 printf("\nChoix invalide.\n");
                 ajout_log("[UTILISATEUR] Choix invalide");
                 break;
@@ -133,7 +150,7 @@ void menu_modifier_config(){
 
         afficher_menu("Mode administrateur - modification configuration", options, nb_choix);
 
-        choix = obtenir_choix_utilisateur(nb_choix);
+        choix = obtenir_entier_utilisateur(nb_choix);
 
         switch (choix){
 
@@ -150,10 +167,14 @@ void menu_modifier_config(){
                 modifier_config();
                 break;
             case 3:
+                system("clear"); // reset le terminal 
+
                 printf("\nRetour au Menu administrateur\n");
                 ajout_log("Retour au menu administrateur");
                 return; 
             default:
+                system("clear"); // reset le terminal 
+
                 printf("\nChoix invalide\n");
                 ajout_log("[ADMIN] Choix invalide");
                 break;
@@ -181,25 +202,29 @@ void menu_mode_administrateur() {
     do {
         afficher_menu("   Mode Administrateur", options, nb_options);
         
-        choix = obtenir_choix_utilisateur(nb_options);
+        choix = obtenir_entier_utilisateur(nb_options);
 
         switch (choix) {
             case 1:
+                system("clear");
                 printf("\n[ADMIN] Lancement de l'editeur de configuration\n");
                 ajout_log("[ADMIN] Lancement de l'editeur de configuration");
                 menu_modifier_config();
                 
                 break;
             case 2:
+                system("clear");
                 printf("\n[ADMIN] ------------ Affichage des logs -------------\n\n");
                 ajout_log("[ADMIN] Affichage des logs");
                 affiche_logs();
                 break;
             case 3:
+                system("clear");
                 printf("\nRetour au Menu Principal\n");
                 ajout_log("Retour au menu principal");
                 return; 
             default:
+                system("clear"); // reset le terminal 
                 printf("\nChoix invalide\n");
                 ajout_log("[ADMIN] Choix invalide");
                 break;
@@ -227,11 +252,7 @@ void afficher_menu(const char *titre, const char *options[], int nb_options) {
     printf("Entrez votre choix : ");
 }
 
-/*
- Lit l'entree utilisateur et s'assure qu'elle est valide.
- Choix_maximum = Le nombre maximum d'options valides.
- Retourne : le choix valide de l'utilisateur (ou 0 si invalide).
- */
+
 int obtenir_choix_utilisateur(int choix_maximum) {
 
     int choix;
@@ -255,6 +276,33 @@ int obtenir_choix_utilisateur(int choix_maximum) {
         return 0;
     }
     return choix;
+}
+
+/*
+ Lit l'entree utilisateur et s'assure qu'elle est valide.
+ Choix_maximum = Le nombre maximum d'options valides.
+ Retourne : le choix valide de l'utilisateur (ou 0 si invalide).
+ */
+int obtenir_entier_utilisateur(int nombre_max){
+
+    int choix;
+    //int resultat_lecture;
+
+    // lit l'entier
+    if (scanf("%d",&choix) ==1){
+        if (choix <= nombre_max) return choix;
+    }
+    else{
+
+        printf("\nErreur de saisie\n");
+        printf("Entrez votre choix :");
+
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);  // vider le buffer
+
+        return obtenir_entier_utilisateur(nombre_max);
+    }
+
 }
 
 

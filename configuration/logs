@@ -1,10 +1,9 @@
-16:26:47 : Lancement du programme 
+11:47:12 : Lancement du programme 
 
-16:27:03 : Mot de passe Valide 
-16:27:03 : ==> Entree en Mode Administrateur
-16:27:17 : [ADMIN] Affichage des logs
-16:27:22 : Retour au menu principal
-16:27:24 : ==> Entree en mode Utilisateur
-16:27:27 : [UTILISATEUR] Choix du mode Vocal
-16:27:32 : [UTILISATEUR] Choix du mode Textuel
-16:30:02 : [UTILISATEUR] Choix de la langue
+11:47:15 : Choix invalide (menu principal)
+11:47:19 : ==> Entree en mode Utilisateur
+11:47:28 : [UTILISATEUR] Choix invalide
+11:47:48 : [UTILISATEUR] Retour au menu principal
+11:47:50 : Quitter le programme
+11:47:50 : Programme arrêté 
+

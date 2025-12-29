@@ -65,14 +65,14 @@ void modifier_config(){
     int valeur;
     
     printf("\nEntrez votre choix : ");
-    choix = obtenir_choix_utilisateur(nb_choix);
+    choix = obtenir_entier_utilisateur(nb_choix);
     
         switch (choix){
 
             case 1:
                 printf("Entrez la valeur :\n");
-                valeur = obtenir_choix_utilisateur(max);
-                if (valeur > 0 && valeur < 2){
+                valeur = obtenir_entier_utilisateur(max);
+                if (valeur > 0 && valeur <= 2){
                     config.dist_dep = valeur;
                     sauvegarder_config();
                 }
@@ -81,7 +81,7 @@ void modifier_config(){
                 break;
             case 2:
                 printf("Entrez la valeur :\n");
-                valeur = obtenir_choix_utilisateur(360);
+                valeur = obtenir_entier_utilisateur(360);
                 if (valeur > 0 && valeur < 30){
                     config.tps_dep = valeur;
                     sauvegarder_config();
@@ -91,7 +91,7 @@ void modifier_config(){
                 break;
             case 3: 
                 printf("Entrez la valeur :\n");
-                valeur = obtenir_choix_utilisateur(360);
+                valeur = obtenir_entier_utilisateur(360);
                 if (valeur > 5 && valeur < 50){
                     config.dist_det = valeur;
                     sauvegarder_config();
@@ -101,7 +101,7 @@ void modifier_config(){
                 break;
             case 4:
                 printf("Entrez la valeur :\n");
-                valeur = obtenir_choix_utilisateur(360);
+                valeur = obtenir_entier_utilisateur(360);
                 if (valeur > 20 && valeur < 360){
                     config.angle = valeur;
                     sauvegarder_config();
@@ -130,7 +130,9 @@ void choix_langue(){
     printf("2 : Anglais\n");
     printf("Votre choix : ");
 
-    choix=obtenir_choix_utilisateur(nb_choix);
+    choix=obtenir_entier_utilisateur(nb_choix);
+
+    system("chmod ug+w configuration/parametres");
 
     if (choix==1){
         printf("\nLangue : Francais\n");
@@ -145,6 +147,7 @@ void choix_langue(){
         ajout_log("Langue choisie : Anglais");
     }
     else printf("Choix invalide, retour au menu précédent");
+    system("chmod ug-w configuration/parametres");
 
 }
 
