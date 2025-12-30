@@ -1,5 +1,5 @@
-main : src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o
-	gcc -o main src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o
+main : src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o src/images/images.o
+	gcc -o main src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o src/images/images.o
 
 main.o : src/main.c src/menu/menu.h
 	gcc -c src/main.c -o src/main.o
@@ -12,6 +12,9 @@ outils.o : src/outils/outils.c src/outils/outils.h
 
 config.o : src/config/config.c src/config/config.h
 	gcc -c src/config/config.c -o src/config/config.o
+
+images.o : src/images/images.c src/images/images.h
+	gcc -c src/images/images.c -o src/images/images.o
 
 clean:
 	rm -f main
