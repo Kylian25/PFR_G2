@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include "images/images.h"
 #include "menu/menu.h"
@@ -29,22 +30,16 @@ int main(void){
 
   printf("\nTests images\n");
 
-  IMAGE * img = lire_image("IMG_5389.txt");
+  IMAGE img = lire_image("IMG_5389.txt");
 
-  printf("Hauteur : %d\nLargeur : %d\nNombre de canaux : %d\n", img->H, img->L, img->nb_canaux);
+  printf("Hauteur : %d\nLargeur : %d\nNombre de canaux : %d\n", img.hauteur, img.largeur, img.nb_canaux);
 
-  printf("Premier pixel  : R=%d G=%d B=%d\n",
-  img->donnees[0].r,
-  img->donnees[0].v,
-  img->donnees[0].b);
+  printf("\nPixel (y,x) (35,10)\nR : %d\nV : %d\nB : %d\n", img.matrice[35][10].r, img.matrice[35][10].v, img.matrice[35][10].b);
+  printf("\nPixel (y,x) (H,L)\nR : %d\nV : %d\nB : %d\n", img.matrice[H-1][L-1].r, img.matrice[H-1][L-1].v, img.matrice[H-1][L-1].b);
 
-  int last = img->H * img->L - 1;
-  printf("Dernier pixel  : R=%d G=%d B=%d\n",
-  img->donnees[last].r,
-  img->donnees[last].v,
-  img->donnees[last].b);
-
-  liberer_image(img);
+  IMAGE img1 = lire_image("IMG_5390.txt");
+  IMAGE img1_bleu = filtrer_bleu(&img1, SEUIL_BLEU, DELTA);
+  system("python3 src/simu/afficher_image.py resultats/filtre_bleu");
 
   printf("Programme arrêté \n");
   ajout_log("Programme arrêté \n");

@@ -1,6 +1,0 @@
-19:44:52 : Lancement du programme 
-
-19:44:53 : Quitter le programme
-19:44:53 : image libérée
-19:44:53 : Programme arrêté 
-

@@ -1,6 +1,15 @@
 #ifndef IMAGES_H  
 #define IMAGES_H
 
+
+#define H 300
+#define L 300
+
+#define DELTA 50
+#define SEUIL_BLEU 40
+#define SEUIL_ROUGE 40
+#define SEUIL_JAUNE 40
+
 typedef struct{
     int r;
     int v;
@@ -8,16 +17,14 @@ typedef struct{
 }PIXEL;
 
 typedef struct{
-    int H;
-    int L;
-    int nb_canaux;
-    PIXEL * donnees;   // permettra de creer un tableau de pixels 
-}IMAGE;                // en fonction de H et L avec un malloc 
+    int nb_canaux, hauteur,largeur;
+    PIXEL matrice[H][L];   
+}IMAGE;                 
 
+IMAGE lire_image(const char * chemin);
 
-IMAGE * lire_image(const char * chemin);
+IMAGE filtrer_bleu(IMAGE * image, int seuil,int delta);
 
-void liberer_image(IMAGE *img);
-
+void sauvegarder_image(const char * nom_fichier, IMAGE img);
 
 #endif
