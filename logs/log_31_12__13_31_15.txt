@@ -1,0 +1,3 @@
+13:31:15 : Lancement du programme 
+
+13:31:16 : ==> Entree en mode Utilisateur

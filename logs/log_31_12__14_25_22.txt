@@ -1,0 +1,5 @@
+14:25:22 : Lancement du programme 
+
+14:25:25 : Quitter le programme
+14:25:25 : Programme arrêté 
+

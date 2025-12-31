@@ -36,3 +36,38 @@ void affiche_logs(){
     system(commande);
 
 }
+/*
+char * lire_chaine(){
+    
+    char *nom_fichier = (char*)malloc(256 * sizeof(char));
+    
+    if (nom_fichier == NULL) {
+        printf("Erreur, allocation mémoire échouée\n");
+        return NULL;
+    }
+    
+    printf("Entrez le nom du fichier : ");
+
+    if (scanf("%255s", nom_fichier) != 1) {
+        printf("Erreur, impossible de lire la chaine\n");
+        free(nom_fichier);
+        return lire_chaine();
+    }
+    
+    if (strlen(nom_fichier) == 0) {
+        printf("Erreur : chaîne vide\n");
+        free(nom_fichier);
+        return lire_chaine();
+    }
+    
+    for (int i = 0; nom_fichier[i] != '\0'; i++) {
+        if (nom_fichier[i] < 32 || nom_fichier[i] > 126) {
+            printf("Erreur : caractère invalide\n");
+            free(nom_fichier);
+            return lire_chaine();
+        }
+    }
+    
+    return nom_fichier;
+}
+*/

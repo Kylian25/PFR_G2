@@ -54,6 +54,16 @@ void recup_config(CONFIG_ROBOT * config){
     FILE *f;
     f = fopen("configuration/parametres", "r");
 
+    if (f == NULL) {
+        printf("Erreur : impossible d'ouvrir le fichier de configuration\n");
+        printf("Vérifiez les droits d'accès du fichier configuration/parametres\n");
+        ajout_log("ERREUR : Impossible d'ouvrir configuration/parametres");
+        
+        // Initialiser avec les valeurs par défaut
+        init_config(config);
+        return;
+    }
+
     while (fscanf(f, "%29s %29s" , cle , valeur) == 2){  // == 2 -> si les deux chaines ont bien été lues
         
         // langue

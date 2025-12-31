@@ -6,25 +6,52 @@
 #define L 300
 
 #define DELTA 50
+//bleu
 #define SEUIL_BLEU 40
-#define SEUIL_ROUGE 40
-#define SEUIL_JAUNE 40
+// rouge
+#define SEUIL_ROUGE 60
+
+// jaune 
+#define MAX_JAUNE_bleu 90
 
 typedef struct{
-    int r;
-    int v;
-    int b;
+    unsigned char r;
+    unsigned char v;
+    unsigned char b;
 }PIXEL;
 
 typedef struct{
     int nb_canaux, hauteur,largeur;
     PIXEL matrice[H][L];   
-}IMAGE;                 
+}IMAGE;   
 
-IMAGE lire_image(const char * chemin);
+typedef struct {
+    int forme, couleur;
+    unsigned char coin_HD[2];
+    unsigned char coin_HG[2];
+}OBJET;
 
-IMAGE filtrer_bleu(IMAGE * image, int seuil,int delta);
+typedef struct{
+    unsigned char r,v,b;
+}COULEUR;
 
-void sauvegarder_image(const char * nom_fichier, IMAGE img);
+
+// FONCTIONS
+
+IMAGE * lire_image(const char * nom_fichier);
+
+IMAGE * filtrer_bleu(IMAGE * image, unsigned char seuil,unsigned char delta);
+IMAGE * filtrer_jaune(IMAGE * image_source);
+IMAGE * filtrer_rouge(IMAGE * image_source, unsigned char seuil, unsigned char delta);
+
+IMAGE * filtrer_image(const char * nom_fichier);
+
+void sauvegarder_image(const char * nom_fichier, IMAGE *img);
+
+// void traiter_image();
+
+int nb_pixel_couleur(IMAGE * image, COULEUR * c);
+
+
 
 #endif

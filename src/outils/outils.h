@@ -8,4 +8,6 @@ void reset_logs();
 
 void affiche_logs();
 
+// char * lire_chaine();
+
 #endif
