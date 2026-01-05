@@ -43,7 +43,7 @@ IMAGE * creer_image(int h, int l){
             free(img);
         }
     }
-
+    ajout_log("Image crée dans créer_image");
     return img;
 
 }
@@ -59,6 +59,7 @@ void liberer_image(IMAGE * img){
         free(img->matrice);
     }
     free(img);
+    ajout_log("Image libérée");
 }
 
 
@@ -118,6 +119,7 @@ IMAGE *lire_image(const char * nom_fichier){
     }
 
     fclose(fichier);
+    ajout_log("Fichier image lu, OK");
     return image;
 }
 
@@ -230,12 +232,13 @@ IMAGE * filtrer_image(const char * nom_fichier){
 
     int H = image->hauteur;
     int L = image->largeur;
+    char trace[200];
 
     IMAGE * img_bleu = filtrer_bleu(image,SEUIL_BLEU, DELTA);  // a liberer a la fin
     IMAGE *img_jaune = filtrer_jaune(image);
     IMAGE *img_rouge = filtrer_rouge(image, SEUIL_ROUGE, DELTA);
 
-    IMAGE * img_filtre = malloc(sizeof(IMAGE));
+    IMAGE * img_filtre = creer_image(H,L);
 
     for (int y=0; y<H; y++){
         for (int x=0 ; x<L; x++){
@@ -269,10 +272,14 @@ IMAGE * filtrer_image(const char * nom_fichier){
 
     // liberer l'espace 
 
-    free(image);
-    free(img_bleu);
-    free(img_jaune);
-    free(img_rouge);
+    liberer_image(image);
+    liberer_image(img_bleu);
+    liberer_image(img_jaune);
+    liberer_image(img_rouge);
+
+    //trace 
+    sprintf(trace, "%s : filtrage effctué", nom_fichier);
+    ajout_log(trace);
 
 
     sauvegarder_image("image_filtree", img_filtre);
@@ -284,6 +291,7 @@ void sauvegarder_image(const char * nom_fichier, IMAGE * img){
 
     int H = img->hauteur;
     int L = img->largeur;
+    char trace[200];
 
     char chemin[100];
     sprintf(chemin, "resultats/%s",nom_fichier);
@@ -296,6 +304,17 @@ void sauvegarder_image(const char * nom_fichier, IMAGE * img){
         }
     }
     fclose(f);
+    sprintf(trace, "Image sauvegardée : %s", nom_fichier);
+    ajout_log(trace);
+    
+}
+
+void afficher_image(const char * nom_image_filtree, const char * nom_image_originale){
+
+    char commande[256];
+    sprintf(commande, "python3 src/simu/afficher_image.py resultats/%s donnees/%s", nom_image_filtree, nom_image_originale);
+
+    system(commande);
 }
 
 /*

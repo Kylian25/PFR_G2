@@ -1,7 +1,7 @@
 #ifndef IMAGES_H  
 #define IMAGES_H
 
-#define DELTA 40
+#define DELTA 50
 //bleu
 #define SEUIL_BLEU 40
 // rouge
@@ -41,6 +41,7 @@ void liberer_image(IMAGE * img);
 
 IMAGE * lire_image(const char * nom_fichier);
 void sauvegarder_image(const char * nom_fichier, IMAGE *img);
+void afficher_image(const char *nom_image_filtree, const char * nom_image_originale);
 
 // couleur
 
