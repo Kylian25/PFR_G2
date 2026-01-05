@@ -5,7 +5,7 @@
 #define H 300
 #define L 300
 
-#define DELTA 50
+#define DELTA 40
 //bleu
 #define SEUIL_BLEU 40
 // rouge
