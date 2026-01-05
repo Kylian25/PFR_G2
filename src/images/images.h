@@ -1,10 +1,6 @@
 #ifndef IMAGES_H  
 #define IMAGES_H
 
-
-#define H 300
-#define L 300
-
 #define DELTA 40
 //bleu
 #define SEUIL_BLEU 40
@@ -22,7 +18,7 @@ typedef struct{
 
 typedef struct{
     int nb_canaux, hauteur,largeur;
-    PIXEL matrice[H][L];   
+    PIXEL **matrice;   // pas de tableau fixe (taille pas connue a la compilation)
 }IMAGE;   
 
 typedef struct {
@@ -38,18 +34,24 @@ typedef struct{
 
 // FONCTIONS
 
+// images
+
+IMAGE * creer_image(int h, int l);
+void liberer_image(IMAGE * img);
+
 IMAGE * lire_image(const char * nom_fichier);
+void sauvegarder_image(const char * nom_fichier, IMAGE *img);
+
+// couleur
 
 IMAGE * filtrer_bleu(IMAGE * image, unsigned char seuil,unsigned char delta);
 IMAGE * filtrer_jaune(IMAGE * image_source);
 IMAGE * filtrer_rouge(IMAGE * image_source, unsigned char seuil, unsigned char delta);
 
+// traitement 
+
 IMAGE * filtrer_image(const char * nom_fichier);
-
-void sauvegarder_image(const char * nom_fichier, IMAGE *img);
-
-// void traiter_image();
-
+void traiter_image();
 int nb_pixel_couleur(IMAGE * image, COULEUR * c);
 
 
