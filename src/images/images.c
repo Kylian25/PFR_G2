@@ -309,10 +309,12 @@ void sauvegarder_image(const char * nom_fichier, IMAGE * img){
     
 }
 
-void afficher_image(const char * nom_image_filtree, const char * nom_image_originale){
+void afficher_image(const char * nom_image_filtree, const char * nom_image_originale, IMAGE * img){
 
     char commande[256];
-    sprintf(commande, "python3 src/simu/afficher_image.py resultats/%s donnees/%s", nom_image_filtree, nom_image_originale);
+    int H = img->hauteur;
+    int L = img->largeur;
+    sprintf(commande, "python3 src/simu/afficher_image.py resultats/%s donnees/%s %d %d", nom_image_filtree, nom_image_originale, H,L);
 
     system(commande);
 }

@@ -41,7 +41,7 @@ void liberer_image(IMAGE * img);
 
 IMAGE * lire_image(const char * nom_fichier);
 void sauvegarder_image(const char * nom_fichier, IMAGE *img);
-void afficher_image(const char *nom_image_filtree, const char * nom_image_originale);
+void afficher_image(const char *nom_image_filtree, const char * nom_image_originale, IMAGE * img);
 
 // couleur
 

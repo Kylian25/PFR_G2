@@ -1,0 +1,21 @@
+22:23:30 : Lancement du programme 
+
+22:23:30 : Quitter le programme
+22:23:30 : Image crée dans créer_image
+22:23:30 : Fichier image lu, OK
+22:23:30 : Image crée dans créer_image
+22:23:30 : Image sauvegardée : filtre_bleu
+22:23:30 : Image crée dans créer_image
+22:23:30 : Image sauvegardée : filtre_jaune
+22:23:30 : Image crée dans créer_image
+22:23:30 : Image sauvegardée : filtre_rouge
+22:23:30 : Image crée dans créer_image
+22:23:30 : Image libérée
+22:23:30 : Image libérée
+22:23:31 : Image libérée
+22:23:31 : Image libérée
+22:23:31 : image_test.txt : filtrage effctué
+22:23:31 : Image sauvegardée : image_filtree
+22:23:32 : Image libérée
+22:23:32 : Programme arrêté 
+

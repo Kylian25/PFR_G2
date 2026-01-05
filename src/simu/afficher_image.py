@@ -2,13 +2,14 @@ import matplotlib.pyplot as plt
 import matplotlib.image as mpimg
 import numpy as np
 import sys
-
-H, L = 300, 300  
+ 
 
 # sys.argv[1] -> fichier texte (image filtrée)
 # sys.argv[2] -> fichier jpeg (image originale)
 fichier_filtre = sys.argv[1]
 fichier_original = sys.argv[2]
+H = int(sys.argv[3])
+L = int(sys.argv[4])
 
 
 with open(fichier_filtre, "r") as f:    # lire le fichier
