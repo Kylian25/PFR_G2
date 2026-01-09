@@ -1,0 +1,33 @@
+12:53:14 : Lancement du programme 
+
+12:53:16 : ==> Entree en mode Utilisateur
+12:53:37 : [UTILISATEUR] Choix du mode Vocal
+12:53:40 : [UTILISATEUR] Choix du mode Vocal
+12:53:51 : [UTILISATEUR] Choix de la langue
+12:53:51 : Langue choisie : Anglais
+12:54:07 : [UTILISATEUR] Choix de la langue
+12:54:08 : Langue choisie : Francais
+12:54:11 : [UTILISATEUR] Choix du mode Vocal
+12:54:12 : [UTILISATEUR] Choix du mode Textuel
+12:54:14 : [UTILISATEUR] Choix du mode Textuel
+12:54:17 : [UTILISATEUR] Choix du mode Textuel
+12:54:47 : [UTILISATEUR] Retour au menu principal
+12:54:48 : Quitter le programme
+12:54:48 : Image crée dans créer_image
+12:54:48 : Fichier image lu, OK
+12:54:48 : Image crée dans créer_image
+12:54:48 : Image sauvegardée : filtre_bleu
+12:54:48 : Image crée dans créer_image
+12:54:48 : Image sauvegardée : filtre_jaune
+12:54:48 : Image crée dans créer_image
+12:54:48 : Image sauvegardée : filtre_rouge
+12:54:48 : Image crée dans créer_image
+12:54:48 : Image libérée
+12:54:48 : Image libérée
+12:54:48 : Image libérée
+12:54:48 : Image libérée
+12:54:48 : IMG_5390.txt : filtrage effctué
+12:54:48 : Image sauvegardée : image_filtree
+12:54:53 : Image libérée
+12:54:53 : Programme arrêté 
+

@@ -49,8 +49,11 @@ void init_log(LOG *l){
 
 void recup_config(CONFIG_ROBOT * config){
 
+    
     char cle[30];
     char valeur[30];
+
+    system("chmod ug+rw configuration/parametres");
     FILE *f;
     f = fopen("configuration/parametres", "r");
 
@@ -163,6 +166,7 @@ void afficher_fichier_config(){
 }
 
 void sauvegarder_config(){
+
 
     const char * chemin_fichier_config = "configuration/parametres";
 

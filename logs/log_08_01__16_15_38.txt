@@ -1,0 +1,21 @@
+16:15:38 : Lancement du programme 
+
+16:15:58 : Quitter le programme
+16:15:58 : Image crée dans créer_image
+16:15:58 : Fichier image lu, OK
+16:15:58 : Image crée dans créer_image
+16:15:58 : Image sauvegardée : filtre_bleu
+16:15:58 : Image crée dans créer_image
+16:15:58 : Image sauvegardée : filtre_jaune
+16:15:58 : Image crée dans créer_image
+16:15:58 : Image sauvegardée : filtre_rouge
+16:15:58 : Image crée dans créer_image
+16:15:58 : Image libérée
+16:15:58 : Image libérée
+16:15:58 : Image libérée
+16:15:58 : Image libérée
+16:15:58 : IMG_5390.txt : filtrage effctué
+16:15:58 : Image sauvegardée : image_filtree
+16:16:01 : Image libérée
+16:16:01 : Programme arrêté 
+

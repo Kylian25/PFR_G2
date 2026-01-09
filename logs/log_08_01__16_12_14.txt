@@ -1,0 +1,29 @@
+16:12:14 : Lancement du programme 
+
+16:12:21 : Choix invalide (menu principal)
+16:13:56 : Mot de passe Valide 
+16:13:56 : ==> Entree en Mode Administrateur
+16:13:58 : [ADMIN] Lancement de l'editeur de configuration
+16:14:30 : Retour au menu administrateur
+16:14:33 : Retour au menu principal
+16:14:43 : ==> Entree en mode Utilisateur
+16:15:05 : [UTILISATEUR] Retour au menu principal
+16:15:28 : Quitter le programme
+16:15:28 : Image crée dans créer_image
+16:15:28 : Fichier image lu, OK
+16:15:28 : Image crée dans créer_image
+16:15:28 : Image sauvegardée : filtre_bleu
+16:15:28 : Image crée dans créer_image
+16:15:28 : Image sauvegardée : filtre_jaune
+16:15:28 : Image crée dans créer_image
+16:15:28 : Image sauvegardée : filtre_rouge
+16:15:28 : Image crée dans créer_image
+16:15:28 : Image libérée
+16:15:28 : Image libérée
+16:15:28 : Image libérée
+16:15:28 : Image libérée
+16:15:28 : IMG_5390.txt : filtrage effctué
+16:15:28 : Image sauvegardée : image_filtree
+16:15:32 : Image libérée
+16:15:32 : Programme arrêté 
+

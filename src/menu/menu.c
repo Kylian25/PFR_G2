@@ -10,6 +10,7 @@
 // debut du menu
 void demarrer_menu() {
 
+    system("chmod ug-w configuration/parametres");
     system("clear"); // reset le terminal
     int choix;
     const char * options[] = {   // tableau de pointeurs qui pointent vers une chaine de caracteres (constantes)
@@ -32,7 +33,7 @@ void demarrer_menu() {
                 system("clear");
                 printf("\n=====> Entree en Mode Utilisateur...\n");
                 ajout_log("==> Entree en mode Utilisateur");
-
+        
                 menu_mode_utilisateur();
                 break;
             case 2:
@@ -84,7 +85,7 @@ void menu_mode_utilisateur() {
     };
 
     int nb_options = 4;
-
+    
     do {
         afficher_menu("   Mode Utilisateur", options, nb_options);
         
@@ -96,7 +97,7 @@ void menu_mode_utilisateur() {
 
                 printf("\n[UTILISATEUR] Mode Textuel\n");
                 ajout_log("[UTILISATEUR] Choix du mode Textuel");
-                strcpy(config.type_requete, "texte");
+                strcpy(config.type_requete, "txt");
                 //sauvegarder_config();
                 // appel fonction de gestion des commandes texte
                 break;
@@ -105,7 +106,7 @@ void menu_mode_utilisateur() {
 
                 printf("\n[UTILISATEUR] Mode Vocal\n");
                 ajout_log("[UTILISATEUR] Choix du mode Vocal");
-                strcpy(config.type_requete, "vocale");
+                strcpy(config.type_requete, "voc");
                 //sauvegarder_config();
                 // appel fonction de gestion des commandes vocales
                 break;

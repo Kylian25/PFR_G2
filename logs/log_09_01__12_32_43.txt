@@ -1,0 +1,23 @@
+12:32:43 : Lancement du programme 
+
+12:34:02 : ==> Entree en mode Utilisateur
+12:34:44 : [UTILISATEUR] Retour au menu principal
+12:35:41 : Quitter le programme
+12:35:41 : Image crée dans créer_image
+12:35:41 : Fichier image lu, OK
+12:35:41 : Image crée dans créer_image
+12:35:41 : Image sauvegardée : filtre_bleu
+12:35:41 : Image crée dans créer_image
+12:35:41 : Image sauvegardée : filtre_jaune
+12:35:41 : Image crée dans créer_image
+12:35:41 : Image sauvegardée : filtre_rouge
+12:35:41 : Image crée dans créer_image
+12:35:41 : Image libérée
+12:35:41 : Image libérée
+12:35:41 : Image libérée
+12:35:41 : Image libérée
+12:35:41 : IMG_5390.txt : filtrage effctué
+12:35:41 : Image sauvegardée : image_filtree
+12:35:47 : Image libérée
+12:35:47 : Programme arrêté 
+

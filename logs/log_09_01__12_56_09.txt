@@ -1,0 +1,4 @@
+12:56:09 : Lancement du programme 
+
+12:56:10 : ==> Entree en mode Utilisateur
+12:56:58 : [UTILISATEUR] Choix du mode Textuel

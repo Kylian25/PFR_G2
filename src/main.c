@@ -12,7 +12,7 @@
 int main(void){
 
   // INITIALISATION 
-
+  
   recup_config(&config);
 
   init_log(&f_log);
@@ -28,8 +28,8 @@ int main(void){
   
   // tests images
   IMAGE * image_test;
-  image_test = filtrer_image("IMG_5393.txt");
-  afficher_image("image_filtree", "IMG_5393.jpeg", image_test);
+  image_test = filtrer_image("IMG_5390.txt");
+  afficher_image("image_filtree", "IMG_5390.jpeg", image_test);
   liberer_image(image_test);
   
 
