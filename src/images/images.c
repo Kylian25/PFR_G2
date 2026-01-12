@@ -137,7 +137,7 @@ IMAGE * filtrer_bleu(IMAGE * image_source, unsigned char seuil, unsigned char de
             PIXEL * px_src = &image_source->matrice[y][x];  // pixel de l'image source
             PIXEL * px = &img->matrice[y][x];   // pointeur pour modifier directement la valeur du pixel (évite les copies)
 
-            if(px_src->b > seuil && px_src->b > px_src->r + delta && px_src->b > px_src->v + delta){
+            if(px_src->b > seuil && px_src->b > 1.2*(px_src->r)  && px_src->b > px_src->v && px_src->r < 170){
 
                 px->b = 255;
                 px->r = 0;
@@ -171,7 +171,7 @@ IMAGE * filtrer_jaune(IMAGE * image_source){
             PIXEL * px_src = &image_source->matrice[y][x];  // pixel de l'image source
             PIXEL * px = &img->matrice[y][x];   // pointeur pour modifier directement la valeur du pixel (évite les copies)
 
-            if( px_src->b < MAX_JAUNE_bleu && px_src->r > px_src->b + DELTA && px_src->v > px_src->b + DELTA && abs(px_src->r - px_src->v) < 70){
+            if( px_src->b < MAX_JAUNE_bleu && px_src->r > 2*(px_src->b) && px_src->v > 2*(px_src->b) + DELTA && abs(px_src->r - px_src->v) < 100){
 
                 px->b = 0;
                 px->r = 255;
@@ -227,7 +227,10 @@ IMAGE * filtrer_rouge(IMAGE * image_source, unsigned char seuil, unsigned char d
 
 IMAGE * filtrer_image(const char * nom_fichier){
 
-    IMAGE * image =  lire_image(nom_fichier);  // a liberer a la fin 
+    char nom_complet[256];
+    sprintf(nom_complet, "%s.txt", nom_fichier);
+
+    IMAGE * image =  lire_image(nom_complet);  // a liberer a la fin 
     if (image == NULL){ajout_log("Erreur creation image dans filtrer_image"); return NULL;}
 
     int H = image->hauteur;
@@ -314,7 +317,7 @@ void afficher_image(const char * nom_image_filtree, const char * nom_image_origi
     char commande[256];
     int H = img->hauteur;
     int L = img->largeur;
-    sprintf(commande, "python3 src/simu/afficher_image.py resultats/%s donnees/%s %d %d", nom_image_filtree, nom_image_originale, H,L);
+    sprintf(commande, "python3 src/outils/afficher_image.py resultats/%s donnees/%s.jpeg %d %d", nom_image_filtree, nom_image_originale, H,L);
 
     system(commande);
 }

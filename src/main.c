@@ -25,13 +25,14 @@ int main(void){
   demarrer_menu();
 
 
-  
+  /*
   // tests images
+  const char *fichier = "IMG_5405";
   IMAGE * image_test;
-  image_test = filtrer_image("IMG_5390.txt");
-  afficher_image("image_filtree", "IMG_5390.jpeg", image_test);
+  image_test = filtrer_image(fichier);
+  afficher_image("image_filtree", fichier, image_test);
   liberer_image(image_test);
-  
+  */
 
   printf("Programme arrêté \n");
   ajout_log("Programme arrêté \n");

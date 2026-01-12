@@ -290,6 +290,7 @@ void choix_langue(){
         ajout_log("Langue choisie : Anglais");
     }
     else printf("Choix invalide, retour au menu précédent");
+    sauvegarder_config();
     system("chmod ug-w configuration/parametres");
 
 }

@@ -8,7 +8,7 @@
 #define SEUIL_ROUGE 60
 
 // jaune 
-#define MAX_JAUNE_bleu 90
+#define MAX_JAUNE_bleu 100
 
 typedef struct{
     unsigned char r;
