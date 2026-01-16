@@ -6,3 +6,6 @@ main.o : traitement.h main.c
 
 main.out : traitement.o main.o
 	gcc -o main.out traitement.o main.o
+
+clear :
+	rm *.o

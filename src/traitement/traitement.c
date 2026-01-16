@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 #include "traitement.h"
 
@@ -33,11 +34,12 @@ int mot_dans_lexique(const char *mot, const Lexique *lexique){
 }
 
 int est_nombre(const char *mot){
-    if (*mot == '\0') return 0;
+    if (mot == NULL || *mot == '\0') return 0;
 
-    while (*mot){
-        if ((int) *mot != *mot) return 0;
-        mot ++;
+    int i = 0;
+    while(mot[i] !='\0'){
+        if (!isdigit((unsigned char) mot[i]))return 0;
+        i++;
     }
     return 1;
 }
@@ -48,7 +50,7 @@ Instruction text_to_instruction(const char *texte, const Lexique *lexique){
     char *copie = strdup(texte);
     if (!copie) return instr;
 
-    char *token = strtok(copie, " \t\n");
+    char *token = strtok(copie, " ");
 
     while (token){
         if (mot_dans_lexique(token, lexique) || est_nombre(token)){
@@ -56,11 +58,19 @@ Instruction text_to_instruction(const char *texte, const Lexique *lexique){
             instr.mots[instr.indice] = strdup(token);
             instr.indice ++;
         }
-        token = strok(NULL, " \t\n");
+        token = strtok(NULL, " ");
     }
 
     free(copie);
     return instr;
+}
+
+void afficher_Instruction(Instruction instr){
+    printf("[ ");
+    for (int i = 0; i < instr.indice; i++){
+        printf("%s ",instr.mots[i]);
+    }
+    printf("] \n");
 }
 
 void libere_lexique(Lexique *lexique){

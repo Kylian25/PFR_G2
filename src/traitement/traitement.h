@@ -21,6 +21,7 @@ int mot_dans_lexique(const char *mot, const Lexique *lexique);
 int est_nombre(const char *mot);
 
 Instruction text_to_instruction(const char *texte, const Lexique *lexique);
+void afficher_Instruction(Instruction instr);
 
 void libere_lexique(Lexique *lexique);
 void libere_instruction(Instruction *instr);

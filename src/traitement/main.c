@@ -3,7 +3,7 @@
 #include <string.h>
 
 #include "traitement.h"
-// #include "../config/config.h"
+//#include "../config/config.h"
 
 int main(void){
 
@@ -11,12 +11,12 @@ int main(void){
 
     //CONFIG_ROBOT config = {0};
     //recup_config(&config);
-    char * nom_fichier;
+    //char * nom_fichier;
 
     //if (config.langue == "EN") nom_fichier = strdup("lexique_EN");
     //if (config.langue == "FR") nom_fichier = strdup("lexique_FR");
 
-    Lexique lexique = charger_lexique(nom_fichier);
+    Lexique lexique = charger_lexique("../../configuration/lexique_FR");
 
     char texte[100];
 
@@ -35,6 +35,7 @@ int main(void){
     //}
 
     Instruction instr = text_to_instruction(texte, &lexique);
+    afficher_Instruction(instr);
 
     // Exécution de l'instruction et affichage avec le module de simu
 
