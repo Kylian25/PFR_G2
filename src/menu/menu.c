@@ -5,7 +5,7 @@
 #include "menu.h"
 #include "../outils/outils.h"
 #include "../config/config.h"
-#include "../images/images.h"
+
 
 // debut du menu
 void demarrer_menu() {
