@@ -28,10 +28,10 @@ void init_log(LOG *l){
 
     f = popen("date +%d_%m__%H_%M_%S","r");
 
-    if (f!=NULL){
+    if (f!=NULL){  // si fichier existe
 
         if (fgets(date, sizeof(date), f) != NULL) {
-            date[strcspn(date, "\n")] = '\0'; // supprime le retour à la ligne \n ajoute par la commande
+            date[strcspn(date, "\n")] = '\0'; // supprime le retour à la ligne \n ajouté par la commande
         }
         pclose(f);
     }
@@ -58,8 +58,8 @@ void recup_config(CONFIG_ROBOT * config){
     f = fopen("configuration/parametres", "r");
 
     if (f == NULL) {
-        printf("Erreur : impossible d'ouvrir le fichier de configuration\n");
-        printf("Vérifiez les droits d'accès du fichier configuration/parametres\n");
+        message_console("Erreur : impossible d'ouvrir le fichier de configuration\n", "Error: unable to open configuration file\n");
+        message_console("Vérifiez les droits d'accès du fichier configuration/parametres\n", "Check the access rights for the file : configuration/parametres.\n");
         ajout_log("ERREUR : Impossible d'ouvrir configuration/parametres");
         
         // Initialiser avec les valeurs par défaut
@@ -188,76 +188,76 @@ void sauvegarder_config(){
 
 void modifier_config(){
 
-    printf("\n\n1 : Modifier la distance de déplacement\n");
-    printf("2 : Modifier le temps de déplacement \n");
-    printf("3 : Modifier la distance de détection\n");
-    printf("4 : Modifier l'angle de rotation\n");
-    printf("5 : Revenir au menu précédent\n");
+    message_console("\n\n1 : Modifier la distance de déplacement\n","\n\n1 : Change the travel distance\n");
+    message_console("2 : Modifier le temps de déplacement \n", "2 : Change travel time \n");
+    message_console("3 : Modifier la distance de détection\n", "3 : Change the detection distance\n");
+    message_console("4 : Modifier l'angle de rotation\n", "4 : Change rotation angle\n");
+    message_console("5 : Revenir au menu précédent\n", "5 : Return to previous menu\n");
 
     const int nb_choix = 5;
     int choix;
     int valeur;
     
-    printf("\nEntrez votre choix : ");
+    message_console("\nEntrez votre choix : ", "\nEnter your choice : ");
     choix = obtenir_entier_utilisateur(nb_choix);
     
         switch (choix){
 
             case 1:
-                printf("Entrez la valeur :");
+                message_console("Entrez la valeur :", "Enter the value : ");
                 valeur = obtenir_entier_utilisateur(MAX_DIST_DEP);
                 if (valeur > MIN_DIST_DEP && valeur <= MAX_DIST_DEP){
                     config.dist_dep = valeur;
                     sauvegarder_config();
                 }
-                else printf("valeur incorrecte");
+                else message_console("valeur incorrecte", "Incorrect value");
                 ajout_log("distance de déplacement par defaut modifiée");
 
                 system("clear");
                 break;
             case 2:
-                printf("Entrez la valeur :");
+                message_console("Entrez la valeur :", "Enter the value : ");
                 valeur = obtenir_entier_utilisateur(MAX_TPS_DEP);
                 if (valeur > MIN_TPS_DEP && valeur < MAX_TPS_DEP){
                     config.tps_dep = valeur;
                     sauvegarder_config();
                 }
-                else printf("valeur incorrecte");
+                else message_console("valeur incorrecte", "Incorrect value");
                 ajout_log("temps de déplacement par defaut modifiée");
                 system("clear");
                 break;
             case 3: 
-                printf("Entrez la valeur :");
+                message_console("Entrez la valeur :", "Enter the value : ");
                 valeur = obtenir_entier_utilisateur(MAX_DIST_DET);
                 if (valeur > MIN_DIST_DET && valeur < MAX_DIST_DET){
                     config.dist_det = valeur;
                     sauvegarder_config();
                 }
-                else printf("valeur incorrecte");
+                else message_console("valeur incorrecte", "Incorrect value");
                 ajout_log("distance de détection par defaut modifiée");
                 system("clear");
                 break;
             case 4:
-                printf("Entrez la valeur :");
+                message_console("Entrez la valeur :", "Enter the value : ");
                 valeur = obtenir_entier_utilisateur(MAX_ANGLE);
                 if (valeur > MIN_ANGLE && valeur < MAX_ANGLE){
                     config.angle = valeur;
                     sauvegarder_config();
                 }
-                else printf("valeur incorrecte");
+                else message_console("valeur incorrecte", "Incorrect value");
                 ajout_log("angle de rotation par defaut modifiée");
                 system("clear");
                 break;
             case 5:
                 system("clear");
 
-                printf("\nRetour au menu précédent\n");
+                message_console("\nRetour au menu précédent\n","\nReturn to previous menu\n");
                 ajout_log("Retour au menu précédent");
                 return; 
             default:
                 system("clear");
 
-                printf("\nChoix invalide\n");
+                message_console("\nChoix invalide\n","\nInvalid choice\n");
                 ajout_log("[ADMIN] Choix invalide");
                 break;
         }
@@ -269,27 +269,27 @@ void choix_langue(){
     int choix;
     int nb_choix = 3;
 
-    printf("\n1 : Francais\n");
-    printf("2 : Anglais\n");
-    printf("Votre choix : ");
+    message_console("\n1 : Francais\n", "\n1 : French\n");
+    message_console("2 : Anglais\n", "2 : English\n");
+    message_console("Votre choix : ", "Your choice : ");
 
     choix=obtenir_entier_utilisateur(nb_choix);
 
     system("chmod ug+w configuration/parametres");
 
     if (choix==1){
-        printf("\nLangue : Francais\n");
+        message_console("\nLangue : Francais\n", "\nLanguage : French\n");
         strcpy(config.langue,"FR");
         sauvegarder_config();
         ajout_log("Langue choisie : Francais");
     }
     else if (choix==2){
-        printf("\nLangue choisie : Anglais");
+        message_console("\nLangue choisie : Anglais", "\nChosen language : English");
         strcpy(config.langue,"EN");
         sauvegarder_config();
         ajout_log("Langue choisie : Anglais");
     }
-    else printf("Choix invalide, retour au menu précédent");
+    else message_console("Choix invalide, retour au menu précédent", "Invalid choice, returning to previous menu");
     sauvegarder_config();
     system("chmod ug-w configuration/parametres");
 

@@ -31,7 +31,7 @@ void demarrer_menu() {
         switch (choix) {
             case 1:
                 system("clear");
-                printf("\n=====> Entree en Mode Utilisateur...\n");
+                message_console("\n=====> Entree en mode Utilisateur...\n", "\n=====> Entering User Mode...\n");
                 ajout_log("==> Entree en mode Utilisateur");
         
                 menu_mode_utilisateur();
@@ -41,7 +41,7 @@ void demarrer_menu() {
                 if (mdp_valide){
 
                     system("clear");
-                    printf("\n=====> Entree en Mode Administrateur...\n");
+                    message_console("\n=====> Entree en mode Administrateur...\n","\n=====> Entering Admin mode...\n");
                     ajout_log("Mot de passe Valide ");
                     ajout_log("==> Entree en Mode Administrateur");
                     system("chmod ug+rw configuration/parametres"); // modifie les droits du fichier parametres pour modification
@@ -49,20 +49,20 @@ void demarrer_menu() {
                     break;
                 }
                 else {
-                    printf("Mauvais mot de passe\n");
+                    message_console("Mauvais mot de passe\n","Wrong password\n");
                     ajout_log("Mauvais mot de passe rentré");
                     break;
                 }
             case 3:
                 system("clear");
                 system("chmod ug+w configuration/parametres");
-                printf("\nArret du programme..\n");
+                message_console("\nArret du programme..\n", "\nStopping program..\n");
                 ajout_log("Quitter le programme");
                 return; 
             default:
                 system("clear"); // reset le terminal 
 
-                printf("\nChoix invalide. Réessayez.\n");
+                message_console("\nChoix invalide, Réessayez.\n","\nInvalid choice, try again\n");
                 ajout_log("Choix invalide (menu principal)");
                 break;
         }
@@ -95,7 +95,7 @@ void menu_mode_utilisateur() {
             case 1:
                 system("clear"); // reset le terminal
 
-                printf("\n[UTILISATEUR] Mode Textuel\n");
+                message_console("\n[UTILISATEUR] Mode Textuel\n","\n[USER] Text mode\n");
                 ajout_log("[UTILISATEUR] Choix du mode Textuel");
                 strcpy(config.type_requete, "txt");
                 //sauvegarder_config();
@@ -104,7 +104,7 @@ void menu_mode_utilisateur() {
             case 2:
                 system("clear"); // reset le terminal 
 
-                printf("\n[UTILISATEUR] Mode Vocal\n");
+                message_console("\n[UTILISATEUR] Mode Vocal\n","\n[USER] Voice mode\n");
                 ajout_log("[UTILISATEUR] Choix du mode Vocal");
                 strcpy(config.type_requete, "voc");
                 //sauvegarder_config();
@@ -113,21 +113,21 @@ void menu_mode_utilisateur() {
             case 3:
                 system("clear"); // reset le terminal 
 
-                printf("\n[UTILISATEUR] Changement de langue\n");
+                message_console("\n[UTILISATEUR] Changement de langue\n","[USER] Changing language");
                 ajout_log("[UTILISATEUR] Choix de la langue");
                 choix_langue();
                 break;
             case 4:
                 system("clear"); // reset le terminal 
 
-                printf("\nRetour au Menu Principal.\n");
+                message_console("\nRetour au Menu Principal\n","\nReturn to main menu\n");
                 ajout_log("[UTILISATEUR] Retour au menu principal");
                 system("clear");
                 return; 
             default:
                 system("clear"); // reset le terminal 
 
-                printf("\nChoix invalide.\n");
+                message_console("\nChoix invalide.\n", "\nInvalid choice\n");
                 ajout_log("[UTILISATEUR] Choix invalide");
                 break;
         }
@@ -160,7 +160,7 @@ void menu_modifier_config(){
             case 1:
                 system("clear");
 
-                printf("\n[ADMIN] Affichage des parametres\n");
+                message_console("\n[ADMIN] Affichage des parametres\n","\n[ADMIN] Settings display\n");
                 ajout_log("[ADMIN] Affichage des parametres");
                 
                 afficher_fichier_config();
@@ -169,20 +169,20 @@ void menu_modifier_config(){
             case 2:
                 system("clear");
                 afficher_fichier_config();
-                printf("[ADMIN] Modification des parametres");
+                message_console("\n[ADMIN] Modification des parametres\n", "\n[ADMIN] Settings modification\n");
                 ajout_log("[ADMIN] Modification des parametres");
                 modifier_config();
                 break;
             case 3:
                 system("clear"); // reset le terminal 
 
-                printf("\nRetour au Menu administrateur\n");
+                message_console("\nRetour au Menu administrateur\n", "\nReturn to admin menu\n");
                 ajout_log("Retour au menu administrateur");
                 return; 
             default:
                 system("clear"); // reset le terminal 
 
-                printf("\nChoix invalide\n");
+                message_console("\nChoix invalide\n", "\nInvalid choice\n");
                 ajout_log("[ADMIN] Choix invalide");
                 break;
         }
@@ -214,25 +214,25 @@ void menu_mode_administrateur() {
         switch (choix) {
             case 1:
                 system("clear");
-                printf("\n[ADMIN] Lancement de l'editeur de configuration\n");
+                message_console("\n[ADMIN] Lancement de l'editeur de configuration\n", "\n[ADMIN] Launching the configuration editor");
                 ajout_log("[ADMIN] Lancement de l'editeur de configuration");
                 menu_modifier_config();
                 
                 break;
             case 2:
                 system("clear");
-                printf("\n[ADMIN] ------------ Affichage des logs -------------\n\n");
+                message_console("\n[ADMIN] ------------ Affichage des logs -------------\n\n", "\n[ADMIN] ------------ Log display -------------\n\n");
                 ajout_log("[ADMIN] Affichage des logs");
                 affiche_logs();
                 break;
             case 3:
                 system("clear");
-                printf("\nRetour au Menu Principal\n");
+                message_console("\nRetour au Menu Principal\n","\nReturn to main menu\n");
                 ajout_log("Retour au menu principal");
                 return; 
             default:
                 system("clear"); // reset le terminal 
-                printf("\nChoix invalide\n");
+                message_console("\nChoix invalide\n","\nInvalid choice\n");
                 ajout_log("[ADMIN] Choix invalide");
                 break;
         }
@@ -256,7 +256,7 @@ void afficher_menu(const char *titre, const char *options[], int nb_options) {
     }
 
     printf("--------------------------------------------\n");
-    printf("Entrez votre choix : ");
+    message_console("Entrez votre choix : ", "Enter your choice : ");
 }
 
 
@@ -301,8 +301,8 @@ int obtenir_entier_utilisateur(int nombre_max){
     }
     else{
 
-        printf("\nErreur de saisie\n");
-        printf("Entrez votre choix :");
+        message_console("\nErreur de saisie\n", "\nInput error\n");
+        message_console("Entrez votre choix :","Enter your choice : ");
 
         int c;
         while ((c = getchar()) != '\n' && c != EOF);  // vider le buffer
@@ -317,7 +317,7 @@ int verif_mdp(){
 
     const int mdp = 123;
     int valeur;
-    printf("Entrer le mot de passe : \n");
+    message_console("Entrer le mot de passe :  ", "Enter password :  ");
     scanf("%d", &valeur);
 
     if (valeur == mdp) return 1;
