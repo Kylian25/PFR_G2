@@ -13,18 +13,35 @@ void demarrer_menu() {
     system("chmod ug-w configuration/parametres");
     system("clear"); // reset le terminal
     int choix;
-    const char * options[] = {   // tableau de pointeurs qui pointent vers une chaine de caracteres (constantes)
+
+
+    const char * optionsFR[] = {   // tableau de pointeurs qui pointent vers une chaine de caracteres (constantes)
         "1 : Mode Utilisateur",
         "2 : Mode Administrateur",
         "3 : Quitter"
     };
+
+    const char * optionsEN[] = {  
+        "1 : User mode",
+        "2 : Admin mode",
+        "3 : Exit program"
+    };
+
+    const char ** options;  // pointeur vers un tableau de char
+    if (!strcmp(config.langue, "FR")) options = optionsFR;
+    else options = optionsEN;
+
+    const char * nom_menu;
+    if (!strcmp(config.langue, "FR")) nom_menu = "     MENU PRINCIPAL";  // la chaine "aaaaa" est une adresse donc le = fonctionne
+    else nom_menu = "  MAIN MENU";
+
     int nb_options = 3;
     int mdp_valide;
 
     system("clear");
     do {
 
-        afficher_menu("Menu Principal - Choix du Mode", options, nb_options);
+        afficher_menu(nom_menu, options, nb_options);
 
         choix = obtenir_entier_utilisateur(nb_options);
 
@@ -77,17 +94,33 @@ void menu_mode_utilisateur() {
     int choix;
 
     system("chmod ug-w configuration/parametres");  // supprimer les droits de modif des parametres
-    const char *options[] = {
+
+    const char *optionsFR[] = {
         "1 : Mode Requete Textuelle",
         "2 : Mode Requete Vocale",
         "3 : Choisir la Langue (defaut: Francais)",
         "4 : Retour au Menu Principal"
     };
 
+    const char *optionsEN[] = {
+        "1 : Text request mode",
+        "2 : Voice request mode",
+        "3 : Choose language",
+        "4 : Return to main menu"
+    };
+
+    const char ** options;  // pointeur vers un tableau de chaines
+    if (!strcmp(config.langue, "FR")) options = optionsFR;
+    else options = optionsEN;
+
     int nb_options = 4;
+
+    const char * nom_menu;
+    if (!strcmp(config.langue, "FR")) nom_menu = "  Mode Utilisateur";  
+    else nom_menu = "  User mode";
     
     do {
-        afficher_menu("   Mode Utilisateur", options, nb_options);
+        afficher_menu(nom_menu, options, nb_options);
         
         choix = obtenir_entier_utilisateur(nb_options);
 
@@ -143,15 +176,29 @@ void menu_modifier_config(){
     int nb_choix = 3;
     int choix;
 
-    const char * options[] ={
+    const char * optionsFR[] ={
         "1 : Afficher parametres",
         "2 : Modifier parametres",
         "3 : Revenir au menu amdinistrateur"
     };
 
+    const char * optionsEN[] ={
+        "1 : Display settings",
+        "2 : Modify settings",
+        "3 : Return to admin menu"
+    };
+
+    const char ** options;  // pointeur vers un tableau de chaines
+    if (!strcmp(config.langue, "FR")) options = optionsFR;
+    else options = optionsEN;
+
+    const char * nom_menu;
+    if (!strcmp(config.langue, "FR")) nom_menu = "  Admin - modification de configuration";
+    else nom_menu = "  Admin - modify configuration";
+
     do{
 
-        afficher_menu("Mode administrateur - modification configuration", options, nb_choix);
+        afficher_menu(nom_menu, options, nb_choix);
 
         choix = obtenir_entier_utilisateur(nb_choix);
 
@@ -193,21 +240,36 @@ void menu_modifier_config(){
 
 
 
-//  Menu du mode Administrateur : modification de la configuration et logs.
+//  Menu du mode administrateur : modification de la configuration et des logs
 void menu_mode_administrateur() {
 
     int choix;
 
-    const char *options[] = {
+    const char *optionsFR[] = {
         "1 : Modifier le Fichier de Configuration",
         "2 : Afficher les Logs Systemes",
         "3 : Retour au Menu Principal"
     };
 
+    const char *optionsEN[] = {
+        "1 : Modify config file",
+        "2 : Display system logs",
+        "3 : Return to main menu"
+    };
+
+    const char ** options;  // pointeur vers un tableau de chaines
+    if (!strcmp(config.langue, "FR")) options = optionsFR;
+    else options = optionsEN;
+
     int nb_options = 3;
 
+    const char * nom_menu;
+    if (!strcmp(config.langue, "FR")) nom_menu = "  Mode Administrateur";  // la chaine "aaaaa" est une adresse donc le = fonctionne
+    else nom_menu = "  Admin mode";
+    
+
     do {
-        afficher_menu("   Mode Administrateur", options, nb_options);
+        afficher_menu(nom_menu, options, nb_options);
         
         choix = obtenir_entier_utilisateur(nb_options);
 
