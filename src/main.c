@@ -19,14 +19,14 @@ int main(void){
 
   // FIN INITIALISATION 
 
-  printf("Debut du programme..\n");
+  message_console("Debut du programme..\n", "The program is starting\n");
   ajout_log("Lancement du programme \n");
 
   demarrer_menu();
 
  
 
-  printf("Programme arrêté \n");
+  message_console("Programme arrêté \n", "Program finished\n");
   ajout_log("Programme arrêté \n");
 
 

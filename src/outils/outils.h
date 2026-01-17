@@ -1,13 +1,11 @@
 #ifndef OUTILS_H  // éviter les erreurs lors de la conpilation 
 #define OUTILS_H
 
-// Fonction pour écrire dans le fichier de log
-void ajout_log(const char *message);
 
-void reset_logs();
+void ajout_log(const char *message);
 
 void affiche_logs();
 
-// char * lire_chaine();
+void message_console(char * message_françcais, char * message_anglais);
 
 #endif
