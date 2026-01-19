@@ -176,7 +176,7 @@ void menu_modifier_config(){
     int nb_choix = 3;
     int choix;
 
-    const char * optionsFR[] ={
+    const char * optionsFR[] ={         // tableau de chaines 
         "1 : Afficher parametres",
         "2 : Modifier parametres",
         "3 : Revenir au menu amdinistrateur"
@@ -193,8 +193,8 @@ void menu_modifier_config(){
     else options = optionsEN;
 
     const char * nom_menu;
-    if (!strcmp(config.langue, "FR")) nom_menu = "  Admin - modification de configuration";
-    else nom_menu = "  Admin - modify configuration";
+    if (!strcmp(config.langue, "FR")) nom_menu = "  Admin - modification des paramètres";
+    else nom_menu = "  Admin - modify settings";
 
     do{
 
@@ -215,7 +215,6 @@ void menu_modifier_config(){
 
             case 2:
                 system("clear");
-                afficher_fichier_config();
                 message_console("\n[ADMIN] Modification des parametres\n", "\n[ADMIN] Settings modification\n");
                 ajout_log("[ADMIN] Modification des parametres");
                 modifier_config();
@@ -321,31 +320,6 @@ void afficher_menu(const char *titre, const char *options[], int nb_options) {
     message_console("Entrez votre choix : ", "Enter your choice : ");
 }
 
-
-int obtenir_choix_utilisateur(int choix_maximum) {
-
-    int choix;
-    int resultat_lecture;
-
-    // lit l'entier
-    resultat_lecture = scanf("%d", &choix);
-
-    if (resultat_lecture != 1) {   // scanf retourne le nb d'éléments lus (icion veut 1 (entier)), 0 si elle n'a pas lu un entier et <0 si erreur
-        int c;
-        c=getchar();
-        while (c != '\n' && c != EOF); // c =! du retour a la ligne et de la fin du fichier(EOF)
-        return 0; // Invalide
-    }
-    
-    int caractere;
-    caractere = getchar();
-    while (caractere != '\n' && caractere != EOF);
-
-    if (choix < 1 || choix > choix_maximum) { // || = ou 
-        return 0;
-    }
-    return choix;
-}
 
 /*
  Lit l'entree utilisateur et s'assure qu'elle est valide.

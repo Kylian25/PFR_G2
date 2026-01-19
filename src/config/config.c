@@ -188,6 +188,8 @@ void sauvegarder_config(){
 
 void modifier_config(){
 
+    afficher_fichier_config(); //affichage des paramètres
+    
     message_console("\n\n1 : Modifier la distance de déplacement\n","\n\n1 : Change the travel distance\n");
     message_console("2 : Modifier le temps de déplacement \n", "2 : Change travel time \n");
     message_console("3 : Modifier la distance de détection\n", "3 : Change the detection distance\n");
@@ -215,6 +217,7 @@ void modifier_config(){
                 ajout_log("distance de déplacement par defaut modifiée");
 
                 system("clear");
+                modifier_config();   // relancer la fonction pour éviter de revenir au menu précédent si les modifs ne sont pas encore finies
                 break;
             case 2:
                 message_console("Entrez une valeur entre ", "Enter a value between ");
@@ -227,6 +230,7 @@ void modifier_config(){
                 else message_console("valeur incorrecte", "Incorrect value");
                 ajout_log("temps de déplacement par defaut modifiée");
                 system("clear");
+                modifier_config();
                 break;
             case 3: 
                 message_console("Entrez une valeur entre ", "Enter a value between ");
@@ -239,6 +243,7 @@ void modifier_config(){
                 else message_console("valeur incorrecte", "Incorrect value");
                 ajout_log("distance de détection par defaut modifiée");
                 system("clear");
+                modifier_config(); 
                 break;
             case 4:
                 message_console("Entrez une valeur entre ", "Enter a value between ");
@@ -251,6 +256,7 @@ void modifier_config(){
                 else message_console("valeur incorrecte", "Incorrect value");
                 ajout_log("angle de rotation par defaut modifiée");
                 system("clear");
+                modifier_config();
                 break;
             case 5:
                 system("clear");
