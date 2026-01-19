@@ -204,7 +204,8 @@ void modifier_config(){
         switch (choix){
 
             case 1:
-                message_console("Entrez la valeur :", "Enter the value : ");
+                message_console("Entrez une valeur entre ", "Enter a value between ");
+                printf("[%d,%d] : ", MIN_DIST_DEP, MAX_DIST_DEP);
                 valeur = obtenir_entier_utilisateur(MAX_DIST_DEP);
                 if (valeur > MIN_DIST_DEP && valeur <= MAX_DIST_DEP){
                     config.dist_dep = valeur;
@@ -216,7 +217,8 @@ void modifier_config(){
                 system("clear");
                 break;
             case 2:
-                message_console("Entrez la valeur :", "Enter the value : ");
+                message_console("Entrez une valeur entre ", "Enter a value between ");
+                printf("[%d,%d] : ", MIN_TPS_DEP,MAX_TPS_DEP);
                 valeur = obtenir_entier_utilisateur(MAX_TPS_DEP);
                 if (valeur > MIN_TPS_DEP && valeur < MAX_TPS_DEP){
                     config.tps_dep = valeur;
@@ -227,7 +229,8 @@ void modifier_config(){
                 system("clear");
                 break;
             case 3: 
-                message_console("Entrez la valeur :", "Enter the value : ");
+                message_console("Entrez une valeur entre ", "Enter a value between ");
+                printf("[%d,%d] : ", MIN_DIST_DET, MAX_DIST_DET);
                 valeur = obtenir_entier_utilisateur(MAX_DIST_DET);
                 if (valeur > MIN_DIST_DET && valeur < MAX_DIST_DET){
                     config.dist_det = valeur;
@@ -238,7 +241,8 @@ void modifier_config(){
                 system("clear");
                 break;
             case 4:
-                message_console("Entrez la valeur :", "Enter the value : ");
+                message_console("Entrez une valeur entre ", "Enter a value between ");
+                printf("[%d,%d] : ", MIN_ANGLE, MAX_ANGLE);
                 valeur = obtenir_entier_utilisateur(MAX_ANGLE);
                 if (valeur > MIN_ANGLE && valeur < MAX_ANGLE){
                     config.angle = valeur;

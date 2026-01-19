@@ -6,21 +6,21 @@
 
 #define DEF_LANGUE "FR"
 #define DEF_TYPE_REQUETE "txt"
-#define DEF_DIST_DEP 1
+#define DEF_DIST_DEP 50
 #define DEF_TPS_DEP 1
 #define DEF_DIST_DET 1
-#define DEF_ANGLE 100
+#define DEF_ANGLE 90
 
 // valeurs max/min
 
 #define MAX_DIST_DEP 200
-#define MIN_DIST_DEP 1
+#define MIN_DIST_DEP 10
 #define MAX_TPS_DEP 20
 #define MIN_TPS_DEP 1
-#define MAX_DIST_DET 100
+#define MAX_DIST_DET 50
 #define MIN_DIST_DET 1
 #define MAX_ANGLE 360
-#define MIN_ANGLE 30
+#define MIN_ANGLE 20
 
 typedef struct {
 

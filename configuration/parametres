@@ -1,6 +1,6 @@
 langue FR
 type_requete voc
-dist_dep 1
+dist_dep 50
 tps_dep 5
-dist_det 1
-angle 100
+dist_det 20
+angle 50
