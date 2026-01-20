@@ -3,23 +3,26 @@ import turtle as tl
 from PIL import Image
 
 #----------------------------- Fonctions --------------------------------
-
-def charger_config(fichier):                         # récup la config
+"""
+Charger la configuration depuis le fichier parametres.txt
+afin d'accéder aux valeurs par défaut 
+"""
+def charger_config(fichier):                         
     config = {}
     try:
         with open(fichier, "r") as f:
             for ligne in f:
-                ligne = ligne.strip()                # ignore les lignes vides... 
+                ligne = ligne.strip()        # ignore les lignes vides... 
                 if not ligne:
                     continue
                 
-                elem = ligne.split()                 # découpe la ligne, espaces en séparateurs
+                elem = ligne.split()      # découpe la ligne, espaces comme séparateurs
                 
                 if len(elem) == 2:
                     cle = elem[0]
                     valeur = elem[1]
                     
-                    try:                             #convertir les str en entier si possible
+                    try:                            #convertir les str en entier si possible
                         config[cle] = int(valeur)    
                     except ValueError:
                         config[cle] = valeur
@@ -27,13 +30,41 @@ def charger_config(fichier):                         # récup la config
     except FileNotFoundError:
         print("pas de fichier")
         return {}
-    
+     
 def message_console(FR,EN):
     if config["langue"] == "FR":
         print(FR)
     else: print(EN)
 
-# -------------------------------------------------------------------------
+"""
+Récupère les instructions dans le fichier texte et retourne une liste de celles ci,
+si le fichier est vide, retourne un message d'erreur.
+"""
+def recup_instructions():
+    instructions = []
+    fichier = "donnees/instructions.txt"
+
+    try:
+        with open(fichier,"r") as fichier:
+            for ligne in fichier:
+                ligne=ligne.strip()
+                if not ligne:
+                    continue
+                
+                elem = ligne.split()
+
+                if len(elem)>1:
+                    for i in range(len(elem)):
+                        instructions.append(elem[i])
+                    message_console("Liste d'instructions : ", "Instructions list : ")
+                    print(instructions)
+                    return instructions
+                else:
+                    message_console("Aucune instruction dans le fichier", "Instructions file is empty")
+
+    except FileNotFoundError:
+        message_console("Pas de fichier","No file")
+        return []
 
 def initialisation(x,y):
     tl.up()
@@ -57,7 +88,7 @@ def est_dans_image(x_image,y_image):                  #vérifie si le robot est 
         return True
     else: return False
 
-def retour_image(x_image,y_image):
+def retour_image(x_image,y_image):       
     x = max(0, min(x_image,largeur))                   #si x < 0 => revient en 0, sinon au x correspondant dans l'image si x <= largeur
     y = max(0 , min(y_image,hauteur))
 
@@ -126,9 +157,7 @@ def dessiner_obstacle(x_HG,y_HG,x_BD,y_BD,couleur,forme):
         aller_a(x_robot_img,y_robot_img)
     else: message_console("Cette forme n'est pas reconnue", "This form is not recognized")
 
-
-
-def eviter_obstacle(x_HG,y_HG,x_BD,y_BD):     # coordonnées image
+def eviter_obstacle(x_HG,y_HG,x_BD,y_BD):    
 
     x_robot,y_robot = coord_turtle_image(tl.pos()[0],tl.pos()[1])
 
@@ -192,23 +221,20 @@ y_start_tl = - hauteur/2
 screen = tl.Screen()
 screen.setup(width=largeur, height=hauteur)
 
-tl.bgpic("donnees/simu.gif")                         # image de fond
+tl.bgpic("donnees/simu.gif")      # image de fond
 
 
 
 #----------------------------- Programme principal --------------------------------
 
-tl.speed(1)
+tl.speed(100)
 initialisation(x_start_tl,y_start_tl)
 tl.color("green")
-#aller_a(70,30)
-#avancer(25)
-#revenir(x_start_tl,y_start_tl)
 dessiner_obstacle(60,200,160,300,"blue","rond")
 eviter_obstacle(60,200,160,300)
 dessiner_obstacle(30,30,70,55,"yellow", "carre")
 eviter_obstacle(30,30,70,55)
 
-
+L = recup_instructions()
 
 tl.done()
