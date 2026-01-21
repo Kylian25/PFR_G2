@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "module_image.h"
 
 // créer l'image
-Image* creer_image(int largeur, int hauteur){
+Image* creer_image(int largeur, int hauteur, int nombre_de_canaux) {
     Image *image = (Image*)malloc(sizeof(Image));
     if (image == NULL){
         printf("erreur lors de la création de l'image\n");
@@ -11,20 +12,17 @@ Image* creer_image(int largeur, int hauteur){
     }
     image->largeur=largeur;
     image->hauteur=hauteur;
+    image->nombre_de_canaux=nombre_de_canaux;
     image->data= (Pixel*)malloc(largeur*hauteur*sizeof(Pixel));
     if (image->data == NULL){
         printf("erreur lors de l'atribution des pixels à l'image\n");
         free(image);
         return NULL;
     }
-    if(image != NULL && image->data != NULL){
-        printf("image créer avec succès\n");
-    } 
     return image;  
 }
 
-
-//liberer l'image au cas ou
+// liberer l'image 
 void liberer_image(Image *img) {
     if (img != NULL) {
         if (img->data != NULL) {
@@ -35,16 +33,14 @@ void liberer_image(Image *img) {
     }
 }
 
-// récuper directement le pixel
+// récuper le pixel
 Pixel get_pixel(Image *image, int x, int y) {
-    
     if (x < 0 || x >= image->largeur || y < 0 || y >= image->hauteur) {
         Pixel vide = {0, 0, 0}; 
         return vide; 
     }
     return image->data[y * image->largeur + x];
 }
-
 
 // charger l'image
 Image* charger_image(const char* chemin_fichier_texte) {
@@ -57,114 +53,119 @@ Image* charger_image(const char* chemin_fichier_texte) {
     }
 
     printf("Ouverture du fichier texte réussie\n");
-
     fscanf(f, "%d %d %d", &largeur, &hauteur, &nombre_de_canaux);
+    printf("Format détecté : %dx%dx%d\n", largeur, hauteur, nombre_de_canaux);
     
-    printf("le fichier est du format : Taille %dx%dx%d\n",largeur, hauteur, nombre_de_canaux );
-
+    Image *image = creer_image(largeur, hauteur, nombre_de_canaux); 
     
-    Image *image = creer_image(largeur, hauteur); 
+    if (nombre_de_canaux != 3) {
+        printf("Erreur : format non RGB (%d canaux)\n", nombre_de_canaux);
+        fclose(f);
+        liberer_image(image);
+        return NULL;
+    }
 
-   
-    int rouge, vert, bleu;
+     int total_pixels = largeur * hauteur;
+     int valeur;
 
-    for(int i = 0; i < largeur * hauteur; i++) {
-        
-        if (fscanf(f, "%d %d %d", &rouge, &vert, &bleu) != 3) {
-            printf("Erreur ou fin de fichier prématurée au pixel %d\n", i);
+    for(int i = 0; i < total_pixels; i++) {
+        if (fscanf(f, "%d", &valeur) != 1) {
+            printf("Erreur de lecture du Rouge au pixel %d\n", i);
             break; 
         }
-        image->data[i].r = (unsigned char)rouge;
-        image->data[i].g = (unsigned char)vert;
-        image->data[i].b = (unsigned char)bleu;
+        image->data[i].r = (unsigned char)valeur;
+    }
+    for(int i = 0; i < total_pixels; i++) {
+        if (fscanf(f, "%d", &valeur) != 1) {
+            printf("Erreur de lecture du Vert au pixel %d\n", i);
+            break; 
+        }
+        image->data[i].g = (unsigned char)valeur;
+    }
+    for(int i = 0; i < total_pixels; i++) {
+        if (fscanf(f, "%d", &valeur) != 1) {
+            printf("Erreur de lecture du Bleu au pixel %d\n", i);
+            break; 
+        }
+        image->data[i].b = (unsigned char)valeur;
     }
 
     fclose(f);
-    printf("L'image %s a été chargée avec succès en mémoire.\n", chemin_fichier_texte);
+    printf("L'image %s a été chargée avec succès.\n", chemin_fichier_texte);
     
     return image;
+    
 }
 
 
-
-//fonction de detection de couleur 
 int est_couleur_cible(Pixel p, CouleurCible cible) {
-    int seuil = 50;
     switch (cible) {
         case CIBLE_ROUGE:
-            return (p.r > seuil && p.r> p.g + seuil  && p.r > p.b + 30);
+            return (p.r > p.g + 50 && p.r > p.b + 50 && p.r > 120 && p.g < 80 && p.b < 80);
         
         case CIBLE_JAUNE:
-            return (p.r > p.b + 30 && p.g > p.b + 30 && p.b < 90 && abs(p.r - p.g) < 30);
+            return (abs(p.r - p.g) < 30 && p.r > p.b + 40 && p.g > p.b + 40 && p.r > 120 && p.g > 120);
 
         case CIBLE_BLEU:
-             return (p.b >p.r + 30  && p.b > p.g + 30 && p.b > seuil);
+            return (p.b > p.r + 40 && p.b > p.g + 40 && p.b > 120 && p.r < 100 && p.g < 100);
 
         default:
             return 0;
     }
 }
 
-
-//fonction trouver positions
 ObjetDetecte* trouver_positions(const char* image_de_entre) {
-
     Image* img = charger_image(image_de_entre);
+    if (img == NULL) {
+        printf("Annulation de la détection : Image introuvable.\n");
+        return NULL;
+    }
 
     ObjetDetecte *objets = (ObjetDetecte*)malloc(3 * sizeof(ObjetDetecte));
-    if (objets == NULL) return NULL; // Sécurité
+    if (objets == NULL) {
+        liberer_image(img);
+        return NULL;
+    }
 
     CouleurCible liste_couleurs[] = {CIBLE_ROUGE, CIBLE_JAUNE, CIBLE_BLEU};
     const char *noms[] = {"ROUGE", "JAUNE", "BLEU"};
     
-    
     for (int i = 0; i < 3; i++) {
-        printf("Test de détection de la couleur %s\n", noms[i]);
         CouleurCible couleur_actuelle = liste_couleurs[i];
-        
-       
         objets[i].type_couleur = couleur_actuelle;
-        
-        // Initialisation inversée
         objets[i].x_min = img->largeur;
         objets[i].y_min = img->hauteur;
         objets[i].x_max = 0;
         objets[i].y_max = 0;
         objets[i].surface = 0;
 
-        // 3. Scan de l'image
         for (int y = 0; y < img->hauteur; y++) {
             for (int x = 0; x < img->largeur; x++) {
                 
                 Pixel p = get_pixel(img, x, y);
 
                 if (est_couleur_cible(p, couleur_actuelle)) {
-                    // Mise à jour directe dans le tableau
                     if (x < objets[i].x_min) objets[i].x_min = x;
                     if (x > objets[i].x_max) objets[i].x_max = x;
-                    
                     if (y < objets[i].y_min) objets[i].y_min = y;
                     if (y > objets[i].y_max) objets[i].y_max = y;
-                    
                     objets[i].surface++;
                 }
-                
             }
         } 
         if(objets[i].surface == 0){
-                    printf("Aucun objet %s n'a été détectée\n",noms[i]);
-                }
-        else{
-            printf("Objet %s détectée\n",noms[i]);
-            printf("Position: X[%d-%d] Y[%d-%d]\n", objets[i].x_min, objets[i].x_max, objets[i].y_min, objets[i].y_max);
-            printf("Surface: %ld pixels\n", objets[i].surface);
+            printf("%s : Non détecté.\n", noms[i]);
+        } else {
+            printf("%s détecté\n", noms[i]);
+            printf("Position : X[%d-%d] Y[%d-%d]\n", objets[i].x_min, objets[i].x_max, objets[i].y_min, objets[i].y_max);
+            printf("Surface  : %ld pixels\n", objets[i].surface);
+            
         }
     }
-    liberer_image(img);
-    // On renvoie le tableau complet
-    return objets;
-}
 
+    liberer_image(img);
+    return objets; 
+}
 
 
 void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
@@ -175,7 +176,7 @@ void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
     if (!f) return;
 
     for (int i = 0; i < 3; i++) {
-        if (objets[i].surface > 50) {
+        if (objets[i].surface > 40) {
             fprintf(f, "%d %d %d %d\n",
                 objets[i].x_min,
                 objets[i].x_max,

@@ -5,15 +5,14 @@ import sys
 
 def dessiner_rectangle(img, x_min, x_max, y_min, y_max):
     couleur = [0, 0, 0]
+    delta=5
 
-    for x in range(x_min, x_max + 1):
-        img[y_min, x] = couleur
-        img[y_max, x] = couleur
-
-    for y in range(y_min, y_max + 1):
-        img[y, x_min] = couleur
-        img[y, x_max] = couleur
-
+    for x in range(x_min-delta,x_max+delta):
+        img[y_min-delta][x]=couleur
+        img[y_max+delta][x]=couleur
+    for y in range(y_min-delta,y_max+delta):
+        img[y][x_min-delta]=couleur
+        img[y][x_max+delta]=couleur
 
 # main
 img = np.array(Image.open(sys.argv[1]).convert("RGB"))
