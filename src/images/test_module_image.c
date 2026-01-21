@@ -54,7 +54,7 @@ Image* charger_image(const char* chemin_fichier_texte) {
 
     printf("Ouverture du fichier texte réussie\n");
     fscanf(f, "%d %d %d", &largeur, &hauteur, &nombre_de_canaux);
-    printf("Format détecté : %dx%dx%d\n", largeur, hauteur, nombre_de_canaux);
+    printf("Format: %dx%dx%d\n", largeur, hauteur, nombre_de_canaux);
     
     Image *image = creer_image(largeur, hauteur, nombre_de_canaux); 
     
@@ -101,13 +101,13 @@ Image* charger_image(const char* chemin_fichier_texte) {
 int est_couleur_cible(Pixel p, CouleurCible cible) {
     switch (cible) {
         case CIBLE_ROUGE:
-            return (p.r > p.g + 50 && p.r > p.b + 50 && p.r > 120 && p.g < 80 && p.b < 80);
+            return (p.r > p.g + 50 && p.r > p.b + 50 && p.r > 100 && p.g < 80 && p.b < 80);
         
         case CIBLE_JAUNE:
             return (abs(p.r - p.g) < 30 && p.r > p.b + 40 && p.g > p.b + 40 && p.r > 120 && p.g > 120);
 
         case CIBLE_BLEU:
-            return (p.b > p.r + 40 && p.b > p.g + 40 && p.b > 120 && p.r < 100 && p.g < 100);
+            return (p.b > p.r + 40 && p.b > p.g + 40 && p.b > 100 && p.r < 80 && p.g < 80);
 
         default:
             return 0;
@@ -154,9 +154,9 @@ ObjetDetecte* trouver_positions(const char* image_de_entre) {
             }
         } 
         if(objets[i].surface == 0){
-            printf("%s : Non détecté.\n", noms[i]);
+            printf("Objet %s non détecté.\n", noms[i]);
         } else {
-            printf("%s détecté\n", noms[i]);
+            printf("Objet %s détecté\n", noms[i]);
             printf("Position : X[%d-%d] Y[%d-%d]\n", objets[i].x_min, objets[i].x_max, objets[i].y_min, objets[i].y_max);
             printf("Surface  : %ld pixels\n", objets[i].surface);
             

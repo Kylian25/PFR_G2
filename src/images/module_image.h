@@ -37,3 +37,8 @@ typedef struct {
 ObjetDetecte* trouver_positions(const char* image_de_entre);
 
 void afficher_resultats(const char* fichier_entree,const char* image_jpeg);
+
+typedef enum {
+    BALLE, 
+    CUBE   
+} TypeForme;
