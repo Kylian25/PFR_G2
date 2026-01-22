@@ -39,6 +39,7 @@ Fonction *trouver_fonction(char *mot);
 // Traitement de texte
 
 void traiter_texte(char *texte);
+void gestion_requetes(char *mode);
 
 // Déclaration des variables de lexique
 

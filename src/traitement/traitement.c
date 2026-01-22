@@ -73,7 +73,7 @@ void nettoyer_mot(char *mot) {
 
 char* trouver_principal(char *mot) {
     for (int i = 0; i < syn_count; i++) {
-        if (strcmp(mot, synonymes[i].synonyme) == 0) {
+        if (strcasecmp(mot, synonymes[i].synonyme) == 0) {
             return synonymes[i].principal;
         }
     }
@@ -82,7 +82,7 @@ char* trouver_principal(char *mot) {
 
 char* trouver_type(char *mot) {
     for (int i = 0; i < type_count; i++) {
-        if (strcmp(mot, types[i].mot) == 0)
+        if (strcasecmp(mot, types[i].mot) == 0)
             return types[i].type;
     }
     return "INCONNU";
@@ -90,7 +90,7 @@ char* trouver_type(char *mot) {
 
 Fonction* trouver_fonction(char *mot) {
     for (int i = 0; i < func_count; i++) {
-        if (strcmp(mot, fonctions[i].mot) == 0)
+        if (strcasecmp(mot, fonctions[i].mot) == 0)
             return &fonctions[i];
     }
     return NULL;
@@ -163,15 +163,22 @@ void traiter_texte(char *texte) {
     }
 }
 
-int main() {
+void gestion_requetes(char *mode) {
+
     charger_synonymes("../../configuration/syn_FR.txt");
     charger_types("../../configuration/type_FR.txt");
     charger_fonctions("../../configuration/fonction_FR.txt");
 
     char texte[MAX_LINE];
-    printf("Entrez une phrase : ");
-    fgets(texte, MAX_LINE, stdin);
+
+    if (strcmp(mode,"txt") == 0){
+        printf("Entrez une phrase : ");
+        fgets(texte, MAX_LINE, stdin);
+    }
+
+    else{
+        // fonction commande vocale
+    }
 
     traiter_texte(texte);
-    return 0;
 }
