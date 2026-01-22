@@ -1,0 +1,4 @@
+avance;forward;dist
+recule;backward;dist
+tourne;right;angle
+localise;where;object,color

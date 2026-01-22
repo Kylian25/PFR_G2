@@ -1,0 +1,3 @@
+avance;avancer;marche;déplace;move;go
+localise;repère;trouve
+et;puis

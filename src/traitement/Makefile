@@ -1,11 +1,8 @@
-traitement.o : traitement.h traitement.c
-	gcc -c traitement.c -o traitement.o
+traitement_test.o : traitement_test.c traitement_test.h
+	gcc -c traitement_test.c -o traitement_test.o
 
-main.o : traitement.h main.c
-	gcc -c main.c -o main.o
-
-main.out : traitement.o main.o
-	gcc -o main.out traitement.o main.o
+test.out : traitement_test.o
+	gcc -o test.out traitement_test.o
 
 clear :
 	rm *.o
