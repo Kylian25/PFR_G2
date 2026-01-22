@@ -5,7 +5,7 @@ import sys
 
 def dessiner_rectangle(img, x_min, x_max, y_min, y_max):
     couleur = [0, 0, 0]
-    delta=5
+    delta=0
 
     for x in range(x_min-delta,x_max+delta):
         img[y_min-delta][x]=couleur
