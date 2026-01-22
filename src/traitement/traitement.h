@@ -1,4 +1,4 @@
-#ifndef TRAITEMENT_TEST_H
+#ifndef TRAITEMENT_H
 #define TRAITEMENT_H
 
 #define MAX_WORDS 100

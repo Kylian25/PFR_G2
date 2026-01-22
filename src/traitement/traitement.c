@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "traitement_test.h"
+#include "traitement.h"
 
 int syn_count = 0, type_count = 0, func_count = 0;
 
