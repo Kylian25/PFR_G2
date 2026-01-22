@@ -1,4 +1,5 @@
 #ifndef OUTILS_H  // éviter les erreurs lors de la conpilation 
+
 #define OUTILS_H
 
 

@@ -1,3 +1,7 @@
+#ifndef IMAGES_H  // éviter les erreurs lors de la conpilation 
+
+#define IMAGES_H
+
 typedef struct {
     unsigned char r;
     unsigned char g;
@@ -37,3 +41,5 @@ typedef struct {
 ObjetDetecte* trouver_positions(const char* image_de_entre);
 
 void afficher_resultats(const char* fichier_entree,const char* image_jpeg);
+
+#endif
