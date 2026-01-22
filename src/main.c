@@ -6,6 +6,7 @@
 #include "menu/menu.h"
 #include "outils/outils.h"
 #include "config/config.h"
+#include "images/module_image.h"
 
 
 
@@ -29,6 +30,7 @@ int main(void){
   message_console("Programme arrêté \n", "Program finished\n");
   ajout_log("Programme arrêté \n");
 
+  traitement_image();
   system("python3 src/simu/simu.py IMG_5389.jpeg");
 
 

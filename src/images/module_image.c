@@ -173,7 +173,7 @@ void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
     ObjetDetecte *objets = trouver_positions(fichier_entree);
     if (!objets) return;
 
-    FILE *f = fopen("bboxes.txt", "w");
+    FILE *f = fopen("temp/bboxes.txt", "w");
     if (!f) return;
 
     for (int i = 0; i < 3; i++) {
@@ -190,7 +190,7 @@ void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
     fclose(f);
     free(objets);
     char cmd[256];
-    sprintf(cmd, "python3 tracer_rectangle.py %s bboxes.txt", image_jpeg);
+    sprintf(cmd, "python3 src/images/tracer_rectangle.py %s temp/bboxes.txt", image_jpeg);
     system(cmd);
 
 }
@@ -198,9 +198,9 @@ void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
 
 // fonction principale du module image
 
-int traitement_image() {
-char image_1[]="../../donnees/IMG_5402.txt";
-char image_2[]="../../donnees/IMG_5402.jpeg";
-afficher_resultats(image_1,image_2);
-return 0;
+void traitement_image() {
+    char image_1[]="donnees/IMG_5402.txt";
+    char image_2[]="donnees/IMG_5402.jpeg";
+    afficher_resultats(image_1,image_2);
+
 }

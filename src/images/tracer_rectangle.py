@@ -24,4 +24,4 @@ with open(sys.argv[2]) as f:
 
 plt.imshow(img)
 plt.axis("off")
-plt.savefig("resultat.jpg")
+plt.savefig("temp/resultat.jpg")

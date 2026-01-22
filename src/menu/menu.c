@@ -133,6 +133,7 @@ void menu_mode_utilisateur() {
                 strcpy(config.type_requete, "txt");
                 //sauvegarder_config();
                 // appel fonction de gestion des commandes texte
+                //gestion_requetes("txt");
                 break;
             case 2:
                 system("clear"); // reset le terminal 
