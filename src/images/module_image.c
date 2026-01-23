@@ -98,7 +98,7 @@ Image* charger_image(const char* chemin_fichier_texte) {
     
 }
 
-
+//tester couleur
 int est_couleur_cible(Pixel p, CouleurCible cible) {
     switch (cible) {
         case CIBLE_ROUGE:
@@ -114,6 +114,7 @@ int est_couleur_cible(Pixel p, CouleurCible cible) {
             return 0;
     }
 }
+
 
 ObjetDetecte* trouver_positions(const char* image_de_entre) {
     Image* img = charger_image(image_de_entre);
@@ -168,7 +169,7 @@ ObjetDetecte* trouver_positions(const char* image_de_entre) {
     return objets; 
 }
 
-
+//encadrer les objets
 void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
     ObjetDetecte *objets = trouver_positions(fichier_entree);
     if (!objets) return;
@@ -196,11 +197,60 @@ void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
 }
 
 
+//tester la forme
+const char* detecter_forme(ObjetDetecte obj) {
+    long largeur = (obj.x_max - obj.x_min) + 1;
+    long hauteur = (obj.y_max - obj.y_min) + 1;
+    long aire_box = largeur * hauteur;
+    if (aire_box <= 0) return "INCONNU";
+    float ratio = (float)obj.surface / (float)aire_box;
+    if (ratio > 0.85) {
+        return "CUBE";
+    } else {
+        return "BALLE";
+    }
+}
+
+//renvoyer les coordonné de l'objet détecté avec sa forme et sa couleur
+void detecter_forme_et_couleur(const char* fichier_image) {
+
+    ObjetDetecte *obj = trouver_positions(fichier_image);
+    
+    if (obj == NULL) {
+        printf("Erreur : Impossible d'analyser l'image.\n");
+        return;
+    }
+    FILE *f = fopen("temp/forme_couleur.txt", "w");
+    if (f == NULL) {
+        printf("Erreur : Impossible de créer le fichier");
+        free(obj);
+        return;
+    }
+    const char *noms_couleurs[] = {"ROUGE", "JAUNE", "BLEU"};
+    for (int i = 0; i < 3; i++) {
+
+        if (obj[i].surface > 40) {
+            const char* forme_trouvee = detecter_forme(obj[i]);
+            fprintf(f, "%s %s %d %d %d %d\n", 
+                    forme_trouvee, 
+                    noms_couleurs[i], 
+                    obj[i].x_min, obj[i].x_max, 
+                    obj[i].y_min, obj[i].y_max);
+
+            printf("Sauvegardé : %s %s \n", forme_trouvee, noms_couleurs[i]);
+        }
+    }
+    fclose(f);
+    free(obj);
+    printf("Les résultats ont été écrits dans '%s'.\n", "temp/forme_couleur.txt");
+}
+
+
 // fonction principale du module image
 
 void traitement_image() {
     char image_1[]="donnees/image_balles.txt";
     char image_2[]="donnees/image_balles.jpeg";
     afficher_resultats(image_1,image_2);
-
+    detecter_forme_et_couleur(image_1);
 }
