@@ -115,7 +115,7 @@ int est_couleur_cible(Pixel p, CouleurCible cible) {
     }
 }
 
-
+//trouver les positions des objets 
 ObjetDetecte* trouver_positions(const char* image_de_entre) {
     Image* img = charger_image(image_de_entre);
     if (img == NULL) {
@@ -249,8 +249,8 @@ void detecter_forme_et_couleur(const char* fichier_image) {
 // fonction principale du module image
 
 void traitement_image() {
-    char image_1[]="donnees/image_balles.txt";
-    char image_2[]="donnees/image_balles.jpeg";
+    char image_1[]="donnees/IMG_5404.txt";
+    char image_2[]="donnees/IMG_5404.jpeg";
     afficher_resultats(image_1,image_2);
     detecter_forme_et_couleur(image_1);
 }
