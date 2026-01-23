@@ -9,4 +9,6 @@ void affiche_logs();
 
 void message_console(char * message_françcais, char * message_anglais);
 
+void lancer_simu(const char * chemin_image);
+
 #endif

@@ -2,7 +2,7 @@ import sys
 import turtle as tl
 from PIL import Image
 
-#----------------------------- Fonctions --------------------------------
+#----------------------------- Fonctions -----------------------------------
 """
 Charger la configuration depuis le fichier parametres.txt
 afin d'accéder aux valeurs par défaut 
@@ -40,15 +40,16 @@ def message_console(FR,EN):
 Récupère les instructions dans le fichier texte et retourne une liste de celles ci,
 si le fichier est vide, retourne un message d'erreur.
 """
-def recup_instructions():
+def recup_instructions(nom_fichier : str):
     instructions = []
-    fichier = "temp/instructions.txt"
+    fichier = "temp/"+nom_fichier
 
     try:
         with open(fichier,"r") as fichier:
             for ligne in fichier:
-                ligne=ligne.strip()
-                if not ligne:
+                ligne=ligne.strip()  # ignore les lignes vides 
+                if not ligne:    # si lignes vides
+                    message_console("Aucune instruction dans le fichier","Instructions file is empty")
                     continue
                 
                 elem = ligne.split()
@@ -92,6 +93,8 @@ def retour_image(x_image,y_image):
     x = max(0, min(x_image,largeur))                   #si x < 0 => revient en 0, sinon au x correspondant dans l'image si x <= largeur
     y = max(0 , min(y_image,hauteur))
 
+#-------------------------- Fonctions de déplacement ------------------------------
+
 def aller_a(x,y):
     x,y = coord_image_turtle(x,y)
     tl.goto(x,y)
@@ -109,7 +112,7 @@ def tourner(angle):
 def demi_tour():
     tl.right(180)
 
-def dessiner_obstacle(x_HG,y_HG,x_BD,y_BD,couleur,forme):
+def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : int,y_BD : int):
     x_robot_img,y_robot_img = coord_turtle_image(tl.pos()[0],tl.pos()[1])
 
     x_centre_obstacle = (x_HG + x_BD) / 2
@@ -118,7 +121,7 @@ def dessiner_obstacle(x_HG,y_HG,x_BD,y_BD,couleur,forme):
     largeur_obstacle = abs(x_BD - x_HG)
     hauteur_obstacle = abs(y_BD - y_HG)
 
-    if forme == "carre":
+    if forme == "cube":
         #dessin
         tl.up()
         aller_a(x_HG,y_HG)
@@ -139,7 +142,7 @@ def dessiner_obstacle(x_HG,y_HG,x_BD,y_BD,couleur,forme):
         tl.up()
 
         aller_a(x_robot_img,y_robot_img)
-    elif forme == "rond": 
+    elif forme == "balle": 
 
         rayon = min(largeur_obstacle,hauteur_obstacle) /2
 
@@ -170,35 +173,36 @@ def eviter_obstacle(x_HG,y_HG,x_BD,y_BD):
     
     if y_BD + 30 < hauteur:   # verifier si on peut aller en dessous
         tl.up()
-        if est_dans_image(x_centre_obstacle,y_BD + 30):
-            aller_a(x_centre_obstacle, y_BD + 30)
+        delta = 30
+        if est_dans_image(x_centre_obstacle,y_BD + delta):
+            aller_a(x_centre_obstacle, y_BD + delta)
             tl.setheading(90)  # Orientation vers le haut
             tl.down()
             
             # Contournement
             tl.forward(10)
             tl.right(90)
-            tl.forward(largeur_obstacle/2 + 20)
+            tl.forward(largeur_obstacle/2 + delta)
             tl.left(90)
-            tl.forward(hauteur_obstacle + 40)     # marge
+            tl.forward(hauteur_obstacle + delta)    
             tl.left(90)
-            tl.forward(largeur_obstacle/2 + 20)
+            tl.forward(largeur_obstacle/2 + delta)
             tl.right(90)
         else: message_console("Impossible de contourner l'obstacle par le bas", "impossible to go around the obstacle from below")
     else:  
-        if est_dans_image(x_HG-30, y_centre_obstacle):      #contournement par le coté
+        if est_dans_image(x_HG-delta, y_centre_obstacle):      #contournement par le coté
             tl.up()
-            aller_a(x_HG - 30, y_centre_obstacle)
+            aller_a(x_HG - delta, y_centre_obstacle)
             tl.setheading(0)  
             tl.down()
             
             tl.forward(10)
             tl.left(90)
-            tl.forward(hauteur_obstacle/2 + 20)
+            tl.forward(hauteur_obstacle/2 + delta)
             tl.right(90)
-            tl.forward(largeur_obstacle + 60)
+            tl.forward(largeur_obstacle + delta)
             tl.right(90)
-            tl.forward(hauteur_obstacle/2 + 20)
+            tl.forward(hauteur_obstacle/2 + delta)
             tl.left(90)
         else: message_console("Impossible de contourner l'obstacle","impossible to go around the obstacle" )
         
@@ -227,14 +231,22 @@ tl.bgpic("temp/simu.gif")      # image de fond
 
 #----------------------------- Programme principal --------------------------------
 
-tl.speed(100)
+print("")
+tl.speed(1)
 initialisation(x_start_tl,y_start_tl)
 tl.color("green")
-dessiner_obstacle(60,200,160,300,"blue","rond")
-eviter_obstacle(60,200,160,300)
-dessiner_obstacle(30,30,70,55,"yellow", "carre")
-eviter_obstacle(30,30,70,55)
+#dessiner_obstacle(60,200,160,300,"blue","rond")
+#eviter_obstacle(60,200,160,300)
+#dessiner_obstacle(30,30,70,55,"yellow", "carre")
+#eviter_obstacle(30,30,70,55)
 
-L = recup_instructions()
+commandes = recup_instructions("instructions.txt")
+objet = recup_instructions("objet.txt")
+if len(objet) == 6:
+    dessiner_obstacle(objet[0],objet[1],int(objet[2]),int(objet[3]),int(objet[4]),int(objet[5]))
+    eviter_obstacle(int(objet[2]),int(objet[3]),int(objet[4]),int(objet[5]))
+
+print("objet : ", objet)
+print("commandes : ", commandes)
 
 tl.done()

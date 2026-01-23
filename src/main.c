@@ -25,15 +25,15 @@ int main(void){
 
   demarrer_menu();
 
- 
-
   message_console("Programme arrêté \n", "Program finished\n");
   ajout_log("Programme arrêté \n");
 
+  // tests
+
   traitement_image();
-  system("python3 src/simu/simu.py IMG_5389.jpeg");
-
-
+  
+  lancer_simu("IMG_5404");
+  
 
   return 0;
 }

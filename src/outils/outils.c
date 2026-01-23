@@ -36,3 +36,10 @@ void message_console(char * message_FR, char * message_EN){
     if (!strcmp(config.langue, "EN")) printf("%s",message_EN);  // strcmp renvoie 0 si chaines identiques
     else printf("%s", message_FR);
 }
+
+void lancer_simu(const char * chemin_image){   // nom de l'image sans l'extension 
+
+    char commande[200];
+    sprintf(commande, "python3 src/simu/simu.py %s.jpeg", chemin_image);
+    system(commande);
+}
