@@ -42,7 +42,7 @@ si le fichier est vide, retourne un message d'erreur.
 """
 def recup_instructions():
     instructions = []
-    fichier = "donnees/instructions.txt"
+    fichier = "temp/instructions.txt"
 
     try:
         with open(fichier,"r") as fichier:
@@ -212,7 +212,7 @@ config = charger_config(chemin_config)
 
 image = sys.argv[1]
 image = Image.open("donnees/" + image)
-image.save("donnees/simu.gif", format="GIF")
+image.save("temp/simu.gif", format="GIF")
 
 largeur, hauteur = image.size
 x_start_tl = 0
@@ -221,7 +221,7 @@ y_start_tl = - hauteur/2
 screen = tl.Screen()
 screen.setup(width=largeur, height=hauteur)
 
-tl.bgpic("donnees/simu.gif")      # image de fond
+tl.bgpic("temp/simu.gif")      # image de fond
 
 
 

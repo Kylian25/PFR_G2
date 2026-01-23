@@ -199,8 +199,8 @@ void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
 // fonction principale du module image
 
 void traitement_image() {
-    char image_1[]="donnees/IMG_5402.txt";
-    char image_2[]="donnees/IMG_5402.jpeg";
+    char image_1[]="donnees/image_balles.txt";
+    char image_2[]="donnees/image_balles.jpeg";
     afficher_resultats(image_1,image_2);
 
 }
