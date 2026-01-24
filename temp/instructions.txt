@@ -1,1 +1,1 @@
-trouver balle rouge 
+trouve BALLE ROUGE zigzag demi_tour tourne avance zigzag 10  eviter BALLE BLEU 
