@@ -3,6 +3,8 @@
 #include <string.h>
 #include <ctype.h>
 #include "traitement.h"
+#include "../config/config.h"
+#include "../outils/outils.h"
 
 int syn_count = 0, type_count = 0, func_count = 0;
 
@@ -106,6 +108,7 @@ Fonction* trouver_fonction(char *mot) {
 
 
 void traiter_texte(char *texte) {
+    FILE *file = fopen("temp/instructions.txt",'w');
     char *tokens[MAX_WORDS];
     int token_count = 0;
 
@@ -162,13 +165,11 @@ void traiter_texte(char *texte) {
                     j++;
                 }
 
-                printf("%s ", func->mot);
+                fprintf("%s ", func->mot,file);
                 for (int k = 0; k < func->param_count; k++) {
-                    printf("%s", val_param[k]);
-                    if (k < func->param_count - 1)
-                        printf(" ");
+                    fprintf("%s ", val_param[k],file);
                 }
-                printf("\n");
+                fprintf("\n",file);
             }
 
             while (i < token_count && strcmp(trouver_type(tokens[i]), "SEPARATEUR") != 0) {
@@ -180,22 +181,32 @@ void traiter_texte(char *texte) {
     }
 }
 
-void gestion_requetes() {
+void gestion_requetes(char *mode) {
 
     charger_synonymes("../../configuration/syn_FR.txt");
     charger_types("../../configuration/type_FR.txt");
     charger_fonctions("../../configuration/fonction_FR.txt");
 
     char texte[MAX_LINE];
+    int commande_valide = 0;
+    char reponse[10];
 
-    //if (strcmp(mode,"txt") == 0){
-        printf("Entrez une commande : ");
+    do{
+    if (strcmp(mode,"txt") == 0){
+        message_console("Entrez une commande : ","Write a command : ");
         fgets(texte, MAX_LINE, stdin);
-    //}
-
-    //else{
+    } else{
         // fonction commande vocale
-    //}
+    }
 
     traiter_texte(texte);
+    message_console("Validez-vous cette commande ? (o/n) \n","Confirm the command ? (y/n) \n");
+    scanf("%s", reponse);
+    if (strcasecmp(reponse,'o') == 0 || strcasecmp(reponse,'y') == 0){
+        commande_valide = 1;
+        message_console("Commande validée. \n","Command confirmed \n");
+    } else{
+        message_console("Commande annulée. \n","Command cancelled \n");
+    }
+    } while (!commande_valide);
 }

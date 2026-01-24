@@ -5,6 +5,7 @@
 #include "menu.h"
 #include "../outils/outils.h"
 #include "../config/config.h"
+#include "../traitement/traitement.h"
 
 
 // debut du menu
@@ -133,7 +134,7 @@ void menu_mode_utilisateur() {
                 strcpy(config.type_requete, "txt");
                 //sauvegarder_config();
                 // appel fonction de gestion des commandes texte
-                //gestion_requetes("txt");
+                gestion_requetes("txt");
                 break;
             case 2:
                 system("clear"); // reset le terminal 
@@ -143,6 +144,7 @@ void menu_mode_utilisateur() {
                 strcpy(config.type_requete, "voc");
                 //sauvegarder_config();
                 // appel fonction de gestion des commandes vocales
+                gestion_requetes("voc");
                 break;
             case 3:
                 system("clear"); // reset le terminal 
