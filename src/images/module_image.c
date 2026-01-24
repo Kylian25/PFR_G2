@@ -39,11 +39,14 @@ void liberer_image(Image *img) {
 Pixel get_pixel(Image *image, int x, int y) {
     if (x < 0 || x >= image->largeur || y < 0 || y >= image->hauteur) {
         Pixel vide = {0, 0, 0}; 
-        return vide; 
         ajout_log("Coordonnées de pixel invalides dans get_pixel");
+        return vide; 
+        
     }
+    
     return image->data[y * image->largeur + x];
     ajout_log("Récupération du pixel réussie dans get_pixel");
+    
 }
 
 // charger l'image
@@ -225,11 +228,13 @@ const char* detecter_forme(ObjetDetecte obj) {
     if (aire_box <= 0) return "INCONNU";
     float ratio = (float)obj.surface / (float)aire_box;
     if (ratio > 0.85) {
-        return "CUBE";
+        ajout_log("Détection de la forme réussie dans detecter_forme");
+        return "cube";
     } else {
-        return "BALLE";
+        ajout_log("Détection de la forme réussie dans detecter_forme");
+        return "balle";
     }
-    ajout_log("Détection de la forme réussie dans detecter_forme");
+    
 }
 
 //renvoyer les coordonné de l'objet détecté avec sa forme et sa couleur
@@ -252,7 +257,7 @@ void detecter_forme_et_couleur(const char* fichier_image) {
         free(obj);
         return;
     }
-    const char *noms_couleurs[] = {"ROUGE", "JAUNE", "BLEU"};
+    const char *noms_couleurs[] = {"rouge", "jaune", "bleu"};
     for (int i = 0; i < 3; i++) {
 
         if (obj[i].surface > 40) {
@@ -273,8 +278,7 @@ void detecter_forme_et_couleur(const char* fichier_image) {
     }
     fclose(f);
     free(obj);
-    message_console("Les résultats ont été écrits dans 'temp/forme_couleur.txt'.",
-                    "Results have been written to 'temp/forme_couleur.txt'.");
+    ajout_log("Les résultats ont été écrits dans 'temp/forme_couleur.txt'.");
     ajout_log("Détection de forme et couleur terminée dans detecter_forme_et_couleur");
 }
 
@@ -284,11 +288,11 @@ void reconnaissance_forme_couleur(char* fichier_image, char* couleur, char* form
     if (objets == NULL) return;
     int index_cible = -1;
 
-    if (strcmp(couleur, "ROUGE") == 0) {
+    if (strcmp(couleur, "rouge") == 0) {
         index_cible = 0;
-    } else if (strcmp(couleur, "JAUNE") == 0) {
+    } else if (strcmp(couleur, "jaune") == 0) {
         index_cible = 1;
-    } else if (strcmp(couleur, "BLEU") == 0) {
+    } else if (strcmp(couleur, "bleu") == 0) {
         index_cible = 2;
     } else {
         char message_1[1024];
