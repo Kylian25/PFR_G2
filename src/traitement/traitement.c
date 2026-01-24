@@ -109,6 +109,7 @@ Fonction* trouver_fonction(char *mot) {
 
 void traiter_texte(char *texte) {
     FILE *file = fopen("temp/instructions.txt",'w');
+    if (file == NULL) return 0;
     char *tokens[MAX_WORDS];
     int token_count = 0;
 
@@ -200,7 +201,8 @@ void gestion_requetes(char *mode) {
     }
 
     traiter_texte(texte);
-    message_console("Validez-vous cette commande ? (o/n) \n","Confirm the command ? (y/n) \n");
+    system("cat temp/instructions.txt");
+    message_console("\nValidez-vous cette commande ? (o/n) \n","\nConfirm the command ? (y/n) \n");
     scanf("%s", reponse);
     if (strcasecmp(reponse,'o') == 0 || strcasecmp(reponse,'y') == 0){
         commande_valide = 1;
