@@ -2,6 +2,16 @@ import sys
 import turtle as tl
 from PIL import Image
 
+COMMANDES = {
+
+}
+
+COULEURS = {
+
+    "rouge" : "red",
+    "bleu" : "blue",
+    "jaune" : "yellow"
+}
 #----------------------------- Fonctions -----------------------------------
 """
 Charger la configuration depuis le fichier parametres.txt
