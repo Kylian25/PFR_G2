@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "module_image.h"
 #include "../outils/outils.h"
 
@@ -17,6 +18,7 @@ Image* creer_image(int largeur, int hauteur, int nombre_de_canaux) {
     image->data= (Pixel*)malloc(largeur*hauteur*sizeof(Pixel));
     if (image->data == NULL){
         printf("erreur lors de l'atribution des pixels à l'image\n");
+        ajout_log("erreur lors de l'atribution des pixels à l'image");
         free(image);
         return NULL;
     }
@@ -30,6 +32,7 @@ void liberer_image(Image *img) {
             free(img->data); 
         }
         free(img); 
+        ajout_log("libération de l'image réussie");
         printf("suppression de l'image réussie\n");
     }
 }
@@ -50,6 +53,7 @@ Image* charger_image(const char* chemin_fichier_texte) {
 
     if (f == NULL) {
         printf("Erreur : Impossible d'ouvrir le fichier %s\n", chemin_fichier_texte);
+        ajout_log("Erreur : Impossible d'ouvrir le fichier");
         return NULL;
     }
 
@@ -245,6 +249,55 @@ void detecter_forme_et_couleur(const char* fichier_image) {
     printf("Les résultats ont été écrits dans '%s'.\n", "temp/forme_couleur.txt");
 }
 
+void reconnaissance_forme_couleur(char* fichier_image, char* couleur, char* forme) {
+
+    ObjetDetecte *objets = trouver_positions(fichier_image);
+    if (objets == NULL) return;
+    int index_cible = -1;
+
+    if (strcmp(couleur, "ROUGE") == 0) {
+        index_cible = 0;
+    } else if (strcmp(couleur, "JAUNE") == 0) {
+        index_cible = 1;
+    } else if (strcmp(couleur, "BLEU") == 0) {
+        index_cible = 2;
+    } else {
+        printf("Erreur : La couleur '%s' n'est pas gérée (ROUGE, JAUNE, BLEU).\n", couleur);
+        free(objets);
+        return;
+    }
+    ObjetDetecte obj = objets[index_cible];
+    if (obj.surface < 40) {
+        printf("Recherche échouée : Aucun objet %s trouvé dans l'image.\n", couleur);
+        free(objets);
+        return;
+    }
+
+    const char* forme_detectee = detecter_forme(obj);
+    if (strcmp(forme_detectee, forme) == 0) {
+        printf("%s %s trouvé \n", forme, couleur);
+        printf("Position: X[%d  %d] Y[%d  %d]\n", 
+               obj.x_min, obj.x_max, obj.y_min, obj.y_max);
+         FILE *f = fopen("temp/reconnaissance.txt", "w");
+         if (f == NULL) {
+             printf("Erreur : Impossible de créer le fichier");
+             free(objets);
+             return;
+            }
+        fprintf(f, "%s %s %d %d %d %d\n", 
+                forme_detectee, 
+                couleur, 
+                obj.x_min, obj.x_max, 
+                obj.y_min, obj.y_max);
+        fclose(f);
+    } else {
+        printf("la forme %s n'a pas été trouvée pour la couleur %s (trouvé: %s).\n", 
+               forme, couleur, forme_detectee);
+    }
+    free(objets);
+}
+
+
 
 // fonction principale du module image
 
@@ -253,4 +306,5 @@ void traitement_image() {
     char image_2[]="donnees/IMG_5404.jpeg";
     afficher_resultats(image_1,image_2);
     detecter_forme_et_couleur(image_1);
+    reconnaissance_forme_couleur(image_1, "ROUGE", "BALLE");
 }

@@ -46,6 +46,8 @@ const char* detecter_forme(ObjetDetecte obj);
 
 void detecter_forme_et_couleur(const char* fichier_image);
 
+void reconnaissance_forme_couleur(char* fichier_image, char* couleur, char* forme);
+
 void traitement_image();
 
 #endif
