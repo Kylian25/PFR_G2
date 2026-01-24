@@ -225,7 +225,8 @@ config = charger_config(chemin_config)
 
 
 image = sys.argv[1]
-image = Image.open("donnees/" + image)
+#image = Image.open("donnees/"+image)
+image = Image.open("temp/resultat.jpg")
 image.save("temp/simu.gif", format="GIF")
 
 largeur, hauteur = image.size

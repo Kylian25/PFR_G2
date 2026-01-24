@@ -22,6 +22,4 @@ with open(sys.argv[2]) as f:
         x_min, x_max, y_min, y_max = map(int, line.split())
         dessiner_rectangle(img, x_min, x_max, y_min, y_max)
 
-plt.imshow(img)
-plt.axis("off")
-plt.savefig("temp/resultat.jpg")
+Image.fromarray(img).save("temp/resultat.jpg")
