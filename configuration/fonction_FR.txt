@@ -1,4 +1,10 @@
-avance;forward;dist
-recule;backward;dist
-tourne;right;angle
-localise;where;object,color
+avance;dist
+recule;dist
+tourne;angle
+trouve;objet,couleur
+aller;pos,pos
+zigzag;dist
+revenir;
+eviter;objet,couleur
+demi_tour;
+tracer;forme,rayon,couleur

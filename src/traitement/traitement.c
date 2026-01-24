@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "traitement.h"
 
 int syn_count = 0, type_count = 0, func_count = 0;
@@ -45,13 +46,9 @@ void charger_fonctions(const char *nom_fichier) {
         char *mot = token;
 
         token = strtok(NULL, ";");
-        char *fonction = token;
-
-        token = strtok(NULL, ";");
         char *parametres = token;
 
         strcpy(fonctions[func_count].mot, mot);
-        strcpy(fonctions[func_count].fonction, fonction);
         fonctions[func_count].param_count = 0;
 
         char *p = strtok(parametres, ",");
@@ -71,6 +68,15 @@ void nettoyer_mot(char *mot) {
     mot[strcspn(mot, "\n")] = 0;
 }
 
+int est_nombre(const char *mot){
+    if (*mot == '\0') return 0;
+
+    for(int i = 0; mot[i]; i ++){
+        if (!isdigit((unsigned char) mot[i])) return 0;
+    }
+    return 1;
+}
+
 char* trouver_principal(char *mot) {
     for (int i = 0; i < syn_count; i++) {
         if (strcasecmp(mot, synonymes[i].synonyme) == 0) {
@@ -81,6 +87,8 @@ char* trouver_principal(char *mot) {
 }
 
 char* trouver_type(char *mot) {
+    if (est_nombre(mot)) return "NOMBRE";
+
     for (int i = 0; i < type_count; i++) {
         if (strcasecmp(mot, types[i].mot) == 0)
             return types[i].type;
@@ -133,10 +141,19 @@ void traiter_texte(char *texte) {
                         } else if (strcmp(type_j, "NOMBRE") == 0 && strcmp(func->noms_param[rempli], "angle") == 0) {
                             strcpy(val_param[rempli], tokens[j]);
                             rempli++;
-                        } else if (strcmp(type_j, "OBJET") == 0 && strcmp(func->noms_param[rempli], "object") == 0) {
+                        } else if (strcmp(type_j, "NOMBRE") == 0 && strcmp(func->noms_param[rempli], "pos") == 0) {
                             strcpy(val_param[rempli], tokens[j]);
                             rempli++;
-                        } else if (strcmp(type_j, "COULEUR") == 0 && strcmp(func->noms_param[rempli], "color") == 0) {
+                        } else if (strcmp(type_j, "NOMBRE") == 0 && strcmp(func->noms_param[rempli], "rayon") == 0) {
+                            strcpy(val_param[rempli], tokens[j]);
+                            rempli++;
+                        } else if (strcmp(type_j, "OBJET") == 0 && strcmp(func->noms_param[rempli], "objet") == 0) {
+                            strcpy(val_param[rempli], tokens[j]);
+                            rempli++;
+                        } else if (strcmp(type_j, "COULEUR") == 0 && strcmp(func->noms_param[rempli], "couleur") == 0) {
+                            strcpy(val_param[rempli], tokens[j]);
+                            rempli++;
+                        } else if (strcmp(type_j, "FORME") == 0 && strcmp(func->noms_param[rempli], "forme") == 0) {
                             strcpy(val_param[rempli], tokens[j]);
                             rempli++;
                         }
@@ -145,13 +162,13 @@ void traiter_texte(char *texte) {
                     j++;
                 }
 
-                printf("%s(", func->fonction);
+                printf("%s ", func->mot);
                 for (int k = 0; k < func->param_count; k++) {
-                    printf("%s=%s", func->noms_param[k], val_param[k]);
+                    printf("%s", val_param[k]);
                     if (k < func->param_count - 1)
-                        printf(", ");
+                        printf(" ");
                 }
-                printf(")\n");
+                printf("\n");
             }
 
             while (i < token_count && strcmp(trouver_type(tokens[i]), "SEPARATEUR") != 0) {
@@ -163,7 +180,7 @@ void traiter_texte(char *texte) {
     }
 }
 
-void gestion_requetes(char *mode) {
+void gestion_requetes() {
 
     charger_synonymes("../../configuration/syn_FR.txt");
     charger_types("../../configuration/type_FR.txt");
@@ -171,14 +188,14 @@ void gestion_requetes(char *mode) {
 
     char texte[MAX_LINE];
 
-    if (strcmp(mode,"txt") == 0){
-        printf("Entrez une phrase : ");
+    //if (strcmp(mode,"txt") == 0){
+        printf("Entrez une commande : ");
         fgets(texte, MAX_LINE, stdin);
-    }
+    //}
 
-    else{
+    //else{
         // fonction commande vocale
-    }
+    //}
 
     traiter_texte(texte);
 }

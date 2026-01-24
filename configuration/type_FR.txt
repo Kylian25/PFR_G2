@@ -1,19 +1,15 @@
 avance;COMMANDE
 recule;COMMANDE
 tourne;COMMANDE
-localise;COMMANDE
-
-de;LIAISON
-la;LIAISON
+trouve;COMMANDE
+aller;COMMANDE
+zigzag;COMMANDE
+revenir;COMMANDE
+eviter;COMMANDE
+demi_tour;COMMANDE
+tracer;COMMANDE
 
 et;SEPARATEUR
-
-mètres;UNITE
-degrés;UNITE
-
-2;NOMBRE
-3;NOMBRE
-90;NOMBRE
 
 balle;OBJET
 cube;OBJET
@@ -21,3 +17,6 @@ cube;OBJET
 rouge;COULEUR
 jaune;COULEUR
 bleu;COULEUR
+
+cercle;FORME
+carré;FORME

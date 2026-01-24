@@ -18,7 +18,6 @@ typedef struct s_typemot{
 
 typedef struct s_fonction{
     char mot[50];
-    char fonction[50];
     char noms_param[5][20];
     int param_count;
 } Fonction;

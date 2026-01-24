@@ -1,3 +1,13 @@
 avance;avancer;marche;déplace;move;go
-localise;repère;trouve
+recule;reculer
+tourne;tourner
+trouve;repère;localise
+aller;va
+revenir;reviens;retourne;retourner;back
+eviter;evite;évite;éviter;
+demi_tour;tour
+tracer;trace;dessiner;dessine
+
 et;puis
+
+bleu;bleue
