@@ -9,7 +9,6 @@
 Image* creer_image(int largeur, int hauteur, int nombre_de_canaux) {
     Image *image = (Image*)malloc(sizeof(Image));
     if (image == NULL){
-        printf("erreur lors de la création de l'image\n");
         ajout_log("erreur lors de la création de l'image dans creer_image");
         return NULL;
     }
@@ -18,7 +17,6 @@ Image* creer_image(int largeur, int hauteur, int nombre_de_canaux) {
     image->nombre_de_canaux=nombre_de_canaux;
     image->data= (Pixel*)malloc(largeur*hauteur*sizeof(Pixel));
     if (image->data == NULL){
-        printf("erreur lors de l'atribution des pixels à l'image\n");
         ajout_log("erreur lors de l'atribution des pixels à l'image dans creer_image");
         free(image);
         return NULL;
@@ -34,7 +32,6 @@ void liberer_image(Image *img) {
         }
         free(img); 
         ajout_log("libération de l'image réussie dans liberer_image");
-        printf("suppression de l'image réussie\n");
     }
 }
 
@@ -55,20 +52,22 @@ Image* charger_image(const char* chemin_fichier_texte) {
     FILE *f = fopen(chemin_fichier_texte, "r");
 
     if (f == NULL) {
-        printf("Erreur : Impossible d'ouvrir le fichier %s\n", chemin_fichier_texte);
+        char message_1[1024];
+        char message_2[1024];
+        sprintf(message_1,"Erreur : Impossible d'ouvrir le fichier %s\n", chemin_fichier_texte);
+        sprintf(message_2,"Error: Unable to open file %s\n", chemin_fichier_texte);
+        message_console(message_1, message_2);
         ajout_log("Erreur : Impossible d'ouvrir le fichier dans charger_image");
         return NULL;
     }
 
     printf("Ouverture du fichier texte réussie\n");
     fscanf(f, "%d %d %d", &largeur, &hauteur, &nombre_de_canaux);
-    printf("Format détecté : %dx%dx%d\n", largeur, hauteur, nombre_de_canaux);
     ajout_log("Lecture des dimensions de l'image réussie dans charger_image");
     
     Image *image = creer_image(largeur, hauteur, nombre_de_canaux); 
     
     if (nombre_de_canaux != 3) {
-        printf("Erreur : format non RGB (%d canaux)\n", nombre_de_canaux);
         fclose(f);
         liberer_image(image);
         ajout_log("Erreur : format non RGB dans charger_image");
@@ -80,7 +79,6 @@ Image* charger_image(const char* chemin_fichier_texte) {
 
     for(int i = 0; i < total_pixels; i++) {
         if (fscanf(f, "%d", &valeur) != 1) {
-            printf("Erreur de lecture du Rouge au pixel %d\n", i);
             ajout_log("Erreur de lecture du Rouge dans charger_image");
             break; 
         }
@@ -88,7 +86,6 @@ Image* charger_image(const char* chemin_fichier_texte) {
     }
     for(int i = 0; i < total_pixels; i++) {
         if (fscanf(f, "%d", &valeur) != 1) {
-            printf("Erreur de lecture du Vert au pixel %d\n", i);
             ajout_log("Erreur de lecture du Vert dans charger_image");
             break; 
         }
@@ -96,7 +93,6 @@ Image* charger_image(const char* chemin_fichier_texte) {
     }
     for(int i = 0; i < total_pixels; i++) {
         if (fscanf(f, "%d", &valeur) != 1) {
-            printf("Erreur de lecture du Bleu au pixel %d\n", i);
             ajout_log("Erreur de lecture du Bleu dans charger_image");
             break; 
         }
@@ -104,7 +100,6 @@ Image* charger_image(const char* chemin_fichier_texte) {
     }
 
     fclose(f);
-    printf("L'image %s a été chargée avec succès.\n", chemin_fichier_texte);
     ajout_log("Image chargée avec succès dans charger_image");
     
     return image;
@@ -132,7 +127,6 @@ int est_couleur_cible(Pixel p, CouleurCible cible) {
 ObjetDetecte* trouver_positions(const char* image_de_entre) {
     Image* img = charger_image(image_de_entre);
     if (img == NULL) {
-        printf("Annulation de la détection : Image introuvable.\n");
         ajout_log("Annulation de la détection : Image introuvable dans trouver_positions");
         return NULL;
     }
@@ -170,12 +164,22 @@ ObjetDetecte* trouver_positions(const char* image_de_entre) {
             }
         } 
         if(objets[i].surface == 0){
-            printf("%s : Non détecté.\n", noms[i]);
+            char message_1[1024];
+            char message_2[1024];
+            sprintf(message_1,"%s : Non détecté.\n", noms[i]);
+            sprintf(message_2,"%s : Not detected.\n", noms[i]);
+            message_console(message_1, message_2);
             ajout_log("Objet non détecté dans trouver_positions");
         } else {
-            printf("%s détecté\n", noms[i]);
-            printf("Position : X[%d-%d] Y[%d-%d]\n", objets[i].x_min, objets[i].x_max, objets[i].y_min, objets[i].y_max);
-            printf("Surface  : %ld pixels\n", objets[i].surface);
+            char message_1[1024];
+            char message_2[1024];
+            sprintf(message_1,"%s détecté\nPosition : X[%d-%d] Y[%d-%d]\nSurface  : %ld pixels\n",
+                    noms[i], objets[i].x_min, objets[i].x_max, 
+                    objets[i].y_min, objets[i].y_max, objets[i].surface);
+            sprintf(message_2,"%s detected\nPosition : X[%d-%d] Y[%d-%d]\nSurface  : %ld pixels\n",
+                    noms[i], objets[i].x_min, objets[i].x_max, 
+                    objets[i].y_min, objets[i].y_max, objets[i].surface);
+            message_console(message_1, message_2);
             ajout_log("Objet détecté avec succès dans trouver_positions");
         }
     }
@@ -234,13 +238,16 @@ void detecter_forme_et_couleur(const char* fichier_image) {
     ObjetDetecte *obj = trouver_positions(fichier_image);
     
     if (obj == NULL) {
-        printf("Erreur : Impossible d'analyser l'image.\n");
         ajout_log("Erreur : Impossible d'analyser l'image dans detecter_forme_et_couleur");
         return;
     }
     FILE *f = fopen("temp/forme_couleur.txt", "w");
     if (f == NULL) {
-        printf("Erreur : Impossible de créer le fichier");
+        char message_1[1024];
+        char message_2[1024];
+        sprintf(message_1,"Erreur : Impossible de créer le fichier\n");
+        sprintf(message_2,"Error: Unable to create file\n");
+        message_console(message_1, message_2);
         ajout_log("Erreur : Impossible de créer le fichier dans detecter_forme_et_couleur");
         free(obj);
         return;
@@ -255,14 +262,19 @@ void detecter_forme_et_couleur(const char* fichier_image) {
                     noms_couleurs[i], 
                     obj[i].x_min, obj[i].x_max, 
                     obj[i].y_min, obj[i].y_max);
-
-            printf("Sauvegardé : %s %s \n", forme_trouvee, noms_couleurs[i]);
+            
+            char message_1[1024];
+            char message_2[1024];
+            sprintf(message_1,"Sauvegardé : %s %s \n", forme_trouvee, noms_couleurs[i]);
+            sprintf(message_2,"Saved : %s %s \n", forme_trouvee, noms_couleurs[i]);
+            message_console(message_1, message_2);
             ajout_log("Sauvegarde des résultats réussie dans detecter_forme_et_couleur");
         }
     }
     fclose(f);
     free(obj);
-    printf("Les résultats ont été écrits dans '%s'.\n", "temp/forme_couleur.txt");
+    message_console("Les résultats ont été écrits dans 'temp/forme_couleur.txt'.",
+                    "Results have been written to 'temp/forme_couleur.txt'.");
     ajout_log("Détection de forme et couleur terminée dans detecter_forme_et_couleur");
 }
 
@@ -279,25 +291,42 @@ void reconnaissance_forme_couleur(char* fichier_image, char* couleur, char* form
     } else if (strcmp(couleur, "BLEU") == 0) {
         index_cible = 2;
     } else {
-        printf("Erreur : La couleur '%s' n'est pas gérée (ROUGE, JAUNE, BLEU).\n", couleur);
+        char message_1[1024];
+        char message_2[1024];
+        sprintf(message_1,"Erreur : La couleur '%s' n'est pas gérée (ROUGE, JAUNE, BLEU).\n", couleur);
+        sprintf(message_2,"Error: The color '%s' is not handled (RED, YELLOW, BLUE).\n", couleur);
+        message_console(message_1, message_2);
         free(objets);
         return;
     }
     ObjetDetecte obj = objets[index_cible];
     if (obj.surface < 40) {
-        printf("Recherche échouée : Aucun objet %s trouvé dans l'image.\n", couleur);
+        char message_1[1024];
+        char message_2[1024];
+        sprintf(message_1,"Recherche échouée : Aucun objet %s trouvé dans l'image.\n", couleur);
+        sprintf(message_2,"Search failed: No %s object found in the image.\n", couleur);
+        message_console(message_1, message_2);
         free(objets);
         return;
     }
 
     const char* forme_detectee = detecter_forme(obj);
     if (strcmp(forme_detectee, forme) == 0) {
-        printf("%s %s trouvé \n", forme, couleur);
-        printf("Position: X[%d  %d] Y[%d  %d]\n", 
-               obj.x_min, obj.x_max, obj.y_min, obj.y_max);
-         FILE *f = fopen("temp/reconnaissance.txt", "w");
-         if (f == NULL) {
-             printf("Erreur : Impossible de créer le fichier");
+        char message_1[1024];
+        char message_2[1024];
+        sprintf(message_1,"%s %s trouvé \nPosition: X[%d  %d] Y[%d  %d]\n", 
+               forme, couleur, 
+               obj.x_min, obj.x_max, 
+               obj.y_min, obj.y_max);
+        sprintf(message_2,"%s %s found \nPosition: X[%d  %d] Y[%d  %d]\n", 
+               forme, couleur, 
+               obj.x_min, obj.x_max, 
+               obj.y_min, obj.y_max);
+        message_console(message_1, message_2);
+        FILE *f = fopen("temp/reconnaissance.txt", "w");
+        if (f == NULL) {
+            message_console("Erreur : Impossible de créer le fichier",
+                            "Error: Unable to create file");
              free(objets);
              return;
             }
@@ -309,21 +338,24 @@ void reconnaissance_forme_couleur(char* fichier_image, char* couleur, char* form
         fclose(f);
         ajout_log("Reconnaissance de forme et couleur réussie dans reconnaissance_forme_couleur");
     } else {
-        printf("la forme %s n'a pas été trouvée pour la couleur %s (trouvé: %s).\n", 
+        char message_1[1024];
+        char message_2[1024];
+        sprintf(message_1,"la forme %s n'a pas été trouvée pour la couleur %s (trouvé: %s).\n", 
                forme, couleur, forme_detectee);
+        sprintf(message_2,"the shape %s was not found for the color %s (found: %s).\n", 
+               forme, couleur, forme_detectee);
+        message_console(message_1, message_2);  
         ajout_log("Échec de la reconnaissance de forme et couleur dans reconnaissance_forme_couleur");
     }
     free(objets);
 }
 
-
-
 // fonction principale du module image
 
 void traitement_image() {
-    char image_1[]="donnees/IMG_5406.txt";
-    char image_2[]="donnees/IMG_5406.jpeg";
+    char image_1[]="donnees/IMG_5389.txt";
+    char image_2[]="donnees/IMG_5389.jpeg";
     afficher_resultats(image_1,image_2);
     detecter_forme_et_couleur(image_1);
-    reconnaissance_forme_couleur(image_1, "ROUGE", "BALLE");
+    reconnaissance_forme_couleur(image_1, "JAUNE", "BALLE");
 }
