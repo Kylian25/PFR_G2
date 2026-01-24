@@ -15,9 +15,9 @@ MIN_ANGLE = 20
 
 COULEURS = {
 
-    "ROUGE" : "red",
-    "BLEU" : "blue",
-    "JAUNE" : "yellow"
+    "rouge" : "red",
+    "bleu" : "blue",
+    "jaune" : "yellow"
 }
 
 
@@ -181,7 +181,7 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
 
     couleur=COULEURS[couleur]
 
-    if forme == "CUBE":
+    if forme == "cube":
         #dessin
         tl.up()
         aller_a(x_HG,y_HG)
@@ -202,7 +202,7 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
         tl.up()
 
         aller_a(x_robot_img,y_robot_img)
-    elif forme == "BALLE": 
+    elif forme == "balle": 
 
         rayon = min(largeur_obstacle,hauteur_obstacle) /2
 
@@ -385,7 +385,7 @@ commandes = recup_infos("instructions.txt")
 print("commandes : ", commandes)
 formes = recup_infos("forme_couleur.txt")
 print("formes : ", formes)
-#chercher_objet("BALLE", "BLEU")
+#chercher_objet("balle", "BLEU")
 #zigzag(10)
 simulation()
 tl.done()
