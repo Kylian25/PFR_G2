@@ -270,7 +270,7 @@ def eviter_obstacle(forme : str , couleur : str):
                     tl.right(90)
                 else: message_console("Impossible de contourner l'obstacle par le bas", "impossible to go around the obstacle from below")
             else:  
-                if est_dans_image(x_HG-delta, y_centre_obstacle):      #contournement par le coté
+                if est_dans_image(x_HG - delta , y_centre_obstacle):      #contournement par le coté
                     tl.up()
                     revenir()
                     tl.down()
