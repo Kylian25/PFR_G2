@@ -162,7 +162,6 @@ def revenir():
     
     tl.goto(x_start_tl,y_start_tl)
    
-
 def tourner(angle : int = config["angle"]):
     if MIN_ANGLE <= angle <= MAX_ANGLE:
         tl.right(angle)
@@ -319,6 +318,12 @@ def chercher_objet(forme : str , couleur : str):
             dessiner_obstacle(forme, couleur,coords[0],coords[2], coords[1],coords[3])
     revenir()
 
+def reculer(distance : int = config["dist_dep"]):
+    return 0
+
+def tracer(forme : str = "cercle", rayon : int = 20, couleur : str = "green"):
+    return 0
+
 def simulation():
     instructions = recup_infos("instructions.txt")
     if len(instructions)==0:
@@ -355,35 +360,25 @@ def simulation():
 
 #----------- Commandes/fonctions --------------
 COMMANDES = {              # commande : [fonction, nombre d'arguments,""] "int" si seul parametre = entier
-    "zigzag" : (zigzag,0,""),
+    
+    "zigzag" : (zigzag,1,""),
     "tourne" : (tourner,1,"int"),
     "revenir" : (revenir,0,""),
-    "evite" : (eviter_obstacle,4,""),
     "demi_tour" : (demi_tour,0,""),
     "avance" : (avancer,1,"int"),
     "trouve" : (chercher_objet,2,""),
     "aller" : (aller_a,2,""),
-    "eviter" : (eviter_obstacle, 2, "")
+    "eviter" : (eviter_obstacle, 2, ""),
+    "recule" : (reculer,1,"int"),
+    "tracer" : (tracer,3,"")
 }
-
 
 #----------------------------- Programme principal --------------------------------
 
 print("")
-tl.speed(5)
+tl.speed(2)
 initialisation(x_start_tl,y_start_tl)
 tl.color("green")
-
-"""
-commandes = recup_instructions("instructions.txt")
-objet = recup_instructions("objet.txt")
-if len(objet) == 6:
-    dessiner_obstacle(objet[0],objet[1],int(objet[2]),int(objet[3]),int(objet[4]),int(objet[5]))
-    eviter_obstacle(int(objet[2]),int(objet[3]),int(objet[4]),int(objet[5]))
-
-print("objet : ", objet)
-print("commandes : ", commandes)
-"""
 
 print("config : ", config)
 commandes = recup_infos("instructions.txt")
