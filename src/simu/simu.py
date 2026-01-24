@@ -1,23 +1,47 @@
-import sys 
 import turtle as tl
 from PIL import Image
+import numpy as np
 
-COMMANDES = {
+# valeurs max/min
 
-}
+MAX_DIST_DEP = 200
+MIN_DIST_DEP = 10
+MAX_TPS_DEP = 20
+MIN_TPS_DEP = 1
+MAX_DIST_DET = 50
+MIN_DIST_DET = 1
+MAX_ANGLE = 360
+MIN_ANGLE = 20
 
 COULEURS = {
 
-    "rouge" : "red",
-    "bleu" : "blue",
-    "jaune" : "yellow"
+    "ROUGE" : "red",
+    "BLEU" : "blue",
+    "JAUNE" : "yellow"
 }
-#----------------------------- Fonctions -----------------------------------
+
+
+#----------------------------- Initialisation --------------------------------
+
+image = Image.open("temp/resultat.jpg")
+image.save("temp/simu.gif", format="GIF")
+
+largeur, hauteur = image.size
+x_start_tl = 0
+y_start_tl = - hauteur/2
+
+screen = tl.Screen()
+screen.setup(width=largeur+200, height=hauteur+200)
+
+tl.bgpic("temp/simu.gif")      # image de fond
+
+#----------------------------- Config -----------------------------------
 """
 Charger la configuration depuis le fichier parametres.txt
 afin d'accéder aux valeurs par défaut 
 """
-def charger_config(fichier):                         
+def charger_config(fichier):     
+                      
     config = {}
     try:
         with open(fichier, "r") as f:
@@ -40,7 +64,23 @@ def charger_config(fichier):
     except FileNotFoundError:
         print("pas de fichier")
         return {}
-     
+    
+chemin_config = "configuration/parametres"
+config = charger_config(chemin_config)
+
+#----------------------------- Fonctions -----------------------------------
+def ecrire(message : str,couleur : str):
+    tl.speed(100)
+    tl.hideturtle()
+    x,y = coord_image_turtle(5, hauteur+30)
+    tl.pencolor(couleur)
+    tl.up()
+    tl.goto(x,y)
+    tl.down()
+    tl.write(message, font=("Arial",14, "bold"))
+    tl.speed(1)
+
+
 def message_console(FR,EN):
     if config["langue"] == "FR":
         print(FR)
@@ -50,31 +90,30 @@ def message_console(FR,EN):
 Récupère les instructions dans le fichier texte et retourne une liste de celles ci,
 si le fichier est vide, retourne un message d'erreur.
 """
-def recup_instructions(nom_fichier : str):
-    instructions = []
-    fichier = "temp/"+nom_fichier
+def recup_infos(nom_fichier: str):
+    infos = []
+    chemin = "temp/" + nom_fichier
 
     try:
-        with open(fichier,"r") as fichier:
-            for ligne in fichier:
-                ligne=ligne.strip()  # ignore les lignes vides 
-                if not ligne:    # si lignes vides
-                    message_console("Aucune instruction dans le fichier","Instructions file is empty")
-                    continue
-                
-                elem = ligne.split()
+        with open(chemin, "r") as f:
+            for ligne in f:
+                ligne = ligne.strip()
+                if not ligne:
+                    continue            # ignore les lignes vides
 
-                if len(elem)>1:
-                    for i in range(len(elem)):
-                        instructions.append(elem[i])
-                    message_console("Liste d'instructions : ", "Instructions list : ")
-                    print(instructions)
-                    return instructions
-                else:
-                    message_console("Aucune instruction dans le fichier", "Instructions file is empty")
+                elem = ligne.split()
+                infos.extend(elem)
+
+        if not infos:
+            message_console(
+                "Aucune instruction dans le fichier",
+                "Instructions file is empty"
+            )
+
+        return infos
 
     except FileNotFoundError:
-        message_console("Pas de fichier","No file")
+        message_console("Pas de fichier", "No file")
         return []
 
 def initialisation(x,y):
@@ -105,19 +144,29 @@ def retour_image(x_image,y_image):
 
 #-------------------------- Fonctions de déplacement ------------------------------
 
-def aller_a(x,y):
-    x,y = coord_image_turtle(x,y)
-    tl.goto(x,y)
+def aller_a(x : int=x_start_tl,y : int =y_start_tl):
+    if est_dans_image(x,y):
+        x,y = coord_image_turtle(x,y)
+        tl.goto(x,y)
+    else:
+        message_console("Coordonnées en dehors de l'image","Coordinates out of image")
 
-def avancer(distance):
-    tl.forward(distance)
+def avancer(distance: int =30 ):
+    if MIN_DIST_DEP <= distance <= MAX_DIST_DEP:
+        tl.forward(distance)
+    else:
+        message_console(f"Distance de déplacement hors des limites [{MIN_DIST_DEP},{MAX_DIST_DEP}]",
+                        f"distance is out of limits [{MIN_DIST_DEP},{MAX_DIST_DEP}]")
 
-def revenir(x,y):
+def revenir():
+    
+    tl.goto(x_start_tl,y_start_tl)
+   
 
-    tl.goto(x,y)
-
-def tourner(angle):
-    tl.right(angle)
+def tourner(angle : int = config["angle"]):
+    if MIN_ANGLE <= angle <= MAX_ANGLE:
+        tl.right(angle)
+    else: message_console(f"Angle en dehors des limites [{MIN_ANGLE},{MAX_ANGLE}]",f"Angle out of limits [{MIN_ANGLE},{MAX_ANGLE}]")
 
 def demi_tour():
     tl.right(180)
@@ -131,7 +180,9 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
     largeur_obstacle = abs(x_BD - x_HG)
     hauteur_obstacle = abs(y_BD - y_HG)
 
-    if forme == "cube":
+    couleur=COULEURS[couleur]
+
+    if forme == "CUBE":
         #dessin
         tl.up()
         aller_a(x_HG,y_HG)
@@ -152,7 +203,7 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
         tl.up()
 
         aller_a(x_robot_img,y_robot_img)
-    elif forme == "balle": 
+    elif forme == "BALLE": 
 
         rayon = min(largeur_obstacle,hauteur_obstacle) /2
 
@@ -168,89 +219,162 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
 
         tl.up()
         aller_a(x_robot_img,y_robot_img)
+        tl.down()
     else: message_console("Cette forme n'est pas reconnue", "This form is not recognized")
 
-def eviter_obstacle(x_HG,y_HG,x_BD,y_BD):    
+def eviter_obstacle(forme : str , couleur : str): 
 
-    x_robot,y_robot = coord_turtle_image(tl.pos()[0],tl.pos()[1])
+    formes = recup_infos("forme_couleur.txt")
+    coords = []
+    for i in range(len(formes)):
+        if formes[i] == forme and formes[i+1] == couleur:
+            indice_objet = i
+            message_console(f"L'image contient bien un objet de type {forme} et de couleur {couleur}",
+                            f"The image does contain an object of type {forme} and color {couleur}.")
+            for k in range(i+2,i+6):
+                coords.append(int(formes[k]))
+            #dessiner_obstacle(forme, couleur,coords[0],coords[2], coords[1],coords[3])   
 
-    x_centre_obstacle = (x_HG + x_BD) / 2
-    y_centre_obstacle = (y_HG + y_BD) / 2
-    
-    largeur_obstacle = abs(x_BD - x_HG)
-    hauteur_obstacle = abs(y_BD - y_HG)
-    
-    
-    if y_BD + 30 < hauteur:   # verifier si on peut aller en dessous
-        tl.up()
-        delta = 30
-        if est_dans_image(x_centre_obstacle,y_BD + delta):
-            aller_a(x_centre_obstacle, y_BD + delta)
-            tl.setheading(90)  # Orientation vers le haut
-            tl.down()
+            x_HG = coords[0]
+            x_BD = coords[1]
+            y_HG = coords[2]
+            y_BD = coords[3] 
+
+            x_robot,y_robot = coord_turtle_image(tl.pos()[0],tl.pos()[1])
+
+            x_centre_obstacle = (x_HG + x_BD) / 2
+            y_centre_obstacle = (y_HG + y_BD) / 2
             
-            # Contournement
-            tl.forward(10)
-            tl.right(90)
-            tl.forward(largeur_obstacle/2 + delta)
-            tl.left(90)
-            tl.forward(hauteur_obstacle + delta)    
-            tl.left(90)
-            tl.forward(largeur_obstacle/2 + delta)
-            tl.right(90)
-        else: message_console("Impossible de contourner l'obstacle par le bas", "impossible to go around the obstacle from below")
-    else:  
-        if est_dans_image(x_HG-delta, y_centre_obstacle):      #contournement par le coté
-            tl.up()
-            aller_a(x_HG - delta, y_centre_obstacle)
-            tl.setheading(0)  
-            tl.down()
+            largeur_obstacle = abs(x_BD - x_HG)
+            hauteur_obstacle = abs(y_BD - y_HG)
             
-            tl.forward(10)
-            tl.left(90)
-            tl.forward(hauteur_obstacle/2 + delta)
-            tl.right(90)
-            tl.forward(largeur_obstacle + delta)
-            tl.right(90)
-            tl.forward(hauteur_obstacle/2 + delta)
-            tl.left(90)
-        else: message_console("Impossible de contourner l'obstacle","impossible to go around the obstacle" )
-        
+            
+            if y_BD + 30 < hauteur:   # verifier si on peut aller en dessous
+                tl.up()
+                delta = 30
+                if est_dans_image(x_centre_obstacle,y_BD + delta):
+                    tl.up()
+                    revenir()
+                    tl.down()
+                    aller_a(x_centre_obstacle, y_BD + delta)
+                    tl.setheading(90)  # Orientation vers le haut
+                    
+                    # Contournement
+                    tl.forward(10)
+                    tl.right(90)
+                    tl.forward(largeur_obstacle/2 + delta)
+                    tl.left(90)
+                    tl.forward(hauteur_obstacle + delta)    
+                    tl.left(90)
+                    tl.forward(largeur_obstacle/2 + delta)
+                    tl.right(90)
+                else: message_console("Impossible de contourner l'obstacle par le bas", "impossible to go around the obstacle from below")
+            else:  
+                if est_dans_image(x_HG-delta, y_centre_obstacle):      #contournement par le coté
+                    tl.up()
+                    revenir()
+                    tl.down()
+                    aller_a(x_HG - delta, y_centre_obstacle)
+                    tl.setheading(0)  
+                    tl.down()
+                    
+                    tl.forward(10)
+                    tl.left(90)
+                    tl.forward(hauteur_obstacle/2 + delta)
+                    tl.right(90)
+                    tl.forward(largeur_obstacle + delta)
+                    tl.right(90)
+                    tl.forward(hauteur_obstacle/2 + delta)
+                    tl.left(90)
+                else: message_console("Impossible de contourner l'obstacle","impossible to go around the obstacle" )
 
+       
+def zigzag(distance : int = config["dist_dep"]):
+    tl.setheading(90)
+    x_max = int(distance * np.cos((np.pi)/4))
+    y_max = int(tl.pos()[1] + 2 * distance * np.sin((np.pi)/4))
 
-#----------------------------- Initialisation --------------------------------
+    while x_max < largeur and y_max < coord_image_turtle(0,0)[1]:
 
-chemin_config = "configuration/parametres"
-config = charger_config(chemin_config)
+        tl.right(45)
+        tl.forward(distance)
+        tl.left(90)
+        tl.forward(distance)
+        tl.right(45)
+        y_max += int(2 * distance * np.sin((np.pi)/4))
+    
 
+def chercher_objet(forme : str , couleur : str):
 
-image = sys.argv[1]
-#image = Image.open("donnees/"+image)
-image = Image.open("temp/resultat.jpg")
-image.save("temp/simu.gif", format="GIF")
+    #instructions = recup_infos("instructions.txt")
+    formes = recup_infos("forme_couleur.txt")
+    coords = []
+    for i in range(len(formes)):
+        if formes[i] == forme and formes[i+1] == couleur:
+            indice_objet = i
+            message_console(f"L'image contient bien un objet de type {forme} et de couleur {couleur}",
+                            f"The image does contain an object of type {forme} and color {couleur}.")
+            for k in range(i+2,i+6):
+                coords.append(int(formes[k]))
+            dessiner_obstacle(forme, couleur,coords[0],coords[2], coords[1],coords[3])
+    revenir()
 
-largeur, hauteur = image.size
-x_start_tl = 0
-y_start_tl = - hauteur/2
+def simulation():
+    instructions = recup_infos("instructions.txt")
+    if len(instructions)==0:
+        ecrire("Aucune instruction !","red")
+    objets = recup_infos("forme_couleur.txt")
+    nb_commandes = 0
 
-screen = tl.Screen()
-screen.setup(width=largeur, height=hauteur)
+    for i in range(len(instructions)):
+        param = []
+        if instructions[i] in COMMANDES.keys():
+            nb_parametres = COMMANDES[instructions[i]][1]
+            commande = COMMANDES[instructions[i]]
 
-tl.bgpic("temp/simu.gif")      # image de fond
+            if nb_parametres>0:
+                for k in range(i+1,i+1+nb_parametres):
 
+                    if k<len(instructions):
+
+                        if instructions[k].isdigit():
+                            param.append(int(instructions[k]))
+                        elif commande[2] != "int":
+                            param.append(instructions[k])
+
+                    else: break
+                commande[0](*param)
+                nb_commandes +=1
+                print(f"Commande exécutée : {commande[0]}")
+                
+            else:
+                commande[0]()
+                print(f"Commande exécutée : {commande[0]}")
+    if nb_commandes > 1:
+        ecrire("Simulation terminée !", "green")
+
+#----------- Commandes/fonctions --------------
+COMMANDES = {              # commande : [fonction, nombre d'arguments,""] "int" si seul parametre = entier
+    "zigzag" : (zigzag,0,""),
+    "tourne" : (tourner,1,"int"),
+    "revenir" : (revenir,0,""),
+    "evite" : (eviter_obstacle,4,""),
+    "demi_tour" : (demi_tour,0,""),
+    "avance" : (avancer,1,"int"),
+    "trouve" : (chercher_objet,2,""),
+    "aller" : (aller_a,2,""),
+    "eviter" : (eviter_obstacle, 2, "")
+}
 
 
 #----------------------------- Programme principal --------------------------------
 
 print("")
-tl.speed(1)
+tl.speed(5)
 initialisation(x_start_tl,y_start_tl)
 tl.color("green")
-#dessiner_obstacle(60,200,160,300,"blue","rond")
-#eviter_obstacle(60,200,160,300)
-#dessiner_obstacle(30,30,70,55,"yellow", "carre")
-#eviter_obstacle(30,30,70,55)
 
+"""
 commandes = recup_instructions("instructions.txt")
 objet = recup_instructions("objet.txt")
 if len(objet) == 6:
@@ -259,5 +383,14 @@ if len(objet) == 6:
 
 print("objet : ", objet)
 print("commandes : ", commandes)
+"""
 
+print("config : ", config)
+commandes = recup_infos("instructions.txt")
+print("commandes : ", commandes)
+formes = recup_infos("forme_couleur.txt")
+print("formes : ", formes)
+#chercher_objet("BALLE", "BLEU")
+#zigzag(10)
+simulation()
 tl.done()
