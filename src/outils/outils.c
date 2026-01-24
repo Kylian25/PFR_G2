@@ -40,6 +40,6 @@ void message_console(char * message_FR, char * message_EN){
 void lancer_simu(const char * chemin_image){   // nom de l'image sans l'extension 
 
     char commande[200];
-    sprintf(commande, "python3 src/simu/simu.py %s.jpeg", chemin_image);
+    sprintf(commande, "python3 src/simu/simu.py temp/resultat.jpg");
     system(commande);
 }

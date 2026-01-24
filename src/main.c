@@ -32,7 +32,7 @@ int main(void){
 
   traitement_image();
   
-  lancer_simu("IMG_5404");
+  lancer_simu();
   
 
   return 0;
