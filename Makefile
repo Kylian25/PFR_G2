@@ -16,6 +16,8 @@ config.o : src/config/config.c src/config/config.h
 module_image.o : src/images/module_image.c src/images/module_image.h
 	gcc -c src/images/module_image.c -o src/images/module_image.o
 
+traitement.o : src/traitement/traitement.c src/traitement/traitement.h
+	gcc -c src/traitement/traitement.c -o src/traitement/traitement.o
 
 clean:
 	rm -f main
