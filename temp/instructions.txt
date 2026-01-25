@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 trouve cube rouge 
 trouve cube bleu 
+=======
+trouve balle rouge 
+trouve balle bleu 
+>>>>>>> 9c75868 (fix erreur simu)
