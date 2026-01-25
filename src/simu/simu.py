@@ -4,14 +4,14 @@ import numpy as np
 
 # valeurs max/min
 
-MAX_DIST_DEP = 200
-MIN_DIST_DEP = 10
+MAX_DIST_DEP = 300
+MIN_DIST_DEP = 1
 MAX_TPS_DEP = 20
 MIN_TPS_DEP = 1
 MAX_DIST_DET = 50
 MIN_DIST_DET = 1
 MAX_ANGLE = 360
-MIN_ANGLE = 20
+MIN_ANGLE = 1
 
 COULEURS = {
 
@@ -50,7 +50,7 @@ def charger_config(fichier):
                 if not ligne:
                     continue
                 
-                elem = ligne.split()      # découpe la ligne, espaces comme séparateurs
+                elem = ligne.split()         # découpe la ligne, espaces comme séparateurs
                 
                 if len(elem) == 2:
                     cle = elem[0]
@@ -157,7 +157,7 @@ def avancer(distance: int =30 ):
     else:
         message_console(f"Distance de déplacement hors des limites [{MIN_DIST_DEP},{MAX_DIST_DEP}]",
                         f"distance is out of limits [{MIN_DIST_DEP},{MAX_DIST_DEP}]")
-
+        
 def revenir():
     
     tl.goto(x_start_tl,y_start_tl)
@@ -186,6 +186,7 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
         tl.up()
         aller_a(x_HG,y_HG)
 
+        tl.color(couleur)
         tl.fillcolor(couleur)
         tl.begin_fill()
         tl.setheading(1)
@@ -198,6 +199,7 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
         tl.right(90)
         tl.forward(hauteur_obstacle)
         tl.end_fill()
+        tl.color("green")
 
         tl.up()
 
@@ -208,20 +210,21 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
 
         tl.up()
         aller_a(x_centre_obstacle,y_centre_obstacle+rayon)
-
+        tl.color(couleur)
         tl.fillcolor(couleur)
         tl.begin_fill()
         tl.down()
         tl.setheading(0)
         tl.circle(rayon)
         tl.end_fill()
+        tl.color("green")
 
         tl.up()
         aller_a(x_robot_img,y_robot_img)
         tl.down()
     else: message_console("Cette forme n'est pas reconnue", "This shape is not recognized")
 
-def eviter_obstacle(forme : str , couleur : str): 
+def eviter_obstacle(forme : str = "balle" , couleur : str = "bleu"): 
 
     formes = recup_infos("forme_couleur.txt")
     coords = []
@@ -286,8 +289,7 @@ def eviter_obstacle(forme : str , couleur : str):
                     tl.forward(hauteur_obstacle/2 + delta)
                     tl.left(90)
                 else: message_console("Impossible de contourner l'obstacle","impossible to go around the obstacle" )
-
-       
+   
 def zigzag(distance : int = config["dist_dep"]):
     tl.setheading(90)
     x_max = int(distance * np.cos((np.pi)/4))
@@ -302,8 +304,7 @@ def zigzag(distance : int = config["dist_dep"]):
         tl.right(45)
         y_max += int(2 * distance * np.sin((np.pi)/4))
     
-
-def chercher_objet(forme : str , couleur : str):
+def chercher_objet(forme : str = "balle", couleur : str = "rouge"):
 
     #instructions = recup_infos("instructions.txt")
     formes = recup_infos("forme_couleur.txt")
@@ -319,10 +320,31 @@ def chercher_objet(forme : str , couleur : str):
     revenir()
 
 def reculer(distance : int = config["dist_dep"]):
-    return 0
+    demi_tour()
+    avancer(distance)
 
-def tracer(forme : str = "cercle", rayon : int = 20, couleur : str = "green"):
-    return 0
+def tracer(forme : str = "cercle", rayon : int = 20, couleur : str = "vert"):
+    x, y = tl.pos()
+    tl.color(COULEURS[couleur])
+    if forme == "cercle":
+        #avancer(5)
+        tl.setheading(0)
+        if -150 <= x <= 150 and -150 <= x + (2*rayon) <= 150 and -150 <= y <= 150 and -150 <= y + (2*rayon) <= 150:
+            tl.circle(rayon)
+        else:
+           message_console("impossible de tracer le cercle à ces coordonnées",
+                           "Impossible to draw a circle at these coordinates")
+    elif forme == "carré":
+        #avancer(5)
+        tl.setheading(0)
+        if -150 <= x + rayon <= 150 and -150 <= x <= 150 and -150 <= y + rayon <= 150 and -150 <= y <= 150:
+            for i in range(4):
+                tl.forward(rayon)
+                tl.left(90)
+        else:
+            message_console("impossible de tracer le carré à ces coordonnées",
+                            "Impossible to draw a square at these coordinates")
+
 
 def simulation():
     instructions = recup_infos("instructions.txt")
@@ -380,8 +402,8 @@ tl.speed(1)
 initialisation(x_start_tl,y_start_tl)
 tl.color("green")
 
-print("config : ", config)
-commandes = recup_infos("\ninstructions.txt")
+print("config : ", config,"\n")
+commandes = recup_infos("instructions.txt")
 
 print("commandes : ", commandes)
 objets = recup_infos("forme_couleur.txt")
