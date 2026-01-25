@@ -10,9 +10,11 @@ tracer;trace;dessiner;dessine;draw;
 
 et;puis;and;then
 
+balle;ball
+
 rouge;red
 jaune;yellow
 bleu;bleue;blue
 
 cercle;circle
-carré;square
+carré;square;carre
