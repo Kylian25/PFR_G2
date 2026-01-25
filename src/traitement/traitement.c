@@ -206,7 +206,6 @@ void gestion_requetes(char *mode) {
     sprintf(chemin_image_texte,"donnees/%s.txt",nom_image);
     sprintf(chemin_image_jpeg,"donnees/%s.jpeg",nom_image);
 
-    traitement_image(chemin_image_texte,chemin_image_jpeg);
 
     while ((c = getchar()) != '\n' && c != EOF);
 
@@ -240,5 +239,7 @@ void gestion_requetes(char *mode) {
         }
     } while (!commande_valide);
 
+    printf("\n\n");
+    traitement_image(chemin_image_texte,chemin_image_jpeg);
     lancer_simu();
 }

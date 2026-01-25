@@ -219,7 +219,7 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
         tl.up()
         aller_a(x_robot_img,y_robot_img)
         tl.down()
-    else: message_console("Cette forme n'est pas reconnue", "This form is not recognized")
+    else: message_console("Cette forme n'est pas reconnue", "This shape is not recognized")
 
 def eviter_obstacle(forme : str , couleur : str): 
 
@@ -350,11 +350,11 @@ def simulation():
                     else: break
                 commande[0](*param)
                 nb_commandes +=1
-                print(f"Commande exécutée : {commande[0]}")
+                #print(f"Commande exécutée : {commande[0]}")
                 
             else:
                 commande[0]()
-                print(f"Commande exécutée : {commande[0]}")
+                #print(f"Commande exécutée : {commande[0]}")
     if nb_commandes > 1:
         ecrire("Simulation terminée !", "green")
 
@@ -376,16 +376,17 @@ COMMANDES = {              # commande : [fonction, nombre d'arguments,""] "int" 
 #----------------------------- Programme principal --------------------------------
 
 print("")
-tl.speed(2)
+tl.speed(1)
 initialisation(x_start_tl,y_start_tl)
 tl.color("green")
 
 print("config : ", config)
-commandes = recup_infos("instructions.txt")
+commandes = recup_infos("\ninstructions.txt")
+
 print("commandes : ", commandes)
-formes = recup_infos("forme_couleur.txt")
-print("formes : ", formes)
-#chercher_objet("balle", "BLEU")
-#zigzag(10)
+objets = recup_infos("forme_couleur.txt")
+print("\nobjets : ", objets)
+
 simulation()
+
 tl.done()

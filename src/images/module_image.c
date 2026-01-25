@@ -64,7 +64,7 @@ Image* charger_image(const char* chemin_fichier_texte) {
         return NULL;
     }
 
-    printf("Ouverture du fichier texte réussie\n");
+    ajout_log("Ouverture du fichier texte réussie\n");
     fscanf(f, "%d %d %d", &hauteur, &largeur, &nombre_de_canaux);
     ajout_log("Lecture des dimensions de l'image réussie dans charger_image");
     
