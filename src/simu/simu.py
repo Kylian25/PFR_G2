@@ -204,6 +204,7 @@ def dessiner_obstacle(forme : str,couleur : str ,x_HG : int,y_HG : int,x_BD : in
         tl.up()
 
         aller_a(x_robot_img,y_robot_img)
+        tl.down()
     elif forme == "balle": 
 
         rayon = min(largeur_obstacle,hauteur_obstacle) /2
@@ -253,7 +254,7 @@ def eviter_obstacle(forme : str = "balle" , couleur : str = "bleu"):
             
             if y_BD + 30 < hauteur:   # verifier si on peut aller en dessous
                 tl.up()
-                delta = 30
+                delta = 15
                 if est_dans_image(x_centre_obstacle,y_BD + delta):
                     tl.up()
                     revenir()
@@ -323,21 +324,29 @@ def reculer(distance : int = config["dist_dep"]):
     demi_tour()
     avancer(distance)
 
-def tracer(forme : str = "cercle", rayon : int = 20, couleur : str = "jaune"):
+def tracer(forme: str = "cercle", rayon: int = hauteur//4, couleur: str = "jaune"):
     x, y = tl.pos()
     tl.color(COULEURS[couleur])
+    
+    x_min = -largeur // 2 
+    x_max = largeur // 2
+    y_min = -hauteur // 2
+    y_max = hauteur // 2
+    
     if forme == "cercle":
         avancer(5)
         tl.setheading(0)
-        if -150 <= x <= 150 and -150 <= x + (2*rayon) <= 150 and -150 <= y <= 150 and -150 <= y + (2*rayon) <= 150:
+        if (x_min <= x - rayon and x + rayon <= x_max and 
+            y_min <= y and y + (2 * rayon) <= y_max):
             tl.circle(rayon)
         else:
-           message_console("impossible de tracer le cercle à ces coordonnées",
+            message_console("impossible de tracer le cercle à ces coordonnées",
                            "Impossible to draw a circle at these coordinates")
+    
     elif forme == "carré":
-        #avancer(5)
         tl.setheading(0)
-        if -150 <= x + rayon <= 150 and -150 <= x <= 150 and -150 <= y + rayon <= 150 and -150 <= y <= 150:
+        if (x_min <= x and x + rayon <= x_max and 
+            y_min <= y and y + rayon <= y_max):
             for i in range(4):
                 tl.forward(rayon)
                 tl.left(90)
@@ -391,7 +400,7 @@ def simulation():
             else:
                 commande[0]()
                 #print(f"Commande exécutée : {commande[0]}")
-    if nb_commandes > 1:
+    if nb_commandes >= 1:
         ecrire("Simulation terminée !", "green")
 
 #----------- Commandes/fonctions --------------
@@ -417,12 +426,12 @@ tl.speed(1)
 initialisation(x_start_tl,y_start_tl)
 tl.color("green")
 
-print("config : ", config,"\n")
+#print("config : ", config,"\n")
 commandes = recup_infos("instructions.txt")
 
 print("commandes : ", commandes)
-objets = recup_infos("forme_couleur.txt")
-print("\nobjets : ", objets)
+#objets = recup_infos("forme_couleur.txt")
+#print("\nobjets : ", objets)
 
 simulation()
 
