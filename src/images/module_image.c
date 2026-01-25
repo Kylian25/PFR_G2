@@ -356,10 +356,9 @@ void reconnaissance_forme_couleur(char* fichier_image, char* couleur, char* form
 
 // fonction principale du module image
 
-void traitement_image() {
-    char image_1[]="donnees/cubes.txt";
-    char image_2[]="donnees/cubes.jpeg";
-    afficher_resultats(image_1,image_2);
-    detecter_forme_et_couleur(image_1);
-    //reconnaissance_forme_couleur(image_1, "ROUGE", "BALLE");
+void traitement_image(char * fichier_texte, char * fichier_jpeg) {
+    
+    afficher_resultats(fichier_texte,fichier_jpeg);
+    detecter_forme_et_couleur(fichier_texte);
+    
 }

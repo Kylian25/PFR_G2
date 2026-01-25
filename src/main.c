@@ -28,12 +28,5 @@ int main(void){
   message_console("Programme arrêté \n", "Program finished\n");
   ajout_log("Programme arrêté \n");
 
-  // tests
-
-  traitement_image();
-  
-  lancer_simu();
-  
-
   return 0;
 }

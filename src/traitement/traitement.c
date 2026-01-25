@@ -5,6 +5,7 @@
 #include "traitement.h"
 #include "../config/config.h"
 #include "../outils/outils.h"
+#include "../images/module_image.h"
 
 
 // Déclaration des variables de lexique et des compteurs
@@ -195,6 +196,19 @@ void gestion_requetes(char *mode) {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 
+    char nom_image[100];
+    char chemin_image_texte[150];
+    char chemin_image_jpeg[150];
+
+    message_console("\nEntrez le nom de l'image : ", "\nEnter the image name : ");
+    scanf("%s",nom_image);
+
+    sprintf(chemin_image_texte,"donnees/%s.txt",nom_image);
+    sprintf(chemin_image_jpeg,"donnees/%s.jpeg",nom_image);
+
+    traitement_image(chemin_image_texte,chemin_image_jpeg);
+
+    while ((c = getchar()) != '\n' && c != EOF);
 
     charger_synonymes("configuration/syn_FR.txt");
     charger_types("configuration/type_FR.txt");
@@ -225,4 +239,6 @@ void gestion_requetes(char *mode) {
             message_console("Commande annulée. \n","Command cancelled \n");
         }
     } while (!commande_valide);
+
+    lancer_simu();
 }

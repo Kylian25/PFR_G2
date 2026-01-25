@@ -37,9 +37,7 @@ void message_console(char * message_FR, char * message_EN){
     else printf("%s", message_FR);
 }
 
-void lancer_simu(const char * chemin_image){   // nom de l'image sans l'extension 
+void lancer_simu(){  
 
-    char commande[200];
-    sprintf(commande, "python3 src/simu/simu.py temp/resultat.jpg");
-    system(commande);
+    system("python3 src/simu/simu.py temp/resultat.jpg");
 }

@@ -1,2 +1,1 @@
-avance 2 
-tourne 90 
+trouve balle bleu 
