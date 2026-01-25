@@ -1,5 +1,5 @@
 langue FR
-type_requete txt
+type_requete voc
 dist_dep 20
 tps_dep 3
 dist_det 10

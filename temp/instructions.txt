@@ -1,2 +1,2 @@
-trouve   
-avance 50 
+trouve cube rouge 
+trouve cube bleu 

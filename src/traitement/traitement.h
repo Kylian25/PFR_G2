@@ -1,8 +1,8 @@
 #ifndef TRAITEMENT_H
 #define TRAITEMENT_H
 
-#define MAX_WORDS 100
-#define MAX_LINE 256
+#define MAX_WORDS 200
+#define MAX_LINE 500
 
 // Définition des structures
 

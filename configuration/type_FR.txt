@@ -2,6 +2,7 @@ avance;COMMANDE
 recule;COMMANDE
 tourne;COMMANDE
 trouve;COMMANDE
+find;COMMANDE
 aller;COMMANDE
 zigzag;COMMANDE
 revenir;COMMANDE

@@ -2,6 +2,7 @@ avance;dist
 recule;dist
 tourne;angle
 trouve;objet,couleur
+find;couleur,objet
 aller;pos,pos
 zigzag;dist
 revenir;
