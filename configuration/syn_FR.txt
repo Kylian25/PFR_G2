@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 avance;avances;avancer;avancez;avancé;marche;marches;marcher;marchez;marché;déplace;déplaces;déplacer;déplacez;déplacé;move;walk
 recule;recules;reculer;reculez;reculé;backward;backwards
 tourne;tournes;tourner;tourné;tournez;turn
@@ -9,19 +8,8 @@ revenir;reviens;retourne;retournes;retourner;retourné;retournez;back
 eviter;evite;evites;evitez;evité;évite;évites;éviter;évitez;évité;esquive;esquiver;esquivez;esquivé;avoid;dodge
 demi_tour;tour;reverse
 tracer;trace;tracé;tracez;traces;dessiner;dessiné;dessinez;dessines;dessine;draw;
-=======
-avance;avancer;marche;déplace;move;walk
-recule;reculer;backward;backwards
-tourne;tourner;turn
-trouve;repère;localise;find;spot;locate;trouver
-aller;va;go
-revenir;reviens;retourne;retourner;back
-eviter;evite;évite;éviter;esquive;esquiver;avoid;dodge
-demi_tour;tour
-tracer;trace;dessiner;dessine;draw;
->>>>>>> 9c75868 (fix erreur simu)
 
-et;puis;and;then
+puis;then
 
 balle;ball
 
