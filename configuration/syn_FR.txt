@@ -20,4 +20,4 @@ jaune;jaunes;yellow
 bleu;bleue;bleus;bleues;blue
 
 cercle;cercles;circle
-carré;carrés;carrées;carrée;square
+carré;carre;carrescarrés;carrées;carrees;carrée;carree;square
