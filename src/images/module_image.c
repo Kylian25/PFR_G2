@@ -191,15 +191,6 @@ ObjetDetecte* trouver_positions(const char* image_de_entre) {
             message_console(message_1, message_2);
             ajout_log("Objet non détecté dans trouver_positions");
         } else {
-            char message_1[1024];
-            char message_2[1024];
-            sprintf(message_1,"%s détecté\nPosition : X[%d-%d] Y[%d-%d]\nSurface  : %ld pixels\n",
-                    noms[i], objets[i].x_min, objets[i].x_max, 
-                    objets[i].y_min, objets[i].y_max, objets[i].surface);
-            sprintf(message_2,"%s detected\nPosition : X[%d-%d] Y[%d-%d]\nSurface  : %ld pixels\n",
-                    noms[i], objets[i].x_min, objets[i].x_max, 
-                    objets[i].y_min, objets[i].y_max, objets[i].surface);
-            message_console(message_1, message_2);
             ajout_log("Objet détecté avec succès dans trouver_positions");
         }
     }
@@ -214,6 +205,7 @@ ObjetDetecte* trouver_positions(const char* image_de_entre) {
  */
 void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
     ObjetDetecte *objets = trouver_positions(fichier_entree);
+    const char *noms[] = {"ROUGE", "JAUNE", "BLEU"};
     if (!objets) return;
 
     FILE *f = fopen("temp/bboxes.txt", "w");
@@ -227,6 +219,15 @@ void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
                 objets[i].y_min,
                 objets[i].y_max
             );
+            char message_1[1024];
+            char message_2[1024];
+            sprintf(message_1,"%s détecté\nPosition : X[%d-%d] Y[%d-%d]\nSurface  : %ld pixels\n",
+                    noms[i], objets[i].x_min, objets[i].x_max, 
+                    objets[i].y_min, objets[i].y_max, objets[i].surface);
+            sprintf(message_2,"%s detected\nPosition : X[%d-%d] Y[%d-%d]\nSurface  : %ld pixels\n",
+                    noms[i], objets[i].x_min, objets[i].x_max, 
+                    objets[i].y_min, objets[i].y_max, objets[i].surface);
+            message_console(message_1, message_2);
         }
     }
 
