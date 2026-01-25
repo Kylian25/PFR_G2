@@ -1,4 +1,4 @@
-avance;avances;avancer;avancez;avancé;marche;marches;marcher;marchez;marché;déplace;déplaces;déplacer;déplacez;déplacé;move;walk
+avance;avances;avancer;avancez;avancé;marche;marches;marcher;marchez;marché;déplace;déplaces;déplacer;déplacez;déplacé;move;walk;forward
 recule;recules;reculer;reculez;reculé;backward;backwards
 tourne;tournes;tourner;tourné;tournez;turn
 trouve;trouves;trouver;trouvez;trouvé;repère;repères;repérer;repérez;repéré;cherche;cherches;chercher;cherchez;cherché;localise;localises;localiser;localisé;localisez;

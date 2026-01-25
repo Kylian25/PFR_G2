@@ -1,8 +1,3 @@
-<<<<<<< HEAD
 cube rouge 362 524 184 356
 cube jaune 670 838 256 433
 cube bleu 48 213 198 370
-=======
-balle rouge 30 132 81 166
-balle bleu 101 171 33 96
->>>>>>> 9c75868 (fix erreur simu)
