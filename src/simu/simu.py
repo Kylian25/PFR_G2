@@ -323,11 +323,11 @@ def reculer(distance : int = config["dist_dep"]):
     demi_tour()
     avancer(distance)
 
-def tracer(forme : str = "cercle", rayon : int = 20, couleur : str = "vert"):
+def tracer(forme : str = "cercle", rayon : int = 20, couleur : str = "jaune"):
     x, y = tl.pos()
     tl.color(COULEURS[couleur])
     if forme == "cercle":
-        #avancer(5)
+        avancer(5)
         tl.setheading(0)
         if -150 <= x <= 150 and -150 <= x + (2*rayon) <= 150 and -150 <= y <= 150 and -150 <= y + (2*rayon) <= 150:
             tl.circle(rayon)
@@ -345,6 +345,20 @@ def tracer(forme : str = "cercle", rayon : int = 20, couleur : str = "vert"):
             message_console("impossible de tracer le carré à ces coordonnées",
                             "Impossible to draw a square at these coordinates")
 
+def find ( couleur : str = "rouge",forme : str = "balle"):
+    
+    #instructions = recup_infos("instructions.txt")
+    formes = recup_infos("forme_couleur.txt")
+    coords = []
+    for i in range(len(formes)):
+        if formes[i] == forme and formes[i+1] == couleur:
+            indice_objet = i
+            message_console(f"L'image contient bien un objet de type {forme} et de couleur {couleur}",
+                            f"The image does contain an object of type {forme} and color {couleur}.")
+            for k in range(i+2,i+6):
+                coords.append(int(formes[k]))
+            dessiner_obstacle(forme, couleur,coords[0],coords[2], coords[1],coords[3])
+    revenir()
 
 def simulation():
     instructions = recup_infos("instructions.txt")
@@ -392,7 +406,8 @@ COMMANDES = {              # commande : [fonction, nombre d'arguments,""] "int" 
     "aller" : (aller_a,2,""),
     "eviter" : (eviter_obstacle, 2, ""),
     "recule" : (reculer,1,"int"),
-    "tracer" : (tracer,3,"")
+    "tracer" : (tracer,3,""),
+    "find" : (find,2,"")
 }
 
 #----------------------------- Programme principal --------------------------------
