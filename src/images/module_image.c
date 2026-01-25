@@ -5,7 +5,11 @@
 #include "module_image.h"
 #include "../outils/outils.h"
 
-// créer l'image
+/**
+ * créer l'image
+ * - creer_image: alloue de la mémoire pour une nouvelle image avec les dimensions et le nombre de canaux spécifiés.
+ * - Elle initialise également les données des pixels.
+ */
 Image* creer_image(int largeur, int hauteur, int nombre_de_canaux) {
     Image *image = (Image*)malloc(sizeof(Image));
     if (image == NULL){
@@ -24,7 +28,9 @@ Image* creer_image(int largeur, int hauteur, int nombre_de_canaux) {
     return image;  
 }
 
-// liberer l'image 
+/*
+ * - liberer_image: libère la mémoire allouée pour une image.
+ */
 void liberer_image(Image *img) {
     if (img != NULL) {
         if (img->data != NULL) {
@@ -35,7 +41,9 @@ void liberer_image(Image *img) {
     }
 }
 
-// récuper le pixel
+/**
+ * - get_pixel: récupère un pixel à une position donnée dans une image.
+ */ 
 Pixel get_pixel(Image *image, int x, int y) {
     if (x < 0 || x >= image->largeur || y < 0 || y >= image->hauteur) {
         Pixel vide = {0, 0, 0}; 
@@ -49,7 +57,10 @@ Pixel get_pixel(Image *image, int x, int y) {
     
 }
 
-// charger l'image
+/**
+ * charger_image: charge une image à partir d'un fichier texte.
+ * - Le fichier texte doit contenir les dimensions de l'image suivies des valeurs RGB des pixels.
+ */
 Image* charger_image(const char* chemin_fichier_texte) {
     int largeur, hauteur, nombre_de_canaux;
     FILE *f = fopen(chemin_fichier_texte, "r");
@@ -109,7 +120,9 @@ Image* charger_image(const char* chemin_fichier_texte) {
     
 }
 
-//tester couleur
+/** 
+ * est_couleur_cible: vérifie si un pixel correspond à une couleur cible spécifiée.
+ */
 int est_couleur_cible(Pixel p, CouleurCible cible) {
     switch (cible) {
         case CIBLE_ROUGE:
@@ -126,7 +139,11 @@ int est_couleur_cible(Pixel p, CouleurCible cible) {
     }
 }
 
-//trouver les positions des objets 
+/** 
+ * @trouver les positions des objets détectés dans l'image
+ * - trouver_positions: analyse une image pour détecter des objets de couleurs spécifiques (rouge, jaune, bleu).
+ * - Elle renvoie un tableau d'objets détectés avec leurs positions et surfaces.
+ */
 ObjetDetecte* trouver_positions(const char* image_de_entre) {
     Image* img = charger_image(image_de_entre);
     if (img == NULL) {
@@ -191,7 +208,10 @@ ObjetDetecte* trouver_positions(const char* image_de_entre) {
     return objets; 
 }
 
-//encadrer les objets
+/**
+ * afficher_resultats: affiche les résultats de la détection en traçant des rectangles autour des objets détectés.
+ * - Elle utilise un script Python externe pour dessiner les rectangles sur l'image JPEG.
+ */
 void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
     ObjetDetecte *objets = trouver_positions(fichier_entree);
     if (!objets) return;
@@ -220,7 +240,9 @@ void afficher_resultats(const char* fichier_entree,const char* image_jpeg) {
 }
 
 
-//tester la forme
+/**
+ * detecter_forme: détermine la forme d'un objet détecté en fonction de son ratio surface/boîte englobante.
+ */
 const char* detecter_forme(ObjetDetecte obj) {
     long largeur = (obj.x_max - obj.x_min) + 1;
     long hauteur = (obj.y_max - obj.y_min) + 1;
@@ -237,7 +259,9 @@ const char* detecter_forme(ObjetDetecte obj) {
     
 }
 
-//renvoyer les coordonné de l'objet détecté avec sa forme et sa couleur
+/**
+ * detecter_forme_et_couleur: détecte les formes et couleurs des objets dans une image et enregistre les résultats dans un fichier.
+ */
 void detecter_forme_et_couleur(const char* fichier_image) {
 
     ObjetDetecte *obj = trouver_positions(fichier_image);
@@ -282,6 +306,10 @@ void detecter_forme_et_couleur(const char* fichier_image) {
     ajout_log("Détection de forme et couleur terminée dans detecter_forme_et_couleur");
 }
 
+/**
+ * reconnaissance_forme_couleur: reconnaît une forme et une couleur spécifiques dans une image.
+ * - Elle enregistre les résultats dans un fichier si la forme et la couleur sont trouvées.
+ */
 void reconnaissance_forme_couleur(char* fichier_image, char* couleur, char* forme) {
 
     ObjetDetecte *objets = trouver_positions(fichier_image);
@@ -354,7 +382,9 @@ void reconnaissance_forme_couleur(char* fichier_image, char* couleur, char* form
     free(objets);
 }
 
-// fonction principale du module image
+/**
+ * traitement_image: effectue le traitement complet d'une image en détectant les objets et en affichant les résultats.
+ */
 
 void traitement_image(char * fichier_texte, char * fichier_jpeg) {
     
