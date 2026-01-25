@@ -27,7 +27,6 @@ int main(void){
 
   message_console("Programme arrêté \n", "Program finished\n");
   ajout_log("Programme arrêté \n");
-  traitement_image("/home/flow/PFR_G2/donnees/IMG_5395.txt", "/home/flow/PFR_G2/donnees/IMG_5395.jpeg");
 
   return 0;
 }

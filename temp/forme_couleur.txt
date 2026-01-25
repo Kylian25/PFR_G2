@@ -1,3 +1,3 @@
-balle rouge 18 55 159 185
-balle jaune 39 68 43 68
-balle bleu 248 279 103 126
+cube rouge 362 524 184 356
+cube jaune 670 838 256 433
+cube bleu 48 213 198 370

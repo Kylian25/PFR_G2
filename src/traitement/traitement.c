@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include <unistd.h>
 #include "traitement.h"
 #include "../config/config.h"
 #include "../outils/outils.h"
@@ -19,6 +20,7 @@ int syn_count = 0, type_count = 0, func_count = 0;
 
 void charger_synonymes(const char *nom_fichier) {
     FILE *f = fopen(nom_fichier, "r");
+    if (f == NULL) ajout_log("Fichier introuvable");
     char ligne[MAX_LINE];
     while (fgets(ligne, MAX_LINE, f)) {
         char *token = strtok(ligne, ";");
@@ -37,6 +39,7 @@ void charger_synonymes(const char *nom_fichier) {
 
 void charger_types(const char *nom_fichier) {
     FILE *f = fopen(nom_fichier, "r");
+    if (f == NULL) ajout_log("Fichier introuvable");
     char mot[50], type[20];
     while (fscanf(f, "%[^;];%s\n", mot, type) != EOF) {
         strcpy(types[type_count].mot, mot);
@@ -48,6 +51,7 @@ void charger_types(const char *nom_fichier) {
 
 void charger_fonctions(const char *nom_fichier) {
     FILE *f = fopen(nom_fichier, "r");
+    if (f == NULL) ajout_log("Fichier introuvable");
     char ligne[MAX_LINE];
     while (fgets(ligne, MAX_LINE, f)) {
         ligne[strcspn(ligne, "\n")] = 0;
@@ -222,7 +226,25 @@ void gestion_requetes(char *mode) {
             message_console("Entrez une commande : ","Write a command : ");
             fgets(texte,MAX_LINE,stdin);
         } else{
-            // fonction commande vocale
+            if (strcmp(config.langue, "FR") == 0) {
+                system("\"/mnt/c/Users/grums/AppData/Local/Programs/Python/Python312/python.exe\" "
+                    "\"C:\\Users\\grums\\Documents\\Cours_3A_SRI\\PFR\\commande_voc.py\" FR");
+
+            } else {
+                system("\"/mnt/c/Users/grums/AppData/Local/Programs/Python/Python312/python.exe\" "
+                    "\"C:\\Users\\grums\\Documents\\Cours_3A_SRI\\PFR\\commande_voc.py\" EN");
+
+            }
+
+            FILE *f = NULL;
+            while (f == NULL) {
+                f = fopen("/mnt/c/Users/grums/Documents/Cours_3A_SRI/PFR/res_commande_voc.txt", "r");
+                sleep(1);
+            }
+
+            fgets(texte, MAX_LINE, f);
+            fclose(f);
+
         }
 
         traiter_texte(texte);

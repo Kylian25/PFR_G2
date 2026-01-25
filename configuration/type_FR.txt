@@ -2,6 +2,7 @@ avance;COMMANDE
 recule;COMMANDE
 tourne;COMMANDE
 trouve;COMMANDE
+find;COMMANDE
 aller;COMMANDE
 zigzag;COMMANDE
 revenir;COMMANDE
@@ -9,7 +10,7 @@ eviter;COMMANDE
 demi_tour;COMMANDE
 tracer;COMMANDE
 
-et;SEPARATEUR
+puis;SEPARATEUR
 
 balle;OBJET
 cube;OBJET
