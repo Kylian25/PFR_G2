@@ -126,13 +126,13 @@ Image* charger_image(const char* chemin_fichier_texte) {
 int est_couleur_cible(Pixel p, CouleurCible cible) {
     switch (cible) {
         case CIBLE_ROUGE:
-            return (p.r > p.g + 50 && p.r > p.b + 50 && p.r > 120 && p.g < 80 && p.b < 80);
+            return (p.r > p.g + 50 && p.r > p.b + 50 && p.r > 100 && p.g < 75 && p.b < 75);
         
         case CIBLE_JAUNE:
-            return (abs(p.r - p.g) < 30 && p.r > p.b + 40 && p.g > p.b + 40 && p.r > 120 && p.g > 120);
+            return (abs(p.r - p.g) < 30 && p.r > p.b + 40 && p.g > p.b + 40 && p.r > 100 && p.g > 100);
 
         case CIBLE_BLEU:
-            return (p.b > p.r + 40 && p.b > p.g + 40 && p.b > 120 && p.r < 100 && p.g < 100);
+            return (p.b > p.r + 40 && p.b > p.g + 40 && p.b > 100 && p.r < 100 && p.g < 100);
 
         default:
             return 0;
@@ -390,5 +390,6 @@ void traitement_image(char * fichier_texte, char * fichier_jpeg) {
     
     afficher_resultats(fichier_texte,fichier_jpeg);
     detecter_forme_et_couleur(fichier_texte);
+    reconnaissance_forme_couleur(fichier_texte, "rouge", "balle");
     
 }

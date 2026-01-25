@@ -1,2 +1,3 @@
-balle rouge 156 187 34 53
-balle bleu 91 175 165 229
+balle rouge 18 55 159 185
+balle jaune 39 68 43 68
+balle bleu 248 279 103 126
