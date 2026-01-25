@@ -1,13 +1,18 @@
-avance;avancer;marche;déplace;move;go
-recule;reculer
-tourne;tourner
-trouve;repère;localise
-aller;va
+avance;avancer;marche;déplace;move;walk
+recule;reculer;backward;backwards
+tourne;tourner;turn
+trouve;repère;localise;find;spot;locate
+aller;va;go
 revenir;reviens;retourne;retourner;back
-eviter;evite;évite;éviter;
+eviter;evite;évite;éviter;esquive;esquiver;avoid;dodge
 demi_tour;tour
-tracer;trace;dessiner;dessine
+tracer;trace;dessiner;dessine;draw;
 
-et;puis
+et;puis;and;then
 
-bleu;bleue
+rouge;red
+jaune;yellow
+bleu;bleue;blue
+
+cercle;circle
+carré;square

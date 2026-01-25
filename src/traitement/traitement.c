@@ -6,6 +6,13 @@
 #include "../config/config.h"
 #include "../outils/outils.h"
 
+
+// Déclaration des variables de lexique et des compteurs
+
+Synonyme synonymes[MAX_WORDS];
+TypeMot types[MAX_WORDS];
+Fonction fonctions[MAX_WORDS];
+
 int syn_count = 0, type_count = 0, func_count = 0;
 
 
@@ -108,8 +115,8 @@ Fonction* trouver_fonction(char *mot) {
 
 
 void traiter_texte(char *texte) {
-    FILE *file = fopen("temp/instructions.txt",'w');
-    if (file == NULL) return 0;
+    FILE *file = fopen("temp/instructions.txt","w");
+    if (file == NULL) ajout_log("Fichier introuvable");
     char *tokens[MAX_WORDS];
     int token_count = 0;
 
@@ -166,11 +173,11 @@ void traiter_texte(char *texte) {
                     j++;
                 }
 
-                fprintf("%s ", func->mot,file);
+                fprintf(file,"%s ", func->mot);
                 for (int k = 0; k < func->param_count; k++) {
-                    fprintf("%s ", val_param[k],file);
+                    fprintf(file,"%s ", val_param[k]);
                 }
-                fprintf("\n",file);
+                fprintf(file,"\n");
             }
 
             while (i < token_count && strcmp(trouver_type(tokens[i]), "SEPARATEUR") != 0) {
@@ -180,35 +187,42 @@ void traiter_texte(char *texte) {
 
         i++;
     }
+    fclose(file);
 }
 
 void gestion_requetes(char *mode) {
 
-    charger_synonymes("../../configuration/syn_FR.txt");
-    charger_types("../../configuration/type_FR.txt");
-    charger_fonctions("../../configuration/fonction_FR.txt");
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF);
+
+
+    charger_synonymes("configuration/syn_FR.txt");
+    charger_types("configuration/type_FR.txt");
+    charger_fonctions("configuration/fonction_FR.txt");
 
     char texte[MAX_LINE];
     int commande_valide = 0;
     char reponse[10];
 
     do{
-    if (strcmp(mode,"txt") == 0){
-        message_console("Entrez une commande : ","Write a command : ");
-        fgets(texte, MAX_LINE, stdin);
-    } else{
-        // fonction commande vocale
-    }
+        if (strcmp(mode,"txt") == 0){
+            message_console("Entrez une commande : ","Write a command : ");
+            fgets(texte,MAX_LINE,stdin);
+        } else{
+            // fonction commande vocale
+        }
 
-    traiter_texte(texte);
-    system("cat temp/instructions.txt");
-    message_console("\nValidez-vous cette commande ? (o/n) \n","\nConfirm the command ? (y/n) \n");
-    scanf("%s", reponse);
-    if (strcasecmp(reponse,'o') == 0 || strcasecmp(reponse,'y') == 0){
-        commande_valide = 1;
-        message_console("Commande validée. \n","Command confirmed \n");
-    } else{
-        message_console("Commande annulée. \n","Command cancelled \n");
-    }
+        traiter_texte(texte);
+        system("cat temp/instructions.txt");
+        message_console("\nValidez-vous cette commande ? (o/n) \n","\nConfirm the command ? (y/n) \n");
+        fgets(reponse,10,stdin);
+        reponse[strcspn(reponse, "\n")] = 0;
+
+        if (strcasecmp(reponse,"o") == 0 || strcasecmp(reponse,"y") == 0){
+            commande_valide = 1;
+            message_console("Commande validée. \n","Command confirmed \n");
+        } else{
+            message_console("Commande annulée. \n","Command cancelled \n");
+        }
     } while (!commande_valide);
 }

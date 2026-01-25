@@ -1,1 +1,2 @@
-trouve cube rouge eviter cube jaune avance tourne 90 zigzag 60
+avance 2 
+tourne 90 

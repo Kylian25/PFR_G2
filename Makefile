@@ -1,5 +1,5 @@
-main : src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o src/images/module_image.o
-	gcc -o main src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o src/images/module_image.o
+main : src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o src/images/module_image.o src/traitement/traitement.o
+	gcc -o main src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o src/images/module_image.o src/traitement/traitement.o
 
 main.o : src/main.c src/menu/menu.h
 	gcc -c src/main.c -o src/main.o

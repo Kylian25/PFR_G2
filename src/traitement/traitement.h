@@ -40,10 +40,4 @@ Fonction *trouver_fonction(char *mot);
 void traiter_texte(char *texte);
 void gestion_requetes(char *mode);
 
-// Déclaration des variables de lexique
-
-Synonyme synonymes[MAX_WORDS];
-TypeMot types[MAX_WORDS];
-Fonction fonctions[MAX_WORDS];
-
 #endif
