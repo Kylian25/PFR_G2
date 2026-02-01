@@ -1,3 +1,10 @@
+/* Ce fichier définit les fonctions utiles au traitement des requêtes textuelles et vocales.
+La fonction gestion_requetes() gère également l'appel au fichier de traitement des images et 
+au fichier de simulation.
+Nom du développeur : Charles MARDON
+Date de la version : 25 janvier 2026
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -227,18 +234,16 @@ void gestion_requetes(char *mode) {
             fgets(texte,MAX_LINE,stdin);
         } else{
             if (strcmp(config.langue, "FR") == 0) {
-                system("\"/mnt/c/Users/grums/AppData/Local/Programs/Python/Python312/python.exe\" "
-                    "\"C:\\Users\\grums\\Documents\\Cours_3A_SRI\\PFR\\commande_voc.py\" FR");
+                system("python3 src/traitement/commande_voc.py FR");
 
             } else {
-                system("\"/mnt/c/Users/grums/AppData/Local/Programs/Python/Python312/python.exe\" "
-                    "\"C:\\Users\\grums\\Documents\\Cours_3A_SRI\\PFR\\commande_voc.py\" EN");
+                system("python3 src/traitement/commande_voc.py EN");
 
             }
 
             FILE *f = NULL;
             while (f == NULL) {
-                f = fopen("/mnt/c/Users/grums/Documents/Cours_3A_SRI/PFR/res_commande_voc.txt", "r");
+                f = fopen("temp/res_commande_voc.txt", "r");
                 sleep(1);
             }
 

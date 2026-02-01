@@ -1,0 +1,1255 @@
+Script started on 2026-01-26 08:38:54+01:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="156" LINES="41"]
+[?2004h(base) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ make
+[?2004lcc    -c -o src/images/module_image.o src/images/module_image.c
+gcc -o main src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o src/images/module_image.o src/traitement/traitement.o
+[?2004h(base) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lThe program is starting
+[H[2J[3J[H[2J[3J
+##############################################################
+                     MAIN MENU
+###############################################################
+1 : User mode
+2 : Admin mode
+3 : Exit program
+--------------------------------------------
+Enter your choice : 3
+[H[2J[3J
+Stopping program..
+Program finished
+[?2004h(base) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ make cea[K[Klean
+[?2004lrm -f main
+find src -name "*.o" -type f -delete   
+[?2004h(base) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ make
+[?2004lcc    -c -o src/main.o src/main.c
+cc    -c -o src/menu/menu.o src/menu/menu.c
+cc    -c -o src/outils/outils.o src/outils/outils.c
+cc    -c -o src/config/config.o src/config/config.c
+cc    -c -o src/images/module_image.o src/images/module_image.c
+cc    -c -o src/traitement/traitement.o src/traitement/traitement.c
+gcc -o main src/main.o src/menu/menu.o src/outils/outils.o src/config/config.o src/images/module_image.o src/traitement/traitement.o
+[?2004h(base) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lThe program is starting
+[H[2J[3J[H[2J[3J
+##############################################################
+                     MAIN MENU
+###############################################################
+1 : User mode
+2 : Admin mode
+3 : Exit program
+--------------------------------------------
+Enter your choice : ^[[F
+
+Input error
+Enter your choice : 1
+[H[2J[3J
+=====> Entering User Mode...
+
+##############################################################
+                     User mode
+###############################################################
+1 : Text request mode
+2 : Voice request mode
+3 : Choose language
+4 : Return to main menu
+--------------------------------------------
+Enter your choice : 3
+[H[2J[3J[USER] Changing language
+1 : French
+2 : English
+Your choice : 1
+
+Language : French
+
+##############################################################
+                     User mode
+###############################################################
+1 : Text request mode
+2 : Voice request mode
+3 : Choose language
+4 : Return to main menu
+--------------------------------------------
+Entrez votre choix : 4
+[H[2J[3J
+Retour au Menu Principal
+[H[2J[3J
+##############################################################
+                     MAIN MENU
+###############################################################
+1 : User mode
+2 : Admin mode
+3 : Exit program
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 4
+[H[2J[3J
+Retour au Menu Principal
+[H[2J[3J
+##############################################################
+                     MAIN MENU
+###############################################################
+1 : User mode
+2 : Admin mode
+3 : Exit program
+--------------------------------------------
+Entrez votre choix : 2
+Entrer le mot de passe :  123
+[H[2J[3J
+=====> Entree en mode Administrateur...
+
+##############################################################
+                     Mode Administrateur
+###############################################################
+1 : Modifier le Fichier de Configuration
+2 : Afficher les Logs Systemes
+3 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[ADMIN] Lancement de l'editeur de configuration
+
+##############################################################
+                     Admin - modification des paramètres
+###############################################################
+1 : Afficher parametres
+2 : Modifier parametres
+3 : Revenir au menu amdinistrateur
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[ADMIN] Affichage des parametres
+
+langue FR
+type_requete voc
+dist_dep 20
+tps_dep 3
+dist_det 10
+angle 60
+--------------------------------------------
+
+##############################################################
+                     Admin - modification des paramètres
+###############################################################
+1 : Afficher parametres
+2 : Modifier parametres
+3 : Revenir au menu amdinistrateur
+--------------------------------------------
+Entrez votre choix : 2
+[H[2J[3J
+[ADMIN] Modification des parametres
+
+langue FR
+type_requete voc
+dist_dep 20
+tps_dep 3
+dist_det 10
+angle 60
+--------------------------------------------
+
+
+1 : Modifier la distance de déplacement
+2 : Modifier le temps de déplacement 
+3 : Modifier la distance de détection
+4 : Modifier l'angle de rotation
+5 : Revenir au menu précédent
+
+Entrez votre choix : 4
+Entrez une valeur entre [1,360] : 200
+[H[2J[3J
+langue FR
+type_requete voc
+dist_dep 20
+tps_dep 3
+dist_det 10
+angle 200
+--------------------------------------------
+
+
+1 : Modifier la distance de déplacement
+2 : Modifier le temps de déplacement 
+3 : Modifier la distance de détection
+4 : Modifier l'angle de rotation
+5 : Revenir au menu précédent
+
+Entrez votre choix : 4
+Entrez une valeur entre [1,360] : 600
+[H[2J[3Jvaleur incorrecte
+langue FR
+type_requete voc
+dist_dep 20
+tps_dep 3
+dist_det 10
+angle 200
+--------------------------------------------
+
+
+1 : Modifier la distance de déplacement
+2 : Modifier le temps de déplacement 
+3 : Modifier la distance de détection
+4 : Modifier l'angle de rotation
+5 : Revenir au menu précédent
+
+Entrez votre choix : 5
+[H[2J[3J
+Retour au menu précédent
+
+##############################################################
+                     Admin - modification des paramètres
+###############################################################
+1 : Afficher parametres
+2 : Modifier parametres
+3 : Revenir au menu amdinistrateur
+--------------------------------------------
+Entrez votre choix : 3
+[H[2J[3J
+Retour au Menu administrateur
+
+##############################################################
+                     Mode Administrateur
+###############################################################
+1 : Modifier le Fichier de Configuration
+2 : Afficher les Logs Systemes
+3 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 2
+[H[2J[3J
+[ADMIN] ------------ Affichage des logs -------------
+
+08:40:22 : Lancement du programme 
+
+08:41:37 : ==> Entree en mode Utilisateur
+08:41:57 : [UTILISATEUR] Choix de la langue
+08:41:59 : Langue choisie : Francais
+08:42:01 : [UTILISATEUR] Retour au menu principal
+08:42:04 : ==> Entree en mode Utilisateur
+08:42:15 : [UTILISATEUR] Retour au menu principal
+08:42:21 : Mot de passe Valide 
+08:42:21 : ==> Entree en Mode Administrateur
+08:42:34 : [ADMIN] Lancement de l'editeur de configuration
+08:42:38 : [ADMIN] Affichage des parametres
+08:42:50 : [ADMIN] Modification des parametres
+08:43:00 : angle de rotation par defaut modifiée
+08:43:13 : angle de rotation par defaut modifiée
+08:43:22 : Retour au menu précédent
+08:43:31 : Retour au menu administrateur
+08:43:34 : [ADMIN] Affichage des logs
+
+##############################################################
+                     Mode Administrateur
+###############################################################
+1 : Modifier le Fichier de Configuration
+2 : Afficher les Logs Systemes
+3 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 3
+[H[2J[3J
+Retour au Menu Principal
+
+##############################################################
+                     MAIN MENU
+###############################################################
+1 : User mode
+2 : Admin mode
+3 : Exit program
+--------------------------------------------
+Entrez votre choix : 2
+Entrer le mot de passe :  123
+[H[2J[3J
+=====> Entree en mode Administrateur...
+
+##############################################################
+                     Mode Administrateur
+###############################################################
+1 : Modifier le Fichier de Configuration
+2 : Afficher les Logs Systemes
+3 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 2
+[H[2J[3J
+[ADMIN] ------------ Affichage des logs -------------
+
+08:40:22 : Lancement du programme 
+
+08:41:37 : ==> Entree en mode Utilisateur
+08:41:57 : [UTILISATEUR] Choix de la langue
+08:41:59 : Langue choisie : Francais
+08:42:01 : [UTILISATEUR] Retour au menu principal
+08:42:04 : ==> Entree en mode Utilisateur
+08:42:15 : [UTILISATEUR] Retour au menu principal
+08:42:21 : Mot de passe Valide 
+08:42:21 : ==> Entree en Mode Administrateur
+08:42:34 : [ADMIN] Lancement de l'editeur de configuration
+08:42:38 : [ADMIN] Affichage des parametres
+08:42:50 : [ADMIN] Modification des parametres
+08:43:00 : angle de rotation par defaut modifiée
+08:43:13 : angle de rotation par defaut modifiée
+08:43:22 : Retour au menu précédent
+08:43:31 : Retour au menu administrateur
+08:43:34 : [ADMIN] Affichage des logs
+08:43:48 : Retour au menu principal
+08:43:54 : Mot de passe Valide 
+08:43:54 : ==> Entree en Mode Administrateur
+08:43:56 : [ADMIN] Affichage des logs
+
+##############################################################
+                     Mode Administrateur
+###############################################################
+1 : Modifier le Fichier de Configuration
+2 : Afficher les Logs Systemes
+3 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 3
+[H[2J[3J
+Retour au Menu Principal
+
+##############################################################
+                     MAIN MENU
+###############################################################
+1 : User mode
+2 : Admin mode
+3 : Exit program
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : cubes
+Entrez une commande : avance de 2 mètres
+avance 2 
+
+Validez-vous cette commande ? (o/n) 
+n
+Commande annulée. 
+Entrez une commande : avance de 2 m             avance de 3000 mètres
+avance 3000 
+
+Validez-vous cette commande ? (o/n) 
+avance de 30 mètres et tourne de 90 degrés                         es puis tourne de 90 degrés
+Commande annulée. 
+tourne 90 
+Entrez une commande : 
+Validez-vous cette commande ? (o/n) 
+avanced e 30 mètres                   n
+Commande annulée. 
+Entrez une commande : avance de 30 mètres et tourne de 90nde    degrés
+avance 30 
+
+Validez-vous cette commande ? (o/n) 
+avance de 30 mètres et tourne de 90 degrés                         es et  puis tourne de 90 degrés
+Commande annulée. 
+tourne 90 
+Entrez une commande : 
+Validez-vous cette commande ? (o/n) 
+^C
+[?2004h(base) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : cubes
+Entrez une commande : avance de 30 mètres et    puis tourne de 90 dég  egrés
+avance 30 
+tourne 90 
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[362-524] Y[184-356]
+Surface  : 27977 pixels
+JAUNE détecté
+Position : X[670-838] Y[256-433]
+Surface  : 29069 pixels
+BLEU détecté
+Position : X[48-213] Y[198-370]
+Surface  : 27892 pixels
+Traceback (most recent call last):
+  File [35m"/home/grumsj2_/UPSSITECH/SRI/PFR_G2/src/images/tracer_rectangle.py"[0m, line [35m1[0m, in [35m<module>[0m
+    from PIL import Image
+[1;35mModuleNotFoundError[0m: [35mNo module named 'PIL'[0m
+Sauvegardé : cube rouge 
+Sauvegardé : cube jaune 
+Sauvegardé : cube bleu 
+la forme balle n'a pas été trouvée pour la couleur rouge (trouvé: cube).
+Traceback (most recent call last):
+  File [35m"/home/grumsj2_/UPSSITECH/SRI/PFR_G2/src/simu/simu.py"[0m, line [35m2[0m, in [35m<module>[0m
+    from PIL import Image
+[1;35mModuleNotFoundError[0m: [35mNo module named 'PIL'[0m
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : ^C
+[?2004h(base) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ pip install Pillow
+[?2004lCollecting Pillow
+  Downloading pillow-12.1.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (8.8 kB)
+Downloading pillow-12.1.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.0 MB)
+[?25l   [38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m0.0/7.0 MB[0m [31m?[0m eta [36m-:--:--[0m[2K   [38;5;197m━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m1.3/7.0 MB[0m [31m15.0 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;197m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m[38;5;237m╺[0m[38;5;237m━━━━━[0m [32m6.0/7.0 MB[0m [31m20.7 MB/s[0m eta [36m0:00:01[0m[2K   [38;5;70m━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[0m [32m7.0/7.0 MB[0m [31m18.1 MB/s[0m  [33m0:00:00[0m
+[?25hInstalling collected packages: Pillow
+Successfully installed Pillow-12.1.0
+[?2004h(base) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ cn[Konda activate PFR
+[?2004l[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ conda activate PFRpip install Pillow[12P./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : avance de 30 mètres puis tourne de 90 degrés
+Entrez une commande : ^C
+[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : cubes
+Entrez une commande : avanced    de 30 mètres puis tourne de 90 degrés
+avance 30 
+tourne 90 
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[362-524] Y[184-356]
+Surface  : 27977 pixels
+JAUNE détecté
+Position : X[670-838] Y[256-433]
+Surface  : 29069 pixels
+BLEU détecté
+Position : X[48-213] Y[198-370]
+Surface  : 27892 pixels
+Sauvegardé : cube rouge 
+Sauvegardé : cube jaune 
+Sauvegardé : cube bleu 
+la forme balle n'a pas été trouvée pour la couleur rouge (trouvé: cube).
+
+commandes :  ['avance', '30', 'tourne', '90']
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : cubes
+Entrez une commande : avance de 30 mètres puis tourne de 90 degrés puis avance de 20 mètres
+avance 30 
+tourne 90 
+avance 20 
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[362-524] Y[184-356]
+Surface  : 27977 pixels
+JAUNE détecté
+Position : X[670-838] Y[256-433]
+Surface  : 29069 pixels
+BLEU détecté
+Position : X[48-213] Y[198-370]
+Surface  : 27892 pixels
+Sauvegardé : cube rouge 
+Sauvegardé : cube jaune 
+Sauvegardé : cube bleu 
+la forme balle n'a pas été trouvée pour la couleur rouge (trouvé: cube).
+
+commandes :  ['avance', '30', 'tourne', '90', 'avance', '20']
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : 1 cubes
+Entrez une commande : avance de 30 puis tourne de 90 puis avance de 20
+avance 30 
+tourne 90 
+avance 20 
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[362-524] Y[184-356]
+Surface  : 27977 pixels
+JAUNE détecté
+Position : X[670-838] Y[256-433]
+Surface  : 29069 pixels
+BLEU détecté
+Position : X[48-213] Y[198-370]
+Surface  : 27892 pixels
+Sauvegardé : cube rouge 
+Sauvegardé : cube jaune 
+Sauvegardé : cube bleu 
+la forme balle n'a pas été trouvée pour la couleur rouge (trouvé: cube).
+
+commandes :  ['avance', '30', 'tourne', '90', 'avance', '20']
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : ^C
+[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : avance de           cubes
+Entrez une commande : avance de 20 puis touend     ourne de 90 puis avance de 30
+avance 20 
+tourne 90 
+avance 30 
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[362-524] Y[184-356]
+Surface  : 27977 pixels
+JAUNE détecté
+Position : X[670-838] Y[256-433]
+Surface  : 29069 pixels
+BLEU détecté
+Position : X[48-213] Y[198-370]
+Surface  : 27892 pixels
+Sauvegardé : cube rouge 
+Sauvegardé : cube jaune 
+Sauvegardé : cube bleu 
+la forme balle n'a pas été trouvée pour la couleur rouge (trouvé: cube).
+
+commandes :  ['avance', '20', 'tourne', '90', 'avance', '30']
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : cubes
+Entrez une commande : avance
+avance  
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[362-524] Y[184-356]
+Surface  : 27977 pixels
+JAUNE détecté
+Position : X[670-838] Y[256-433]
+Surface  : 29069 pixels
+BLEU détecté
+Position : X[48-213] Y[198-370]
+Surface  : 27892 pixels
+Sauvegardé : cube rouge 
+Sauvegardé : cube jaune 
+Sauvegardé : cube bleu 
+la forme balle n'a pas été trouvée pour la couleur rouge (trouvé: cube).
+
+commandes :  ['avance']
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 4
+[H[2J[3J
+Retour au Menu Principal
+[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 3
+[H[2J[3J
+Arret du programme..
+Programme arrêté 
+[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : cubes
+Entrez une commande : avance
+avance  
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[362-524] Y[184-356]
+Surface  : 27977 pixels
+JAUNE détecté
+Position : X[670-838] Y[256-433]
+Surface  : 29069 pixels
+BLEU détecté
+Position : X[48-213] Y[198-370]
+Surface  : 27892 pixels
+Sauvegardé : cube rouge 
+Sauvegardé : cube jaune 
+Sauvegardé : cube bleu 
+la forme balle n'a pas été trouvée pour la couleur rouge (trouvé: cube).
+
+commandes :  ['avance']
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : IMG_5403
+Entrez une commande : avance
+avance  
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[30-132] Y[81-166]
+Surface  : 3655 pixels
+BLEU détecté
+Position : X[101-171] Y[33-96]
+Surface  : 2116 pixels
+Sauvegardé : balle rouge 
+Sauvegardé : balle bleu 
+balle rouge trouvé 
+Position: X[30  132] Y[81  166]
+
+commandes :  ['avance']
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : IMG_5403
+Entrez une commande : trouve la balle rouge
+trouve   
+
+Validez-vous cette commande ? (o/n) 
+^C
+[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : IMG_5403
+Entrez une commande : trouve la balle rouge
+trouve balle rouge 
+
+Validez-vous cette commande ? (o/n) 
+p o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[30-132] Y[81-166]
+Surface  : 3655 pixels
+BLEU détecté
+Position : X[101-171] Y[33-96]
+Surface  : 2116 pixels
+Sauvegardé : balle rouge 
+Sauvegardé : balle bleu 
+balle rouge trouvé 
+Position: X[30  132] Y[81  166]
+
+commandes :  ['trouve', 'balle', 'rouge']
+L'image contient bien un objet de type balle et de couleur rouge
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : IMG_5402
+Entrez une commande : trouve la balle t rouge puis repère la balle bleue puis localise la balle jauen  ne
+trouve   
+trouve   
+trouve   
+
+Validez-vous cette commande ? (o/n) 
+^C
+[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+[UTILISATEUR] Mode Textuel
+
+Entrez le nom de l'image : t IMG_5402
+Entrez une commande : trouve la balle rouge puis repère la balle bleue puis localise la balle jaune
+trouve balle rouge 
+trouve balle bleu 
+trouve balle jaune 
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[14-54] Y[115-140]
+Surface  : 674 pixels
+JAUNE détecté
+Position : X[234-286] Y[128-173]
+Surface  : 115 pixels
+BLEU détecté
+Position : X[94-129] Y[64-94]
+Surface  : 486 pixels
+Sauvegardé : balle rouge 
+Sauvegardé : balle jaune 
+Sauvegardé : balle bleu 
+balle rouge trouvé 
+Position: X[14  54] Y[115  140]
+
+commandes :  ['trouve', 'balle', 'rouge', 'trouve', 'balle', 'bleu', 'trouve', 'balle', 'jaune']
+L'image contient bien un objet de type balle et de couleur rouge
+L'image contient bien un objet de type balle et de couleur bleu
+L'image contient bien un objet de type balle et de couleur jaune
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 4
+[H[2J[3J
+Retour au Menu Principal
+[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 3
+[H[2J[3J
+Arret du programme..
+Programme arrêté 
+[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 1 2
+[H[2J[3J
+[UTILISATEUR] Mode Vocal
+
+Entrez le nom de l'image : IMG_5402
+[6n[?9001h[?1004h[m]0;C:\Users\grums\AppData\Local\Programs\Python\Python312\python.exe[?25hSpeak!
+End!
+[?9001l[?1004leviter balle bleu 
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[14-54] Y[115-140]
+Surface  : 674 pixels
+JAUNE détecté
+Position : X[234-286] Y[128-173]
+Surface  : 115 pixels
+BLEU détecté
+Position : X[94-129] Y[64-94]
+Surface  : 486 pixels
+Sauvegardé : balle rouge 
+Sauvegardé : balle jaune 
+Sauvegardé : balle bleu 
+balle rouge trouvé 
+Position: X[14  54] Y[115  140]
+
+commandes :  ['eviter', 'balle', 'bleu']
+L'image contient bien un objet de type balle et de couleur bleu
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 4
+[H[2J[3J
+Retour au Menu Principal
+[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 3
+[H[2J[3J
+Arret du programme..
+Programme arrêté 
+[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 2
+[H[2J[3J
+[UTILISATEUR] Mode Vocal
+
+Entrez le nom de l'image : cubes
+[6n[?9001h[?1004h[m]0;C:\Users\grums\AppData\Local\Programs\Python\Python312\python.exe[?25hSpeak!
+End!
+[?9001l[?1004lavance 200 
+tourne 45 
+avance 50 
+
+Validez-vous cette commande ? (o/n) 
+n
+Commande annulée. 
+[6n[?9001h[?1004h[m]0;C:\Users\grums\AppData\Local\Programs\Python\Python312\python.exe[?25hSpeak!
+End!
+[?9001l[?1004lavance 200 
+tourne 45 
+avance 50 
+zigzag 20 
+
+Validez-vous cette commande ? (o/n) 
+o
+Commande validée. 
+
+
+ROUGE détecté
+Position : X[362-524] Y[184-356]
+Surface  : 27977 pixels
+JAUNE détecté
+Position : X[670-838] Y[256-433]
+Surface  : 29069 pixels
+BLEU détecté
+Position : X[48-213] Y[198-370]
+Surface  : 27892 pixels
+Sauvegardé : cube rouge 
+Sauvegardé : cube jaune 
+Sauvegardé : cube bleu 
+la forme balle n'a pas été trouvée pour la couleur rouge (trouvé: cube).
+
+commandes :  ['avance', '200', 'tourne', '45', 'avance', '50', 'zigzag', '20']
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 4
+[H[2J[3J
+Retour au Menu Principal
+[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 3
+[H[2J[3J
+Arret du programme..
+Programme arrêté 
+[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ ./main
+[?2004lDebut du programme..
+[H[2J[3J[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Entrez votre choix : 1
+[H[2J[3J
+=====> Entree en mode Utilisateur...
+
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Entrez votre choix : 3
+[H[2J[3J
+[UTILISATEUR] Changement de langue
+
+1 : Francais
+2 : Anglais
+Votre choix : 2
+
+Langue choisie : Anglais
+##############################################################
+                     Mode Utilisateur
+###############################################################
+1 : Mode Requete Textuelle
+2 : Mode Requete Vocale
+3 : Choisir la Langue (defaut: Francais)
+4 : Retour au Menu Principal
+--------------------------------------------
+Enter your choice : 4
+[H[2J[3J
+Return to main menu
+[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Enter your choice : 1
+[H[2J[3J
+=====> Entering User Mode...
+
+##############################################################
+                     User mode
+###############################################################
+1 : Text request mode
+2 : Voice request mode
+3 : Choose language
+4 : Return to main menu
+--------------------------------------------
+Enter your choice : 1
+[H[2J[3J
+[USER] Text mode
+
+Enter the image name : move by 2 meter               cubes
+Write a command : move by 50 metee rs
+avance 50 
+
+Confirm the command ? (y/n) 
+y
+Command confirmed 
+
+
+ROUGE detected
+Position : X[362-524] Y[184-356]
+Surface  : 27977 pixels
+JAUNE detected
+Position : X[670-838] Y[256-433]
+Surface  : 29069 pixels
+BLEU detected
+Position : X[48-213] Y[198-370]
+Surface  : 27892 pixels
+Saved : cube rouge 
+Saved : cube jaune 
+Saved : cube bleu 
+the shape balle was not found for the color rouge (found: cube).
+
+commandes :  ['avance', '50']
+
+##############################################################
+                     User mode
+###############################################################
+1 : Text request mode
+2 : Voice request mode
+3 : Choose language
+4 : Return to main menu
+--------------------------------------------
+Enter your choice : 3 4
+[H[2J[3J
+Return to main menu
+[H[2J[3J
+##############################################################
+                        MENU PRINCIPAL
+###############################################################
+1 : Mode Utilisateur
+2 : Mode Administrateur
+3 : Quitter
+--------------------------------------------
+Enter your choice : 3
+[H[2J[3J
+Stopping program..
+Program finished
+[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ code .
+[?2004l[?2004h(PFR) ]0;grumsj2_@OrdideCharles: ~/UPSSITECH/SRI/PFR_G2[01;32mgrumsj2_@OrdideCharles[00m:[01;34m~/UPSSITECH/SRI/PFR_G2[00m$ exit
+[?2004lexit
+
+Script done on 2026-01-26 09:18:45+01:00 [COMMAND_EXIT_CODE="0"]

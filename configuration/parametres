@@ -3,4 +3,4 @@ type_requete voc
 dist_dep 20
 tps_dep 3
 dist_det 10
-angle 60
+angle 200

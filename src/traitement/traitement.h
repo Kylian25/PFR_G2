@@ -1,3 +1,9 @@
+/* Ce fichier définit les structures et déclare les fonctions utilisées par le fichier traitement.c
+Nom du développeur : Charles MARDON
+Date de la version : 24 janvier 2026
+*/
+
+
 #ifndef TRAITEMENT_H
 #define TRAITEMENT_H
 
