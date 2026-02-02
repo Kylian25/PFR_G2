@@ -1,6 +1,14 @@
 #ifndef CONFIG_H  // éviter les erreurs lors de la conpilation 
 #define CONFIG_H
+/*
+Module : config
+Rôle : Ce fichier contient les valeurs par défaut des paramètres du système, les seuils de ces différentes valeurs,
+les structures nécessaires à la gestion des paramètres et des logs ainsi que les prototypes des fonctions définies 
+dans le fichier config.c
 
+Auteur : Kylian
+Date : 29/01/2026
+*/
 
 // valeurs par defaut 
 

@@ -1,3 +1,13 @@
+/*
+Module : config
+Rôle : Ce fichier permet la gestion des paramètres du robot (langue, distances, angle...) via un fichier texte.
+Il assure également la création dynamique d'un fichier de log à chaque lancement, 
+nommé selon la date et l'heure via un appel shell Unix.
+
+Auteur : Kylian
+Date : 29/01/2026
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
