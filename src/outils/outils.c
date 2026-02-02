@@ -1,3 +1,14 @@
+/*
+Module : outils
+Rôle : Ce fichier contient les prototypes des fonctions utilisables dans tous les 
+modules du projet, comme l'ajout d'information dans le fichier de log ou encore l'affichage
+de messages dans la console en focntion de la langue présente dans la configuration au moment
+de l'affichage du message.
+
+Auteur : Kylian
+Date : 29/01/2026
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

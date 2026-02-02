@@ -2,6 +2,15 @@
 
 #define OUTILS_H
 
+/*
+Module : outils
+Rôle : Ce fichier contient les prototypes des fonctions utilisables dans tous les 
+modules du projet.
+
+Auteur : Kylian
+Date : 29/01/2026
+*/
+
 
 void ajout_log(const char *message);
 
