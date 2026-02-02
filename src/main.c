@@ -1,3 +1,11 @@
+/*
+Rôle : Il d'agit du fichier principal du projet. Il coordone l'initialisation des paramètres 
+de configuration, la création du fichier de log et le lancement de l'interface utilisateur.
+
+Auteur : Kylian
+Date : 29/01/2026
+*/
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
