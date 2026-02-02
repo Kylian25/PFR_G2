@@ -1,3 +1,15 @@
+""" 
+Module : simu
+Rôle : Ce fichier python concerne la partie simulation de déplacement du robot. Il permet de récupérer
+les informations envoyées par les différents modules C et de les traiter pour en déduire un séquence de 
+commandes à exécuter. 
+
+Auteurs : Kylian et Florian
+Date : 29/01/2026
+
+
+"""
+
 import turtle as tl
 from PIL import Image
 import numpy as np
@@ -69,7 +81,11 @@ chemin_config = "configuration/parametres"
 config = charger_config(chemin_config)
 
 #----------------------------- Fonctions -----------------------------------
-def ecrire(message : str,couleur : str):
+def ecrire(messageFR : str,messageEN : str, couleur : str):   # cette fonction permet d'écrire un message en dessous de l'image
+
+    if config["langue"] == "FR":
+        message = messageFR
+    else: message = messageEN
     tl.speed(100)
     tl.hideturtle()
     x,y = coord_image_turtle(5, hauteur+30)
@@ -372,7 +388,7 @@ def find ( couleur : str = "rouge",forme : str = "balle"):
 def simulation():
     instructions = recup_infos("instructions.txt")
     if len(instructions)==0:
-        ecrire("Aucune instruction !","red")
+        ecrire("Aucune instruction !","No instructions","red")
     objets = recup_infos("forme_couleur.txt")
     nb_commandes = 0
 
@@ -401,10 +417,10 @@ def simulation():
                 commande[0]()
                 #print(f"Commande exécutée : {commande[0]}")
     if nb_commandes >= 1:
-        ecrire("Simulation terminée !", "green")
+        ecrire("Simulation terminée !","Simulation ended !", "green")
 
 #----------- Commandes/fonctions --------------
-COMMANDES = {              # commande : [fonction, nombre d'arguments,""] "int" si seul parametre = entier
+COMMANDES = {              # commande : [fonction, nombre d'arguments,""] "int" si seul paramètre = entier
     
     "zigzag" : (zigzag,1,""),
     "tourne" : (tourner,1,"int"),
@@ -423,15 +439,14 @@ COMMANDES = {              # commande : [fonction, nombre d'arguments,""] "int" 
 
 print("")
 tl.speed(1)
+
 initialisation(x_start_tl,y_start_tl)
 tl.color("green")
 
-#print("config : ", config,"\n")
 commandes = recup_infos("instructions.txt")
 
 print("commandes : ", commandes)
-#objets = recup_infos("forme_couleur.txt")
-#print("\nobjets : ", objets)
+
 
 simulation()
 
