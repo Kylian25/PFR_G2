@@ -1,5 +1,14 @@
-#ifndef MENU_H // si menu_h non definie avant , si faux, le compilateur ignore jusqu'au endif
-#define MENU_H  // si condition de dessus vraie
+#ifndef MENU_H 
+#define MENU_H  
+
+/*
+Module : menu
+Rôle : Ce fichier contient les prototypes des fonctions utiles à l'affichage
+et la gestion des menus.
+
+Auteur : Kylian
+Date : 29/01/2026
+*/
 
 // fonction principale du menu
 void demarrer_menu(void);

@@ -1,3 +1,16 @@
+/*
+Module : menu
+Rôle : Ce module centralise la gestion de l'affichage et les interactions clavier.
+Il assure la transition entre le mode Utilisateur et le mode Administrateur.
+Caractéristiques : 
+- Gestion de la langue basée sur la structure CONFIG_ROBOT
+- Utilisation de commandes Shell pour la gestion des droits de modifications
+  du fichier de configuration.
+
+Auteur : Kylian
+Date : 29/01/2026
+*/
+
 #include <stdio.h>
 #include <stdlib.h> 
 #include <string.h>
