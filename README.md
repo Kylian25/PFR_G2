@@ -59,6 +59,8 @@ Pour lancer le programme, exécuter la commande suivante dans le terminal
 - Dans le mode utilisateur, lorsque le nom de l'image est demandé il faut simplement donné le nom d'une image située dans le répertoire donnees sans écrire l'extension.
 - Pour énoncer les différents paramètres d’une commande, ne pas les séparer par “puis”, mais simplement par des espaces
 - Pour écrire ou dicter une suite d'instructions il faut utiliser "puis" entre deux commandes, sinon l'instruction suivante ne sera interprétée.
+- Pour dire au robot de tourner, il ne faut pas préciser la direction mais simplement utiliser “tourne” ou un synonyme et le faire suivre d’un angle de rotation (ex : tourne de 90 degrés)
+- La commande “go” en anglais étant utilisée pour aller vers un point particulier, la commande “revenir” doit être “back” ou un synonyme (et non “go back” comme le voudrait l’anglais naturel), de la même manière la commande “recule” doit être “backward” ou un synonyme (et non “go backwards”).
 
 #### Pour le mode administrateur, le mot de passe par défaut est 123 (modifiable dans le code)
   
