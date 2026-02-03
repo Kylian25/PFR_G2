@@ -391,6 +391,5 @@ void traitement_image(char * fichier_texte, char * fichier_jpeg) {
     
     afficher_resultats(fichier_texte,fichier_jpeg);
     detecter_forme_et_couleur(fichier_texte);
-    reconnaissance_forme_couleur(fichier_texte, "rouge", "balle");
     
 }
