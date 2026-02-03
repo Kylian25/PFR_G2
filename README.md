@@ -21,9 +21,9 @@ git clone https://github.com/Kylian25/PFR_G2
 #### Bibliothèques Python utilisées : 
 
 - Turtle (simulation)
-- Matplotlib (traitement des images)
+- Matplotlib (traitement d'images)
 - numpy
-- PIL (simu + images)
+- PIL (simulation + traitement d'images)
 - speech_recognition (transcription)
 - gTTS (transcription)
 
@@ -35,7 +35,7 @@ Se placer dans le répertoire principal :
 cd PFR_G2
 ```
 
-Compiler le projet :
+Le projet comprte un Makefile, pour compiler le projet il faut exécuter la commande suivante : 
 ```
 make
 ```
